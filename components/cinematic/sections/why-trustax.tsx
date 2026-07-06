@@ -24,7 +24,7 @@ export function WhyTrustTax() {
         {/* Obsidian vault — rising from the bottom of the panel, EventBeds-style */}
         <motion.div
           initial={{ opacity: 0, y: 80 }}
-          whileInView={{ opacity: 0.75, y: 0 }}
+          whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-15%" }}
           transition={{ duration: 1.6, ease: EASE }}
           className="pointer-events-none absolute inset-x-0 bottom-0 mx-auto h-[55%] w-[min(900px,95vw)]"
@@ -34,7 +34,7 @@ export function WhyTrustTax() {
             alt=""
             fill
             sizes="900px"
-            className="mask-fade-ground object-contain object-bottom"
+            className="mask-fade-dark blend-obsidian object-contain object-bottom"
           />
         </motion.div>
 

@@ -122,6 +122,19 @@
     mix-blend-mode: multiply;
     filter: brightness(1.07) contrast(1.02);
   }
+
+  /* Dark renders on obsidian panels: darken the image bg below the panel color,
+     then lighten-blend so only highlights survive — bg melts away completely */
+  .blend-obsidian {
+    mix-blend-mode: lighten;
+    filter: brightness(0.92) contrast(1.18) saturate(1.1);
+  }
+
+  /* Aggressive all-edge fade for dark renders — no rectangular bounds survive */
+  .mask-fade-dark {
+    -webkit-mask-image: radial-gradient(62% 88% at 50% 100%, #000 22%, transparent 62%);
+    mask-image: radial-gradient(62% 88% at 50% 100%, #000 22%, transparent 62%);
+  }
 }
 
 /* Cinematic layer */

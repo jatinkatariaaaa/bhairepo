@@ -42,7 +42,7 @@ export function CTA() {
           alt=""
           fill
           sizes="760px"
-          className="mask-fade-ground object-contain object-bottom"
+          className="mask-fade-dark blend-obsidian object-contain object-bottom"
         />
       </motion.div>
 
