@@ -251,6 +251,7 @@ export function Hero() {
 
 /** A proof-tag that fades in on load, then parallaxes with the page scroll. */
 function FloatingTag({
+            }
   children,
   progress,
   rate,
