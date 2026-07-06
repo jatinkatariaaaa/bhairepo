@@ -26,7 +26,7 @@ export function TaxFiling() {
           </div>
           <h2 className="mt-5 font-display text-[clamp(2.2rem,5.5vw,4.5rem)] font-semibold leading-[1.02] tracking-[-0.03em] text-ink">
             File early.{" "}
-            <span className="font-serif italic font-normal text-primary">Refund faster.</span>
+            <span className="font-display font-extrabold text-primary">Refund faster.</span>
           </h2>
           <p className="mt-6 max-w-md text-body-lg leading-relaxed text-body">
             We compute your tax, claim every legitimate deduction and file the

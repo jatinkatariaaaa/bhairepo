@@ -1,6 +1,7 @@
 "use client";
 
 import * as React from "react";
+import Image from "next/image";
 import { motion, useScroll, useTransform } from "framer-motion";
 
 import { EASE } from "@/components/cinematic/lib/motion";
@@ -18,21 +19,37 @@ export function WhyTrustTax() {
   const words = STATEMENT.split(" ");
 
   return (
-    <section
-      ref={ref}
-      className="noise relative flex min-h-[100vh] items-center overflow-hidden bg-obsidian py-28 text-cream md:py-40"
-    >
-      <div className="bg-orb-emerald pointer-events-none absolute left-1/2 top-1/2 h-[70vmin] w-[70vmin] -translate-x-1/2 -translate-y-1/2 opacity-30" />
-      <div className="bg-dotgrid-dark pointer-events-none absolute inset-0 opacity-40" />
+    <section ref={ref} className="px-3 py-2 md:px-4 md:py-3">
+      <div className="noise relative flex min-h-[100vh] items-center overflow-hidden rounded-[32px] bg-obsidian py-28 text-cream md:rounded-[40px] md:py-40">
+        {/* Obsidian vault — rising from the bottom of the panel, EventBeds-style */}
+        <motion.div
+          initial={{ opacity: 0, y: 80 }}
+          whileInView={{ opacity: 0.75, y: 0 }}
+          viewport={{ once: true, margin: "-15%" }}
+          transition={{ duration: 1.6, ease: EASE }}
+          className="pointer-events-none absolute inset-x-0 bottom-0 mx-auto h-[55%] w-[min(900px,95vw)]"
+        >
+          <Image
+            src="/images/porcelain/vault-dark.png"
+            alt=""
+            fill
+            sizes="900px"
+            className="mask-fade-ground object-contain object-bottom"
+          />
+        </motion.div>
 
-      <div className="container-page relative z-10">
-        <div className="flex items-center gap-2.5 font-mono text-[11px] uppercase tracking-[0.24em] text-cream/60">
-          <span className="h-2 w-2 rounded-full bg-gold" />
-          <span className="text-gold">(03)</span>
-          <span>Why TrustTax</span>
-        </div>
+        <div className="container-page relative z-10 pb-[30vh] text-center md:pb-[34vh]">
+          <motion.h2
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-20%" }}
+            transition={{ duration: 0.9, ease: EASE }}
+            className="font-display text-[clamp(2.6rem,7vw,5.5rem)] font-extrabold tracking-[-0.03em] text-cream"
+          >
+            File and relax
+          </motion.h2>
 
-        <p className="mt-10 max-w-5xl font-display text-[clamp(1.6rem,4.2vw,3.6rem)] font-medium leading-[1.15] tracking-tight">
+          <p className="mx-auto mt-10 max-w-4xl font-display text-[clamp(1.15rem,2.4vw,1.8rem)] font-medium leading-[1.35] tracking-tight text-cream/90">
           {words.map((word, i) => (
             <Word
               key={i}
@@ -49,7 +66,7 @@ export function WhyTrustTax() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.7, ease: EASE, delay: 0.3 }}
-          className="mt-16 flex flex-wrap gap-8 border-t border-cream/10 pt-10"
+          className="mt-14 flex flex-wrap justify-center gap-10 border-t border-cream/10 pt-10"
         >
           {[
             { v: "12,000+", l: "Returns filed" },
@@ -67,6 +84,7 @@ export function WhyTrustTax() {
             </div>
           ))}
         </motion.div>
+        </div>
       </div>
     </section>
   );
