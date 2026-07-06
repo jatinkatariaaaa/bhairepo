@@ -123,25 +123,58 @@ export function BusinessRegistration() {
           })}
         </div>
 
-        {/* Mobile: card grid */}
-        <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:hidden">
-          {panels.map((p) => (
-            <Link
-              key={p.slug}
-              href={`/services/${p.slug}`}
-              className="group rounded-card border border-hairline bg-white p-6 shadow-card transition-transform hover:-translate-y-0.5 hover:shadow-lift"
-            >
-              <span className="grid h-11 w-11 place-items-center rounded-2xl bg-mint text-primary">
-                <Icon name={p.icon} className="h-5 w-5" />
-              </span>
-              <h3 className="mt-4 text-h3 font-semibold text-ink">{p.name}</h3>
-              <p className="mt-2 text-sm leading-relaxed text-body">{p.short}</p>
-              <span className="mt-4 inline-flex items-center gap-1.5 text-sm font-medium text-primary">
-                From {p.priceFrom}
-                <ArrowUpRight className="h-4 w-4" />
-              </span>
-            </Link>
-          ))}
+        {/* Mobile: color-block card grid */}
+        <div className="mt-12 grid gap-3 sm:grid-cols-2 lg:hidden">
+          {panels.map((p, i) => {
+            const dark = i % 2 === 1;
+            return (
+              <Link
+                key={p.slug}
+                href={`/services/${p.slug}`}
+                className={`group relative flex min-h-[240px] flex-col overflow-hidden rounded-[28px] p-7 transition-transform hover:-translate-y-1 ${
+                  dark ? "bg-obsidian text-cream" : "bg-white shadow-card hover:shadow-lift"
+                }`}
+              >
+                <Icon
+                  name={p.icon}
+                  aria-hidden
+                  className={`pointer-events-none absolute -right-6 -top-6 h-36 w-36 ${
+                    dark ? "text-white/[0.06]" : "text-canvas"
+                  }`}
+                  strokeWidth={1}
+                />
+                <span
+                  className={`relative grid h-11 w-11 place-items-center rounded-2xl ${
+                    dark ? "bg-white/10 text-gold" : "bg-mint text-primary"
+                  }`}
+                >
+                  <Icon name={p.icon} className="h-5 w-5" />
+                </span>
+                <h3
+                  className={`relative mt-auto pt-8 font-display text-2xl font-extrabold tracking-[-0.01em] ${
+                    dark ? "text-cream" : "text-ink"
+                  }`}
+                >
+                  {p.name}
+                </h3>
+                <p
+                  className={`relative mt-2 text-sm leading-relaxed ${
+                    dark ? "text-cream/65" : "text-body"
+                  }`}
+                >
+                  {p.short}
+                </p>
+                <span
+                  className={`relative mt-4 inline-flex items-center gap-1.5 text-sm font-bold ${
+                    dark ? "text-gold" : "text-primary"
+                  }`}
+                >
+                  From {p.priceFrom}
+                  <ArrowUpRight className="h-4 w-4" />
+                </span>
+              </Link>
+            );
+          })}
         </div>
       </div>
     </section>

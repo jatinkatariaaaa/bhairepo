@@ -33,7 +33,7 @@ export function Testimonials() {
       <div className="mask-fade-x mt-14">
         <Marquee pauseOnHover>
           {row.map((t, i) => (
-            <TestimonialCard key={`${t.name}-${i}`} t={t} />
+            <TestimonialCard key={`${t.name}-${i}`} t={t} dark={i % 4 === 2} />
           ))}
         </Marquee>
       </div>
@@ -41,24 +41,60 @@ export function Testimonials() {
   );
 }
 
-function TestimonialCard({ t }: { t: typeof testimonials[number] }) {
+function TestimonialCard({
+  t,
+  dark,
+}: {
+  t: typeof testimonials[number];
+  dark?: boolean;
+}) {
   return (
-    <figure className="mx-3 w-[290px] shrink-0 rounded-card border border-hairline bg-white p-7 shadow-card transition-transform duration-500 hover:-translate-y-1 hover:shadow-lift md:w-[400px]">
-      <div className="flex gap-0.5">
+    <figure
+      className={`relative mx-2.5 flex min-h-[300px] w-[300px] shrink-0 flex-col overflow-hidden rounded-[28px] p-8 transition-transform duration-500 hover:-translate-y-1.5 md:w-[420px] ${
+        dark ? "bg-obsidian text-cream" : "bg-white text-ink shadow-card hover:shadow-lift"
+      }`}
+    >
+      {/* Oversized quotation mark — editorial anchor */}
+      <span
+        aria-hidden
+        className={`pointer-events-none absolute -top-7 right-5 font-display text-[9rem] font-extrabold leading-none ${
+          dark ? "text-white/[0.07]" : "text-canvas"
+        }`}
+      >
+        &rdquo;
+      </span>
+
+      <div className="relative flex items-center gap-0.5">
         {Array.from({ length: 5 }).map((_, i) => (
-          <Star key={i} className="h-3.5 w-3.5 fill-gold text-gold" />
+          <Star key={i} className="h-4 w-4 fill-gold text-gold" />
         ))}
       </div>
-      <blockquote className="mt-5 text-[15px] leading-relaxed text-ink">
+
+      <blockquote
+        className={`relative mt-6 font-display text-[17px] font-medium leading-[1.5] tracking-[-0.01em] md:text-lg ${
+          dark ? "text-cream/90" : "text-ink"
+        }`}
+      >
         &ldquo;{t.quote}&rdquo;
       </blockquote>
-      <figcaption className="mt-6 flex items-center gap-3 border-t border-hairline pt-5">
-        <span className="grid h-11 w-11 place-items-center rounded-full bg-primary text-xs font-bold text-white">
+
+      <figcaption
+        className={`relative mt-auto flex items-center gap-3.5 border-t pt-6 ${
+          dark ? "border-white/10" : "border-hairline"
+        }`}
+      >
+        <span
+          className={`grid h-12 w-12 place-items-center rounded-full text-xs font-bold ${
+            dark ? "bg-gold text-obsidian" : "bg-primary text-white"
+          }`}
+        >
           {t.initials}
         </span>
         <div>
-          <div className="text-sm font-semibold text-ink">{t.name}</div>
-          <div className="text-xs text-muted">{t.role}</div>
+          <div className="text-sm font-bold">{t.name}</div>
+          <div className={`mt-0.5 text-xs ${dark ? "text-cream/50" : "text-muted"}`}>
+            {t.role}
+          </div>
         </div>
       </figcaption>
     </figure>
