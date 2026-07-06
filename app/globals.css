@@ -3,11 +3,11 @@
 @tailwind utilities;
 
 :root {
-  --canvas: #fafaf7;
-  --ink: #0b0f0e;
-  --body: #5b6b66;
-  --muted: #8a968f;
-  --hairline: #e7e5e0;
+  --canvas: #f4f4f3;
+  --ink: #161918;
+  --body: #5d6663;
+  --muted: #9aa19d;
+  --hairline: #e4e4e1;
   --mint: #e7f5ef;
   --gold: #c6a15b;
   --primary: #0e5c43;

@@ -25,16 +25,16 @@ export function Navbar() {
   }, []);
 
   return (
-    <header
-      className={cn(
-        "sticky top-0 z-50 transition-all duration-500 ease-premium",
-        scrolled
-          ? "border-b border-hairline bg-canvas/80 backdrop-blur-md"
-          : "border-b border-transparent bg-transparent",
-      )}
-    >
+    <header className="absolute inset-x-0 top-0 z-50 px-3 pt-3 md:px-4 md:pt-4">
       <Container>
-        <div className="flex h-16 items-center justify-between gap-4 md:h-[72px]">
+        <div
+          className={cn(
+            "flex h-14 items-center justify-between gap-4 rounded-2xl px-4 transition-all duration-500 ease-premium md:h-[68px] md:px-6",
+            scrolled
+              ? "bg-white/85 shadow-lift backdrop-blur-md"
+              : "bg-white/60 backdrop-blur-sm",
+          )}
+        >
           <Link
             href="/"
             aria-label="TrusTax — home"

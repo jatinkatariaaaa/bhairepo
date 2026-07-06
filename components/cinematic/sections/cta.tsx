@@ -17,7 +17,8 @@ export function CTA() {
   const reduce = useReducedMotion();
 
   return (
-    <section className="noise relative flex min-h-[92vh] items-center overflow-hidden bg-obsidian py-28 text-cream md:py-40">
+    <section className="px-3 py-2 md:px-4 md:py-3">
+      <div className="noise relative flex min-h-[92vh] items-center overflow-hidden rounded-[32px] bg-obsidian py-28 text-cream md:rounded-[40px] md:py-40">
       {/* Orbiting rings — contained, no overflow */}
       <div className="pointer-events-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
         <div
@@ -75,7 +76,7 @@ export function CTA() {
             className="block"
             delay={0.15}
             segments={[
-              { text: "easiest", className: "font-serif italic font-normal text-accent" },
+              { text: "easiest", className: "font-display font-extrabold text-accent" },
               { text: " part of your business." },
             ]}
           />
@@ -111,6 +112,7 @@ export function CTA() {
 
         <div className="mt-8 font-mono text-[11px] uppercase tracking-[0.24em] text-cream/40">
           No obligation · CA-certified · 100% online
+        </div>
         </div>
       </div>
     </section>

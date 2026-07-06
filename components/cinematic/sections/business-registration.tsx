@@ -45,7 +45,7 @@ export function BusinessRegistration() {
           </div>
           <h2 className="mt-5 font-display text-[clamp(2.2rem,5.5vw,4.5rem)] font-semibold leading-[1.02] tracking-[-0.03em] text-ink">
             Get{" "}
-            <span className="font-serif italic font-normal text-primary">legitimate,</span>{" "}
+            <span className="font-display font-extrabold text-primary">legitimate,</span>{" "}
             fast.
           </h2>
           <p className="mt-5 max-w-lg text-body-lg leading-relaxed text-body">

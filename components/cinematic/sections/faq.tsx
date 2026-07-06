@@ -28,7 +28,7 @@ export function Faq() {
                 { text: "Questions," },
                 {
                   text: " answered.",
-                  className: "font-serif italic font-normal text-primary",
+                  className: "font-display font-extrabold text-primary",
                 },
               ]}
             />
