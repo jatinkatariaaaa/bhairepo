@@ -94,7 +94,7 @@ export function ITR() {
               alt=""
               fill
               sizes="280px"
-              className="mask-fade-radial object-contain mix-blend-multiply"
+              className="mask-fade-radial object-contain blend-porcelain"
             />
           </motion.div>
           {/* Header */}

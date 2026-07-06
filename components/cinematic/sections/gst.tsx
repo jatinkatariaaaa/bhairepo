@@ -112,7 +112,7 @@ export function GST() {
               alt=""
               fill
               sizes="360px"
-              className="mask-fade-radial object-contain mix-blend-multiply"
+              className="mask-fade-radial object-contain blend-porcelain"
             />
           </motion.div>
 

@@ -116,6 +116,12 @@
     -webkit-mask-image: radial-gradient(110% 110% at 100% 100%, #000 45%, transparent 92%);
     mask-image: radial-gradient(110% 110% at 100% 100%, #000 45%, transparent 92%);
   }
+
+  /* Lift render backgrounds toward pure white so mix-blend-multiply leaves no halo */
+  .blend-porcelain {
+    mix-blend-mode: multiply;
+    filter: brightness(1.07) contrast(1.02);
+  }
 }
 
 /* Cinematic layer */

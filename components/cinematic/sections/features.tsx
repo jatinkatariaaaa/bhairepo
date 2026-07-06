@@ -25,7 +25,7 @@ export function Features() {
             alt=""
             fill
             sizes="320px"
-            className="mask-fade-radial object-contain mix-blend-multiply"
+            className="mask-fade-radial object-contain blend-porcelain"
           />
         </div>
       </motion.div>

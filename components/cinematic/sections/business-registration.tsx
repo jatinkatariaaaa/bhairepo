@@ -32,7 +32,7 @@ export function BusinessRegistration() {
           alt=""
           fill
           sizes="400px"
-          className="mask-fade-radial object-contain mix-blend-multiply"
+          className="mask-fade-radial object-contain blend-porcelain"
         />
       </motion.div>
 

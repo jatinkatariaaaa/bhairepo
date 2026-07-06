@@ -87,7 +87,7 @@ export function Hero() {
               fill
               priority
               sizes="(max-width: 768px) 120vw, 1400px"
-              className="object-cover object-bottom opacity-90 mix-blend-multiply"
+              className="object-cover object-bottom opacity-90 blend-porcelain"
             />
           </motion.div>
         </motion.div>
