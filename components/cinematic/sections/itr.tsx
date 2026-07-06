@@ -46,7 +46,7 @@ export function ITR() {
               ]}
             />
           </h2>
-          <p className="mt-6 max-w-md text-body-lg text-body">
+          <p className="mt-6 max-w-md text-body-lg leading-relaxed text-body">
             We read the fine print of the Act so you don&apos;t have to — turning
             eligible expenses into a bigger, faster refund.
           </p>
@@ -86,13 +86,13 @@ export function ITR() {
           </Link>
         </div>
 
-        {/* assembling acknowledgement */}
+        {/* assembling acknowledgement — overflow-visible so the seal can break out */}
         <motion.div
           initial="hidden"
           whileInView="show"
           viewport={viewportOnce}
           variants={{ show: { transition: { staggerChildren: 0.12, delayChildren: 0.1 } } }}
-          className="relative mx-auto w-full max-w-sm rounded-card border border-hairline bg-white p-7 shadow-lift"
+          className="relative mx-auto w-full max-w-sm overflow-visible rounded-card border border-hairline bg-white p-7 shadow-lift"
         >
           <div className="bg-orb-gold pointer-events-none absolute -right-10 -top-10 h-40 w-40" />
           <motion.div variants={rowVariant} className="flex items-center justify-between">

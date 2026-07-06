@@ -85,11 +85,11 @@ export function DashboardPreview() {
           <StatCard stat={stats[3]} />
         </motion.div>
 
-        {/* device */}
-        <div className="perspective-1600 relative z-10 mt-28 lg:mt-0">
+        {/* device — offset down on mobile to clear the header, centered on desktop */}
+        <div className="perspective-1600 relative z-10 mt-32 lg:mt-0">
           <motion.div
             style={{ rotateY, rotateX, scale }}
-            className="w-[250px] will-change-transform md:w-[300px]"
+            className="w-[230px] will-change-transform md:w-[300px]"
           >
             <PhoneMockup screenClassName="bg-white">
               <motion.div style={{ opacity: opDash }} className="absolute inset-0">

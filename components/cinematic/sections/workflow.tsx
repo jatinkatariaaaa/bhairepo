@@ -110,9 +110,9 @@ function Header() {
     <div className="max-w-2xl">
       <SectionLabel index="04">How it works</SectionLabel>
       <h2 className="mt-5 font-display text-display-lg font-semibold tracking-tight text-ink">
-        Four steps, then <span className="font-serif italic text-primary">silence.</span>
+        Four steps, then <span className="font-serif italic font-normal text-primary">silence.</span>
       </h2>
-      <p className="mt-4 max-w-md text-body-lg text-body">
+      <p className="mt-4 max-w-md text-body-lg leading-relaxed text-body">
         You send a few documents once. We take it from there — and keep it there.
       </p>
     </div>

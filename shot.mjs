@@ -15,7 +15,10 @@ const viewports = [
   { name: "m", width: 390, height: 844 },
 ];
 
-const browser = await chromium.launch();
+const browser = await chromium.launch({
+  executablePath:
+    "/playwright/chromium_headless_shell-1208/chrome-headless-shell-linux64/chrome-headless-shell",
+});
 for (const vp of viewports) {
   const ctx = await browser.newContext({
     viewport: { width: vp.width, height: vp.height },

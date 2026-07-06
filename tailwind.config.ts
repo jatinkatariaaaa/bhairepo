@@ -24,7 +24,7 @@ const config: Config = {
 
         mint: {
           DEFAULT: "#E7F5EF", // soft tint (badges / section backgrounds)
-          deep: "#D4EBE0", // hover on tinted surfaces
+          deep: "#B6DFC9", // stronger tint — used for FAQ index counter
         },
         gold: "#C6A15B", // premium accent — use sparingly
 
@@ -45,7 +45,10 @@ const config: Config = {
           soft: "#0B1A15",
           700: "#0E241C",
         },
-        cream: "#F4F1E9", // warm ivory text on dark
+        cream: {
+          DEFAULT: "#F4F1E9", // warm ivory text on dark
+          muted: "#A8B5AE", // dimmed cream for secondary text on dark
+        },
 
         // Semantic
         success: "#10B981",

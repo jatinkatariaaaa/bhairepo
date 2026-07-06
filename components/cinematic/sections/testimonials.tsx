@@ -71,17 +71,17 @@ export function Testimonials() {
 
 function TestimonialCard({ t }: { t: Testimonial }) {
   return (
-    <figure className="mx-2.5 w-[300px] shrink-0 rounded-card border border-hairline bg-white p-6 shadow-card transition-transform duration-500 hover:-translate-y-1 hover:shadow-lift md:w-[380px]">
+    <figure className="mx-3 w-[290px] shrink-0 rounded-card border border-hairline bg-white p-7 shadow-card transition-transform duration-500 hover:-translate-y-1 hover:shadow-lift md:w-[400px]">
       <div className="flex gap-0.5">
         {Array.from({ length: 5 }).map((_, i) => (
           <Star key={i} className="h-3.5 w-3.5 fill-gold text-gold" />
         ))}
       </div>
-      <blockquote className="mt-4 text-[15px] leading-relaxed text-ink">
+      <blockquote className="mt-5 text-[15px] leading-relaxed text-ink">
         “{t.quote}”
       </blockquote>
-      <figcaption className="mt-5 flex items-center gap-3 border-t border-hairline pt-4">
-        <span className="grid h-10 w-10 place-items-center rounded-full bg-primary text-xs font-bold text-white">
+      <figcaption className="mt-6 flex items-center gap-3 border-t border-hairline pt-5">
+        <span className="grid h-11 w-11 place-items-center rounded-full bg-primary text-xs font-bold text-white">
           {t.initials}
         </span>
         <div>

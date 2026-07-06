@@ -36,7 +36,7 @@ export function ProofTag({
         <Icon name={icon} className="h-4 w-4" />
       </span>
       <div className="leading-tight">
-        <div className="font-mono text-[10px] uppercase tracking-[0.14em] opacity-60">
+        <div className="font-mono text-[10px] uppercase tracking-[0.14em] opacity-50">
           {label}
         </div>
         <div className="tnum text-sm font-semibold">{value}</div>

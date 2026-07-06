@@ -13,11 +13,6 @@ import { SectionLabel } from "@/components/cinematic/section-label";
 import { EASE, viewportOnce } from "@/components/cinematic/lib/motion";
 import { values } from "@/lib/content";
 
-/**
- * FEATURES — the four promises. Signature motion: each card wipes in from the
- * bottom (clip-path) on scroll, and on hover an emerald spotlight follows the
- * cursor while the icon tilts and a hairline draws around the border.
- */
 export function Features() {
   return (
     <section className="section-y relative overflow-hidden bg-canvas">
@@ -36,7 +31,7 @@ export function Features() {
               ]}
             />
           </h2>
-          <p className="mt-5 max-w-lg text-body-lg text-body">
+          <p className="mt-5 max-w-lg text-body-lg leading-relaxed text-body">
             No jargon, no surprises. Just a steady, senior team that treats your
             filings as if they were their own.
           </p>
@@ -54,7 +49,7 @@ export function Features() {
                 </span>
               </div>
               <h3 className="mt-6 text-h3 font-semibold text-ink">{v.title}</h3>
-              <p className="mt-3 text-body">{v.description}</p>
+              <p className="mt-3 text-body leading-relaxed">{v.description}</p>
             </SpotlightCard>
           ))}
         </div>
@@ -72,7 +67,8 @@ function SpotlightCard({
 }) {
   const mx = useMotionValue(-200);
   const my = useMotionValue(-200);
-  const spotlight = useMotionTemplate`radial-gradient(240px circle at ${mx}px ${my}px, rgba(16,185,129,0.14), transparent 72%)`;
+  // Stronger spotlight — visible on white without being garish
+  const spotlight = useMotionTemplate`radial-gradient(320px circle at ${mx}px ${my}px, rgba(16,185,129,0.10), transparent 70%)`;
 
   function move(e: React.MouseEvent<HTMLDivElement>) {
     const r = e.currentTarget.getBoundingClientRect();
@@ -89,14 +85,14 @@ function SpotlightCard({
       transition={{ duration: 0.8, ease: EASE, delay: index * 0.08 }}
       className="group relative overflow-hidden rounded-card border border-hairline bg-white p-8 shadow-card transition-shadow duration-500 hover:shadow-lift"
     >
-      {/* cursor spotlight */}
+      {/* cursor spotlight — larger radius, slightly stronger */}
       <motion.div
         aria-hidden
         style={{ background: spotlight }}
         className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-300 group-hover:opacity-100"
       />
       {/* hairline draw on hover */}
-      <span className="pointer-events-none absolute inset-0 rounded-card ring-1 ring-inset ring-primary/0 transition-all duration-500 group-hover:ring-primary/20" />
+      <span className="pointer-events-none absolute inset-0 rounded-card ring-1 ring-inset ring-primary/0 transition-all duration-500 group-hover:ring-primary/25" />
       <div className="relative">{children}</div>
     </motion.div>
   );

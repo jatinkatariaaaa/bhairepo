@@ -10,12 +10,6 @@ import { RevealText } from "@/components/cinematic/reveal-text";
 import { EASE } from "@/components/cinematic/lib/motion";
 import { homeFaqs } from "@/lib/content";
 
-/**
- * FAQ — an indexed accordion. A sticky left rail shows the currently-open
- * index as large type; a shared-layout accent bar glides to the active
- * question and answers expand with an animated height. Signature motion:
- * layout-animated indicator + height reveal.
- */
 export function Faq() {
   const [open, setOpen] = React.useState<number | null>(0);
 
@@ -37,8 +31,8 @@ export function Faq() {
             />
           </h2>
 
-          <div className="mt-8 flex items-end gap-3">
-            <div className="relative h-16 w-16 overflow-hidden">
+          <div className="mt-10 flex items-end gap-4">
+            <div className="relative h-20 w-20 overflow-hidden">
               <AnimatePresence mode="popLayout">
                 <motion.span
                   key={open ?? "none"}
@@ -46,20 +40,20 @@ export function Faq() {
                   animate={{ y: 0 }}
                   exit={{ y: "-100%" }}
                   transition={{ duration: 0.4, ease: EASE }}
-                  className="absolute inset-0 font-mono text-6xl font-bold text-mint-deep"
+                  className="absolute inset-0 flex items-center justify-center font-mono text-7xl font-bold text-mint-deep"
                 >
                   {open === null ? "—" : String(open + 1).padStart(2, "0")}
                 </motion.span>
               </AnimatePresence>
             </div>
-            <span className="mb-2 max-w-[10rem] text-sm text-muted">
+            <span className="mb-3 max-w-[10rem] text-sm leading-relaxed text-muted">
               of {String(homeFaqs.length).padStart(2, "0")} common questions
             </span>
           </div>
 
           <Link
             href="/contact#book"
-            className="link-underline mt-8 inline-flex items-center gap-2 font-medium text-ink"
+            className="link-underline mt-10 inline-flex items-center gap-2 font-medium text-ink"
           >
             Still curious? Talk to a CA →
           </Link>
@@ -76,7 +70,7 @@ export function Faq() {
                   aria-expanded={isOpen}
                   className="flex w-full items-center gap-4 py-6 text-left"
                 >
-                  <span className="relative w-6 shrink-0">
+                  <span className="relative w-8 shrink-0">
                     {isOpen && (
                       <motion.span
                         layoutId="faq-bar"
@@ -110,7 +104,7 @@ export function Faq() {
                       transition={{ duration: 0.4, ease: EASE }}
                       className="overflow-hidden"
                     >
-                      <p className="max-w-2xl pb-7 pl-10 pr-10 text-body-lg text-body">
+                      <p className="max-w-2xl pb-7 pl-12 pr-10 text-body-lg leading-relaxed text-body">
                         {f.answer}
                       </p>
                     </motion.div>

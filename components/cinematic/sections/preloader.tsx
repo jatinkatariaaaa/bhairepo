@@ -72,7 +72,7 @@ export function Preloader() {
           Trus<span className="text-accent">Tax</span>
         </span>
         <span className="font-mono text-[11px] uppercase tracking-[0.24em] text-cream/50">
-          Fiscal Cinema
+          CA-led · 100% online
         </span>
       </motion.div>
 

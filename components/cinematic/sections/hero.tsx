@@ -27,9 +27,9 @@ import { EASE } from "@/components/cinematic/lib/motion";
 /** Entrance for the floating phones — fly up + settle, staggered. */
 function phoneEntrance(delay: number) {
   return {
-    initial: { opacity: 0, y: 90, scale: 0.86 },
+    initial: { opacity: 0, y: 120, scale: 0.85 },
     animate: { opacity: 1, y: 0, scale: 1 },
-    transition: { duration: 1.1, ease: EASE, delay },
+    transition: { duration: 1.2, ease: EASE, delay },
   };
 }
 
@@ -41,33 +41,32 @@ export function Hero() {
     offset: ["start start", "end start"],
   });
 
-  // A single multiplier collapses all parallax to 0 under reduced motion.
   const k = reduce ? 0 : 1;
   const r = <T,>(a: T, b: T) => [a, b] as [T, T];
 
   // ── One scroll clock → many connected layers ───────────────────────────
   // Phone A (center / dashboard) — moves SLOWEST
-  const yA = useTransform(scrollYProgress, [0, 1], r(0, -90 * k));
+  const yA = useTransform(scrollYProgress, [0, 1], r(0, -80 * k));
   const scaleA = useTransform(scrollYProgress, [0, 1], r(1, 1 + 0.06 * k));
   // Phone B (left / GST) — ROTATES
-  const yB = useTransform(scrollYProgress, [0, 1], r(0, -170 * k));
-  const rotB = useTransform(scrollYProgress, [0, 1], r(-10 * k, 3 * k));
-  const xB = useTransform(scrollYProgress, [0, 1], r(0, -34 * k));
+  const yB = useTransform(scrollYProgress, [0, 1], r(0, -160 * k));
+  const rotB = useTransform(scrollYProgress, [0, 1], r(-8 * k, 4 * k));
+  const xB = useTransform(scrollYProgress, [0, 1], r(0, -30 * k));
   // Phone C (right / ITR) — SCALES
-  const yC = useTransform(scrollYProgress, [0, 1], r(0, -140 * k));
-  const scaleC = useTransform(scrollYProgress, [0, 1], r(0.9, 0.9 + 0.24 * k));
-  const rotC = useTransform(scrollYProgress, [0, 1], r(8 * k, -3 * k));
-  const xC = useTransform(scrollYProgress, [0, 1], r(0, 34 * k));
+  const yC = useTransform(scrollYProgress, [0, 1], r(0, -130 * k));
+  const scaleC = useTransform(scrollYProgress, [0, 1], r(0.9, 0.9 + 0.22 * k));
+  const rotC = useTransform(scrollYProgress, [0, 1], r(6 * k, -4 * k));
+  const xC = useTransform(scrollYProgress, [0, 1], r(0, 30 * k));
 
   // Headline slides up & fades; sub/CTA fade faster
-  const yText = useTransform(scrollYProgress, [0, 0.6], r(0, -120 * k));
+  const yText = useTransform(scrollYProgress, [0, 0.6], r(0, -100 * k));
   const opacityText = useTransform(scrollYProgress, [0, 0.5], r(1, k ? 0 : 1));
   const opacityLede = useTransform(scrollYProgress, [0, 0.32], r(1, k ? 0 : 1));
 
-  // Background: orb breathes, ink overlay deepens (subtle bg change)
-  const orbScale = useTransform(scrollYProgress, [0, 1], r(1, 1 + 0.5 * k));
-  const orbOpacity = useTransform(scrollYProgress, [0, 1], r(0.9, 0.45));
-  const tintOpacity = useTransform(scrollYProgress, [0.3, 1], r(0, 0.12 * k));
+  // Background: orb breathes, ink overlay deepens
+  const orbScale = useTransform(scrollYProgress, [0, 1], r(1, 1 + 0.4 * k));
+  const orbOpacity = useTransform(scrollYProgress, [0, 1], r(0.85, 0.4));
+  const tintOpacity = useTransform(scrollYProgress, [0.3, 1], r(0, 0.1 * k));
   const cueOpacity = useTransform(scrollYProgress, [0, 0.12], r(1, k ? 0 : 1));
 
   return (
@@ -80,20 +79,20 @@ export function Hero() {
         {/* background layers */}
         <motion.div
           style={{ scale: orbScale, opacity: orbOpacity }}
-          className="bg-orb-emerald pointer-events-none absolute left-1/2 top-[42%] h-[80vmin] w-[80vmin] -translate-x-1/2 -translate-y-1/2 will-change-transform"
+          className="bg-orb-emerald pointer-events-none absolute left-1/2 top-[44%] h-[85vmin] w-[85vmin] -translate-x-1/2 -translate-y-1/2 will-change-transform"
         />
-        <div className="bg-dotgrid pointer-events-none absolute inset-0 opacity-60" />
+        <div className="bg-dotgrid pointer-events-none absolute inset-0 opacity-50" />
         <motion.div
           style={{ opacity: tintOpacity }}
           className="pointer-events-none absolute inset-0 bg-obsidian"
         />
 
         {/* ── floating phones — rest LOW (peeking), scroll lifts them up ── */}
-        <div className="pointer-events-none absolute inset-x-0 bottom-0 z-10 flex translate-y-[44%] items-end justify-center gap-2 sm:gap-6 md:translate-y-[32%] md:gap-10">
+        <div className="pointer-events-none absolute inset-x-0 bottom-0 z-10 flex translate-y-[38%] items-end justify-center gap-2 sm:gap-6 md:translate-y-[28%] md:gap-10">
           {/* Phone B — left, rotates (hidden on small screens) */}
           <motion.div
             style={{ y: yB, x: xB, rotate: rotB }}
-            className="hidden w-[190px] translate-y-10 will-change-transform sm:block md:w-[236px]"
+            className="hidden w-[190px] translate-y-8 will-change-transform sm:block md:w-[236px]"
           >
             <motion.div {...(reduce ? {} : phoneEntrance(0.5))}>
               <PhoneMockup>
@@ -117,7 +116,7 @@ export function Hero() {
           {/* Phone C — right, scales (hidden on small screens) */}
           <motion.div
             style={{ y: yC, x: xC, scale: scaleC, rotate: rotC }}
-            className="hidden w-[190px] translate-y-16 will-change-transform sm:block md:w-[236px]"
+            className="hidden w-[190px] translate-y-14 will-change-transform sm:block md:w-[236px]"
           >
             <motion.div {...(reduce ? {} : phoneEntrance(0.65))}>
               <PhoneMockup>
@@ -132,7 +131,7 @@ export function Hero() {
           progress={scrollYProgress}
           rate={-70 * k}
           delay={1}
-          className="hidden left-[3%] top-[52%] sm:block md:left-[8%] md:top-[45%]"
+          className="hidden left-[3%] top-[50%] sm:block md:left-[8%] md:top-[44%]"
         >
           <ProofTag icon="BadgeCheck" label="GSTR-3B" value="Filed · on time" />
         </FloatingTag>
@@ -140,7 +139,7 @@ export function Hero() {
           progress={scrollYProgress}
           rate={40 * k}
           delay={1.15}
-          className="hidden right-[3%] top-[58%] sm:block md:right-[8%] md:top-[43%]"
+          className="hidden right-[3%] top-[56%] sm:block md:right-[8%] md:top-[42%]"
         >
           <ProofTag
             icon="IndianRupee"
@@ -152,7 +151,7 @@ export function Hero() {
           progress={scrollYProgress}
           rate={90 * k}
           delay={1.3}
-          className="bottom-[13%] left-[7%] hidden md:block"
+          className="bottom-[14%] left-[7%] hidden md:block"
         >
           <ProofTag
             icon="ShieldCheck"
@@ -164,7 +163,7 @@ export function Hero() {
           progress={scrollYProgress}
           rate={-40 * k}
           delay={1.45}
-          className="bottom-[17%] right-[7%] hidden md:block"
+          className="bottom-[18%] right-[7%] hidden md:block"
         >
           <ProofTag icon="Clock" label="Avg. turnaround" value="3–7 days" />
         </FloatingTag>
@@ -172,7 +171,7 @@ export function Hero() {
         {/* ── headline block (above the phones) ── */}
         <motion.div
           style={{ y: yText }}
-          className="absolute inset-x-0 top-0 z-30 mx-auto flex max-w-5xl flex-col items-center px-6 pt-[11vh] text-center md:pt-[10vh]"
+          className="absolute inset-x-0 top-0 z-30 mx-auto flex max-w-5xl flex-col items-center px-6 pt-[10vh] text-center md:pt-[9vh]"
         >
           <motion.div style={{ opacity: opacityLede }}>
             <SectionLabel index="01" className="justify-center">
@@ -182,7 +181,7 @@ export function Hero() {
 
           <motion.h1
             style={{ opacity: opacityText }}
-            className="mt-6 font-display text-[clamp(2.4rem,7vw,5.25rem)] font-semibold leading-[1.0] tracking-[-0.035em] text-ink"
+            className="mt-7 font-display text-[clamp(2.4rem,7vw,5.25rem)] font-semibold leading-[1.02] tracking-[-0.035em] text-ink"
           >
             <RevealText
               as="span"
@@ -205,7 +204,7 @@ export function Hero() {
 
           <motion.p
             style={{ opacity: opacityLede }}
-            className="mt-6 max-w-xl text-body-lg text-body"
+            className="mt-6 max-w-xl text-body-lg leading-relaxed text-body"
           >
             A team of Chartered Accountants files it right, on time and entirely
             online — so you can get back to running the business.

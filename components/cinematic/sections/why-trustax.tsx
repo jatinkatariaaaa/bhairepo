@@ -39,7 +39,7 @@ export function WhyTrustTax() {
           Why TrustTax
         </SectionLabel>
 
-        <p className="mt-10 max-w-5xl font-display text-[clamp(1.9rem,4.6vw,3.6rem)] font-medium leading-[1.12] tracking-tight">
+        <p className="mt-10 max-w-5xl font-display text-[clamp(1.6rem,4.2vw,3.6rem)] font-medium leading-[1.15] tracking-tight">
           {words.map((word, i) => (
             <Word
               key={i}

@@ -17,8 +17,8 @@ const SLUGS = ["msme", "shop-act", "food-license", "business-consulting"];
 /**
  * BUSINESS REGISTRATION — an expanding gallery. On desktop the panels are a
  * horizontal accordion: hover expands one panel (obsidian) while the rest
- * collapse to vertical labels. On mobile it falls back to a clean card grid.
- * Signature motion: elastic flex-grow expansion.
+ * collapse to vertical labels. Uses animated width (GPU-friendly) instead of
+ * flex-grow (layout-thrashing). On mobile it falls back to a clean card grid.
  */
 export function BusinessRegistration() {
   const panels = SLUGS.map((s) => services.find((x) => x.slug === s)!).filter(
@@ -43,13 +43,13 @@ export function BusinessRegistration() {
               ]}
             />
           </h2>
-          <p className="mt-5 max-w-lg text-body-lg text-body">
+          <p className="mt-5 max-w-lg text-body-lg leading-relaxed text-body">
             MSME, Shop Act, FSSAI or a whole new company — the right paperwork,
             filed with the right department, the first time.
           </p>
         </div>
 
-        {/* desktop: expanding accordion */}
+        {/* desktop: expanding accordion — width-based for smooth GPU transitions */}
         <div className="mt-14 hidden h-[64vh] gap-3 lg:flex">
           {panels.map((p, i) => {
             const isActive = active === i;
@@ -62,13 +62,14 @@ export function BusinessRegistration() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={viewportOnce}
                 transition={{ duration: 0.7, ease: EASE, delay: i * 0.08 }}
-                style={{ flexGrow: isActive ? 3.4 : 1 }}
+                animate={{ width: isActive ? "36%" : "21.3%" }}
                 className={cn(
-                  "relative flex min-w-0 cursor-pointer flex-col justify-between overflow-hidden rounded-card border p-7 transition-[flex-grow,background-color,color] duration-700 ease-premium",
+                  "relative flex min-w-0 cursor-pointer flex-col justify-between overflow-hidden rounded-card border p-7 transition-colors duration-500 ease-premium",
                   isActive
                     ? "border-transparent bg-obsidian text-cream"
                     : "border-hairline bg-white text-ink",
                 )}
+                style={{ originX: 0 }}
               >
                 <div className="flex items-start justify-between">
                   <span className="font-mono text-sm opacity-50">
@@ -96,7 +97,9 @@ export function BusinessRegistration() {
                     <h3 className="mt-2 font-display text-3xl font-semibold text-cream">
                       {p.name}
                     </h3>
-                    <p className="mt-3 max-w-sm text-sm text-cream/70">{p.short}</p>
+                    <p className="mt-3 max-w-sm text-sm leading-relaxed text-cream/70">
+                      {p.short}
+                    </p>
                     <Link
                       href={`/services/${p.slug}`}
                       className="mt-5 inline-flex items-center gap-2 text-sm font-medium text-cream"
@@ -127,7 +130,7 @@ export function BusinessRegistration() {
                 <Icon name={p.icon} className="h-5 w-5" />
               </span>
               <h3 className="mt-4 text-h3 font-semibold text-ink">{p.name}</h3>
-              <p className="mt-2 text-sm text-body">{p.short}</p>
+              <p className="mt-2 text-sm leading-relaxed text-body">{p.short}</p>
               <span className="mt-4 inline-flex items-center gap-1.5 text-sm font-medium text-primary">
                 From {p.priceFrom}
                 <ArrowUpRight className="h-4 w-4" />

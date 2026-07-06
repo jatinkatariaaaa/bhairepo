@@ -13,20 +13,15 @@ import { RevealText } from "@/components/cinematic/reveal-text";
 import { services } from "@/lib/services";
 import { site } from "@/lib/site";
 
-/**
- * CTA — the dark finale. Megatype mask reveal, magnetic primary button,
- * slow-orbiting rings and a faint service marquee behind. Signature motion:
- * orbiting rings + magnetic close.
- */
 export function CTA() {
   const reduce = useReducedMotion();
 
   return (
     <section className="noise relative flex min-h-[92vh] items-center overflow-hidden bg-obsidian py-28 text-cream md:py-40">
-      {/* orbiting rings */}
+      {/* orbiting rings — contained, no overflow */}
       <div className="pointer-events-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
         <div
-          className={`h-[52vw] w-[52vw] rounded-full border border-cream/15 ${reduce ? "" : "animate-spin-slow"}`}
+          className={`h-[min(52vw,720px)] w-[min(52vw,720px)] rounded-full border border-cream/15 ${reduce ? "" : "animate-spin-slow"}`}
         />
         <div className="absolute inset-[8%] rounded-full border border-cream/10" />
         <div className="absolute inset-[22%] rounded-full border border-dashed border-accent/30" />

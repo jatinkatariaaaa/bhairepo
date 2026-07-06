@@ -33,7 +33,7 @@ export function TaxFiling() {
               ]}
             />
           </h2>
-          <p className="mt-6 max-w-md text-body-lg text-body">
+          <p className="mt-6 max-w-md text-body-lg leading-relaxed text-body">
             We compute your tax, claim every legitimate deduction and file the
             right form — early, so refunds land sooner.
           </p>
