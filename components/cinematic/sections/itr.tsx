@@ -2,6 +2,7 @@
 
 import * as React from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { motion } from "framer-motion";
 import { ArrowUpRight, Check } from "lucide-react";
 
@@ -73,7 +74,7 @@ export function ITR() {
           </Link>
         </div>
 
-        {/* Assembling acknowledgement card */}
+        {/* Assembling acknowledgement card over porcelain folder */}
         <motion.div
           initial="hidden"
           whileInView="show"
@@ -81,6 +82,21 @@ export function ITR() {
           variants={{ show: { transition: { staggerChildren: 0.12, delayChildren: 0.1 } } }}
           className="relative mx-auto w-full max-w-sm overflow-visible rounded-card border border-hairline bg-white p-7 shadow-lift"
         >
+          <motion.div
+            variants={{
+              hidden: { opacity: 0, x: 40, rotate: 0 },
+              show: { opacity: 1, x: 0, rotate: -6, transition: { duration: 1, ease: EASE } },
+            }}
+            className="pointer-events-none absolute -left-40 -top-20 -z-10 hidden h-[280px] w-[280px] xl:block"
+          >
+            <Image
+              src="/images/porcelain/itr-folder.png"
+              alt=""
+              fill
+              sizes="280px"
+              className="mask-fade-radial object-contain mix-blend-multiply"
+            />
+          </motion.div>
           {/* Header */}
           <motion.div
             variants={{

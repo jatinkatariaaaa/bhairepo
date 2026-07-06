@@ -1,6 +1,7 @@
 "use client";
 
 import * as React from "react";
+import Image from "next/image";
 import { motion, useMotionTemplate, useMotionValue } from "framer-motion";
 
 import { Icon } from "@/components/shared/icon";
@@ -10,6 +11,25 @@ import { values } from "@/lib/content";
 export function Features() {
   return (
     <section className="section-y relative overflow-hidden bg-canvas">
+      {/* Porcelain shield — quiet trust cue beside the editorial header */}
+      <motion.div
+        initial={{ opacity: 0, y: 30, rotate: 8 }}
+        whileInView={{ opacity: 1, y: 0, rotate: 6 }}
+        viewport={viewportOnce}
+        transition={{ duration: 1.1, ease: EASE, delay: 0.25 }}
+        className="pointer-events-none absolute right-[4%] top-16 hidden h-[280px] w-[280px] lg:block xl:right-[8%] xl:h-[320px] xl:w-[320px]"
+      >
+        <div className="animate-float-slow h-full w-full">
+          <Image
+            src="/images/porcelain/security-shield.png"
+            alt=""
+            fill
+            sizes="320px"
+            className="mask-fade-radial object-contain mix-blend-multiply"
+          />
+        </div>
+      </motion.div>
+
       <div className="container-page">
         {/* Editorial header — massive type like EventBeds */}
         <div className="max-w-3xl">

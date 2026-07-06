@@ -2,6 +2,7 @@
 
 import * as React from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { motion, useReducedMotion } from "framer-motion";
 import { ArrowRight, Phone } from "lucide-react";
 
@@ -26,6 +27,23 @@ export function CTA() {
         <div className="absolute inset-[22%] rounded-full border border-dashed border-accent/30" />
       </div>
       <div className="bg-orb-emerald pointer-events-none absolute left-1/2 top-1/2 h-[64vmin] w-[64vmin] -translate-x-1/2 -translate-y-1/2 opacity-40" />
+
+      {/* Obsidian archway — the doorway out of tax season */}
+      <motion.div
+        initial={{ opacity: 0, scale: 0.94 }}
+        whileInView={{ opacity: 0.55, scale: 1 }}
+        viewport={{ once: true, margin: "-10%" }}
+        transition={{ duration: 1.6, ease: [0.16, 1, 0.3, 1] }}
+        className="pointer-events-none absolute inset-x-0 bottom-0 mx-auto h-[80%] w-[min(760px,90vw)]"
+      >
+        <Image
+          src="/images/porcelain/cta-arch-dark.png"
+          alt=""
+          fill
+          sizes="760px"
+          className="mask-fade-ground object-contain object-bottom"
+        />
+      </motion.div>
 
       {/* Faint service marquee */}
       <div className="pointer-events-none absolute inset-x-0 top-10 opacity-[0.06]">

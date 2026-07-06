@@ -2,6 +2,7 @@
 
 import * as React from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { motion } from "framer-motion";
 import { ArrowUpRight, Check } from "lucide-react";
 
@@ -97,20 +98,38 @@ export function GST() {
           </Link>
         </div>
 
-        {/* Floating device */}
-        <motion.div
-          initial={{ opacity: 0, y: 40, rotate: -3 }}
-          whileInView={{ opacity: 1, y: 0, rotate: 0 }}
-          viewport={viewportOnce}
-          transition={{ duration: 0.9, ease: EASE }}
-          className="mx-auto w-[248px] md:w-[280px]"
-        >
-          <div className="animate-float-slow">
-            <PhoneMockup>
-              <GstScreen />
-            </PhoneMockup>
-          </div>
-        </motion.div>
+        {/* Floating device over porcelain ledger stack */}
+        <div className="relative mx-auto">
+          <motion.div
+            initial={{ opacity: 0, scale: 0.92, rotate: 4 }}
+            whileInView={{ opacity: 1, scale: 1, rotate: 8 }}
+            viewport={viewportOnce}
+            transition={{ duration: 1.1, ease: EASE, delay: 0.15 }}
+            className="pointer-events-none absolute -right-6 -top-16 hidden h-[300px] w-[300px] md:block lg:-right-16 lg:h-[360px] lg:w-[360px]"
+          >
+            <Image
+              src="/images/porcelain/gst-ledger.png"
+              alt=""
+              fill
+              sizes="360px"
+              className="mask-fade-radial object-contain mix-blend-multiply"
+            />
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 40, rotate: -3 }}
+            whileInView={{ opacity: 1, y: 0, rotate: 0 }}
+            viewport={viewportOnce}
+            transition={{ duration: 0.9, ease: EASE }}
+            className="relative z-10 mx-auto w-[248px] md:w-[280px]"
+          >
+            <div className="animate-float-slow">
+              <PhoneMockup>
+                <GstScreen />
+              </PhoneMockup>
+            </div>
+          </motion.div>
+        </div>
       </div>
     </section>
   );

@@ -2,6 +2,7 @@
 
 import * as React from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { motion } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
 
@@ -17,7 +18,24 @@ export function BusinessRegistration() {
   const [active, setActive] = React.useState(0);
 
   return (
-    <section className="section-y bg-canvas">
+    <section className="section-y relative overflow-hidden bg-canvas">
+      {/* Porcelain storefront — the business you're about to make official */}
+      <motion.div
+        initial={{ opacity: 0, y: 40 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={viewportOnce}
+        transition={{ duration: 1.1, ease: EASE, delay: 0.2 }}
+        className="pointer-events-none absolute right-[2%] top-10 hidden h-[340px] w-[340px] lg:block xl:right-[6%] xl:h-[400px] xl:w-[400px]"
+      >
+        <Image
+          src="/images/porcelain/registration-facade.png"
+          alt=""
+          fill
+          sizes="400px"
+          className="mask-fade-radial object-contain mix-blend-multiply"
+        />
+      </motion.div>
+
       <div className="container-page">
         <div className="max-w-2xl">
           <div className="flex items-center gap-2.5 font-mono text-[11px] uppercase tracking-[0.24em] text-muted">

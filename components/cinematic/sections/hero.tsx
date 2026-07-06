@@ -2,6 +2,7 @@
 
 import * as React from "react";
 import Link from "next/link";
+import Image from "next/image";
 import {
   motion,
   useScroll,
@@ -68,6 +69,29 @@ export function Hero() {
           className="bg-orb-emerald pointer-events-none absolute left-1/2 top-[44%] h-[85vmin] w-[85vmin] -translate-x-1/2 -translate-y-1/2 will-change-transform"
         />
         <div className="bg-dotgrid pointer-events-none absolute inset-0 opacity-50" />
+
+        {/* Porcelain city — architectural model horizon behind the devices */}
+        <motion.div
+          style={{ y: yA }}
+          className="pointer-events-none absolute inset-x-0 bottom-0 z-[5] flex justify-center will-change-transform"
+        >
+          <motion.div
+            initial={reduce ? {} : { opacity: 0, y: 60 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1.4, ease: EASE, delay: 0.15 }}
+            className="mask-fade-ground relative h-[38vh] w-[min(1400px,120vw)] md:h-[46vh]"
+          >
+            <Image
+              src="/images/porcelain/hero-cityscape.png"
+              alt=""
+              fill
+              priority
+              sizes="(max-width: 768px) 120vw, 1400px"
+              className="object-cover object-bottom opacity-90 mix-blend-multiply"
+            />
+          </motion.div>
+        </motion.div>
+
         <motion.div
           style={{ opacity: tintOpacity }}
           className="pointer-events-none absolute inset-0 bg-obsidian"

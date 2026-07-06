@@ -1,6 +1,7 @@
 "use client";
 
 import * as React from "react";
+import Image from "next/image";
 import { motion, useScroll, useTransform } from "framer-motion";
 
 import { EASE } from "@/components/cinematic/lib/motion";
@@ -24,6 +25,23 @@ export function WhyTrustTax() {
     >
       <div className="bg-orb-emerald pointer-events-none absolute left-1/2 top-1/2 h-[70vmin] w-[70vmin] -translate-x-1/2 -translate-y-1/2 opacity-30" />
       <div className="bg-dotgrid-dark pointer-events-none absolute inset-0 opacity-40" />
+
+      {/* Obsidian vault — institutional trust, emerging from the dark */}
+      <motion.div
+        initial={{ opacity: 0, x: 60 }}
+        whileInView={{ opacity: 1, x: 0 }}
+        viewport={{ once: true, margin: "-15%" }}
+        transition={{ duration: 1.4, ease: EASE }}
+        className="pointer-events-none absolute -right-[8%] bottom-0 hidden h-[85%] w-[48%] lg:block"
+      >
+        <Image
+          src="/images/porcelain/vault-dark.png"
+          alt=""
+          fill
+          sizes="48vw"
+          className="mask-fade-corner-br object-contain object-right-bottom opacity-80"
+        />
+      </motion.div>
 
       <div className="container-page relative z-10">
         <div className="flex items-center gap-2.5 font-mono text-[11px] uppercase tracking-[0.24em] text-cream/60">

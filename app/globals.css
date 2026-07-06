@@ -100,6 +100,22 @@
     -webkit-mask-image: linear-gradient(to bottom, #000 60%, transparent);
     mask-image: linear-gradient(to bottom, #000 60%, transparent);
   }
+
+  /* Radial fades — melt porcelain renders into the canvas, no visible bounds */
+  .mask-fade-radial {
+    -webkit-mask-image: radial-gradient(closest-side, #000 52%, transparent 96%);
+    mask-image: radial-gradient(closest-side, #000 52%, transparent 96%);
+  }
+
+  .mask-fade-ground {
+    -webkit-mask-image: radial-gradient(120% 100% at 50% 100%, #000 55%, transparent 98%);
+    mask-image: radial-gradient(120% 100% at 50% 100%, #000 55%, transparent 98%);
+  }
+
+  .mask-fade-corner-br {
+    -webkit-mask-image: radial-gradient(110% 110% at 100% 100%, #000 45%, transparent 92%);
+    mask-image: radial-gradient(110% 110% at 100% 100%, #000 45%, transparent 92%);
+  }
 }
 
 /* Cinematic layer */
