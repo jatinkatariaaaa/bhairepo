@@ -1,7 +1,7 @@
 import { FaqJsonLd, OrganizationJsonLd } from "@/components/shared/json-ld";
 import { homeFaqs } from "@/lib/content";
 
-import { Hero } from "@/components/editorial/hero";
+import { Hero } from "@/components/cinematic/sections/hero";
 import { StepsStrip } from "@/components/editorial/steps-strip";
 import { Report } from "@/components/editorial/report";
 import { ServicesIndex } from "@/components/editorial/services-index";

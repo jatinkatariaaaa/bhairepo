@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import Image from "next/image";
+import Link from "next/link";
 import {
   motion,
   useScroll,
@@ -9,17 +9,30 @@ import {
   useReducedMotion,
   type MotionValue,
 } from "framer-motion";
+import { ArrowRight } from "lucide-react";
 
+import { Button } from "@/components/ui/button";
 import { PhoneMockup } from "@/components/cinematic/phone";
-import { DashboardScreen } from "@/components/cinematic/app-screens";
+import {
+  DashboardScreen,
+  GstScreen,
+  ItrScreen,
+} from "@/components/cinematic/app-screens";
 import { ProofTag } from "@/components/cinematic/proof-tag";
+import { RevealText } from "@/components/cinematic/reveal-text";
+import { SectionLabel } from "@/components/cinematic/section-label";
+import { Magnetic } from "@/components/cinematic/magnetic";
 import { EASE } from "@/components/cinematic/lib/motion";
 
-/**
- * EventBeds-style hero: a full-bleed clay-model city fills the viewport,
- * a small gray eyebrow sits above one massive uppercase headline, and a
- * single phone rises out of the scene with floating proof pills around it.
- */
+/** Entrance for the floating phones — fly up + settle, staggered. */
+function phoneEntrance(delay: number) {
+  return {
+    initial: { opacity: 0, y: 90, scale: 0.86 },
+    animate: { opacity: 1, y: 0, scale: 1 },
+    transition: { duration: 1.1, ease: EASE, delay },
+  };
+}
+
 export function Hero() {
   const reduce = useReducedMotion();
   const ref = React.useRef<HTMLDivElement>(null);
@@ -28,104 +41,216 @@ export function Hero() {
     offset: ["start start", "end start"],
   });
 
+  // A single multiplier collapses all parallax to 0 under reduced motion.
   const k = reduce ? 0 : 1;
   const r = <T,>(a: T, b: T) => [a, b] as [T, T];
 
-  const yCity = useTransform(scrollYProgress, [0, 1], r(0, 120 * k));
-  const cityScale = useTransform(scrollYProgress, [0, 1], r(1, 1 + 0.08 * k));
-  const yPhone = useTransform(scrollYProgress, [0, 1], r(0, -140 * k));
-  const yText = useTransform(scrollYProgress, [0, 0.5], r(0, -80 * k));
-  const opacityText = useTransform(scrollYProgress, [0, 0.42], r(1, k ? 0 : 1));
+  // ── One scroll clock → many connected layers ───────────────────────────
+  // Phone A (center / dashboard) — moves SLOWEST
+  const yA = useTransform(scrollYProgress, [0, 1], r(0, -90 * k));
+  const scaleA = useTransform(scrollYProgress, [0, 1], r(1, 1 + 0.06 * k));
+  // Phone B (left / GST) — ROTATES
+  const yB = useTransform(scrollYProgress, [0, 1], r(0, -170 * k));
+  const rotB = useTransform(scrollYProgress, [0, 1], r(-10 * k, 3 * k));
+  const xB = useTransform(scrollYProgress, [0, 1], r(0, -34 * k));
+  // Phone C (right / ITR) — SCALES
+  const yC = useTransform(scrollYProgress, [0, 1], r(0, -140 * k));
+  const scaleC = useTransform(scrollYProgress, [0, 1], r(0.9, 0.9 + 0.24 * k));
+  const rotC = useTransform(scrollYProgress, [0, 1], r(8 * k, -3 * k));
+  const xC = useTransform(scrollYProgress, [0, 1], r(0, 34 * k));
+
+  // Headline slides up & fades; sub/CTA fade faster
+  const yText = useTransform(scrollYProgress, [0, 0.6], r(0, -120 * k));
+  const opacityText = useTransform(scrollYProgress, [0, 0.5], r(1, k ? 0 : 1));
+  const opacityLede = useTransform(scrollYProgress, [0, 0.32], r(1, k ? 0 : 1));
+
+  // Background: orb breathes, ink overlay deepens (subtle bg change)
+  const orbScale = useTransform(scrollYProgress, [0, 1], r(1, 1 + 0.5 * k));
+  const orbOpacity = useTransform(scrollYProgress, [0, 1], r(0.9, 0.45));
+  const tintOpacity = useTransform(scrollYProgress, [0.3, 1], r(0, 0.12 * k));
+  const cueOpacity = useTransform(scrollYProgress, [0, 0.12], r(1, k ? 0 : 1));
 
   return (
     <section
       ref={ref}
-      className="relative -mt-[76px] h-[190vh] md:-mt-[88px]"
-      aria-label="TrustTax — India's all-in-one tax platform"
+      className="relative h-[200vh]"
+      aria-label="TrustTax — taxes, GST and compliance, handled"
     >
-      <div className="sticky top-0 h-screen overflow-hidden bg-canvas">
-        {/* Full-bleed clay city world */}
+      <div className="sticky top-0 h-screen overflow-hidden">
+        {/* background layers */}
         <motion.div
-          style={{ y: yCity, scale: cityScale }}
-          className="pointer-events-none absolute inset-0 will-change-transform"
-        >
+          style={{ scale: orbScale, opacity: orbOpacity }}
+          className="bg-orb-emerald pointer-events-none absolute left-1/2 top-[42%] h-[80vmin] w-[80vmin] -translate-x-1/2 -translate-y-1/2 will-change-transform"
+        />
+        <div className="bg-dotgrid pointer-events-none absolute inset-0 opacity-60" />
+        <motion.div
+          style={{ opacity: tintOpacity }}
+          className="pointer-events-none absolute inset-0 bg-obsidian"
+        />
+
+        {/* ── floating phones — rest LOW (peeking), scroll lifts them up ── */}
+        <div className="pointer-events-none absolute inset-x-0 bottom-0 z-10 flex translate-y-[44%] items-end justify-center gap-2 sm:gap-6 md:translate-y-[32%] md:gap-10">
+          {/* Phone B — left, rotates (hidden on small screens) */}
           <motion.div
-            initial={reduce ? {} : { opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 1.6, ease: EASE }}
-            className="absolute inset-0"
+            style={{ y: yB, x: xB, rotate: rotB }}
+            className="hidden w-[190px] translate-y-10 will-change-transform sm:block md:w-[236px]"
           >
-            <Image
-              src="/images/porcelain/hero-city-world.png"
-              alt=""
-              fill
-              priority
-              sizes="100vw"
-              className="object-cover object-bottom blend-porcelain"
-            />
-            {/* Soften the top so the headline zone stays clean */}
-            <div className="absolute inset-x-0 top-0 h-[45%] bg-gradient-to-b from-canvas via-canvas/70 to-transparent" />
+            <motion.div {...(reduce ? {} : phoneEntrance(0.5))}>
+              <PhoneMockup>
+                <GstScreen />
+              </PhoneMockup>
+            </motion.div>
           </motion.div>
-        </motion.div>
 
-        {/* Eyebrow + massive headline */}
-        <motion.div
-          style={{ y: yText, opacity: opacityText }}
-          className="absolute inset-x-0 top-0 z-30 mx-auto flex flex-col items-center px-4 pt-[16vh] text-center md:pt-[15vh]"
-        >
-          <motion.p
-            initial={reduce ? {} : { opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, ease: EASE, delay: 0.15 }}
-            className="font-display text-[clamp(1.1rem,2.4vw,1.9rem)] font-medium tracking-tight text-muted"
-          >
-            India&apos;s all-in-one platform for
-          </motion.p>
-          <motion.h1
-            initial={reduce ? {} : { opacity: 0, y: 36 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.9, ease: EASE, delay: 0.3 }}
-            className="mt-1 font-display text-[clamp(3.2rem,11.5vw,9.5rem)] font-extrabold uppercase leading-[0.95] tracking-[-0.04em] text-ink"
-          >
-            Taxes, done
-          </motion.h1>
-        </motion.div>
-
-        {/* Single phone rising from the scene */}
-        <motion.div
-          style={{ y: yPhone }}
-          className="pointer-events-none absolute inset-x-0 top-[46%] z-20 flex justify-center will-change-transform"
-        >
+          {/* Phone A — center, slowest & largest */}
           <motion.div
-            initial={reduce ? {} : { opacity: 0, y: 160 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1.3, ease: EASE, delay: 0.45 }}
-            className="w-[240px] md:w-[290px]"
+            style={{ y: yA, scale: scaleA }}
+            className="z-10 w-[248px] will-change-transform md:w-[310px]"
           >
-            <PhoneMockup className="shadow-phone">
-              <DashboardScreen />
-            </PhoneMockup>
+            <motion.div {...(reduce ? {} : phoneEntrance(0.3))}>
+              <PhoneMockup className="shadow-phone">
+                <DashboardScreen />
+              </PhoneMockup>
+            </motion.div>
           </motion.div>
-        </motion.div>
 
-        {/* Floating proof pills — EventBeds price-pill pattern */}
-        <FloatingTag progress={scrollYProgress} rate={-60 * k} delay={0.9} className="left-[6%] top-[52%] hidden sm:block md:left-[13%] md:top-[50%]">
+          {/* Phone C — right, scales (hidden on small screens) */}
+          <motion.div
+            style={{ y: yC, x: xC, scale: scaleC, rotate: rotC }}
+            className="hidden w-[190px] translate-y-16 will-change-transform sm:block md:w-[236px]"
+          >
+            <motion.div {...(reduce ? {} : phoneEntrance(0.65))}>
+              <PhoneMockup>
+                <ItrScreen />
+              </PhoneMockup>
+            </motion.div>
+          </motion.div>
+        </div>
+
+        {/* ── floating proof-tags (each parallaxes at a different rate) ── */}
+        <FloatingTag
+          progress={scrollYProgress}
+          rate={-70 * k}
+          delay={1}
+          className="hidden left-[3%] top-[52%] sm:block md:left-[8%] md:top-[45%]"
+        >
           <ProofTag icon="BadgeCheck" label="GSTR-3B" value="Filed · on time" />
         </FloatingTag>
-        <FloatingTag progress={scrollYProgress} rate={40 * k} delay={1.05} className="right-[5%] top-[58%] hidden sm:block md:right-[12%] md:top-[54%]">
-          <ProofTag icon="IndianRupee" label="Refund credited" value="₹48,200" />
+        <FloatingTag
+          progress={scrollYProgress}
+          rate={40 * k}
+          delay={1.15}
+          className="hidden right-[3%] top-[58%] sm:block md:right-[8%] md:top-[43%]"
+        >
+          <ProofTag
+            icon="IndianRupee"
+            label="Refund credited"
+            value="₹48,200"
+          />
         </FloatingTag>
-        <FloatingTag progress={scrollYProgress} rate={80 * k} delay={1.2} className="bottom-[16%] left-[8%] hidden lg:block">
-          <ProofTag icon="ShieldCheck" label="CA-certified" value="12,000+ returns" />
+        <FloatingTag
+          progress={scrollYProgress}
+          rate={90 * k}
+          delay={1.3}
+          className="bottom-[13%] left-[7%] hidden md:block"
+        >
+          <ProofTag
+            icon="ShieldCheck"
+            label="CA-certified"
+            value="12,000+ returns"
+          />
         </FloatingTag>
-        <FloatingTag progress={scrollYProgress} rate={-35 * k} delay={1.35} className="bottom-[20%] right-[9%] hidden lg:block">
+        <FloatingTag
+          progress={scrollYProgress}
+          rate={-40 * k}
+          delay={1.45}
+          className="bottom-[17%] right-[7%] hidden md:block"
+        >
           <ProofTag icon="Clock" label="Avg. turnaround" value="3–7 days" />
         </FloatingTag>
+
+        {/* ── headline block (above the phones) ── */}
+        <motion.div
+          style={{ y: yText }}
+          className="absolute inset-x-0 top-0 z-30 mx-auto flex max-w-5xl flex-col items-center px-6 pt-[11vh] text-center md:pt-[10vh]"
+        >
+          <motion.div style={{ opacity: opacityLede }}>
+            <SectionLabel index="01" className="justify-center">
+              CA-led · 100% online · India
+            </SectionLabel>
+          </motion.div>
+
+          <motion.h1
+            style={{ opacity: opacityText }}
+            className="mt-6 font-display text-[clamp(2.4rem,7vw,5.25rem)] font-semibold leading-[1.0] tracking-[-0.035em] text-ink"
+          >
+            <RevealText
+              as="span"
+              className="block"
+              segments={[{ text: "Taxes, GST" }]}
+            />
+            <RevealText
+              as="span"
+              className="block"
+              delay={0.18}
+              segments={[
+                { text: "& compliance —" },
+                {
+                  text: " handled.",
+                  className: "font-serif italic font-normal text-primary",
+                },
+              ]}
+            />
+          </motion.h1>
+
+          <motion.p
+            style={{ opacity: opacityLede }}
+            className="mt-6 max-w-xl text-body-lg text-body"
+          >
+            A team of Chartered Accountants files it right, on time and entirely
+            online — so you can get back to running the business.
+          </motion.p>
+
+          <motion.div
+            style={{ opacity: opacityLede }}
+            className="pointer-events-auto mt-8 flex flex-col items-center gap-3 sm:flex-row"
+          >
+            <Magnetic>
+              <Button asChild size="lg">
+                <Link href="/contact#book">
+                  Book free consultation
+                  <ArrowRight className="h-4 w-4" />
+                </Link>
+              </Button>
+            </Magnetic>
+            <Button asChild size="lg" variant="ghost">
+              <Link href="/services">Explore services</Link>
+            </Button>
+          </motion.div>
+        </motion.div>
+
+        {/* scroll cue */}
+        <motion.div
+          style={{ opacity: cueOpacity }}
+          className="absolute bottom-6 left-1/2 z-30 flex -translate-x-1/2 flex-col items-center gap-2 text-muted"
+        >
+          <span className="font-mono text-[10px] uppercase tracking-[0.24em]">
+            Scroll
+          </span>
+          <span className="relative h-9 w-px overflow-hidden bg-hairline">
+            <motion.span
+              className="absolute inset-x-0 top-0 h-3 bg-primary"
+              animate={reduce ? {} : { y: ["-100%", "300%"] }}
+              transition={{ duration: 1.6, ease: "easeInOut", repeat: Infinity }}
+            />
+          </span>
+        </motion.div>
       </div>
     </section>
   );
 }
 
+/** A proof-tag that fades in on load, then parallaxes with the page scroll. */
 function FloatingTag({
   children,
   progress,
@@ -140,7 +265,7 @@ function FloatingTag({
   className: string;
 }) {
   const y = useTransform(progress, [0, 1], [0, rate]);
-  const opacity = useTransform(progress, [0, 0.5], [1, 0]);
+  const opacity = useTransform(progress, [0, 0.55], [1, 0]);
   return (
     <motion.div
       style={{ y, opacity }}
