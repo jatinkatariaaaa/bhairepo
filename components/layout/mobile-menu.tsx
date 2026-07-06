@@ -33,9 +33,10 @@ export function MobileMenu() {
         <button
           type="button"
           aria-label="Open menu"
-          className="inline-flex h-11 w-11 items-center justify-center rounded-button border border-hairline bg-white text-ink shadow-sm transition-colors hover:bg-mint focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/60"
+          className="inline-flex h-11 items-center gap-2 rounded-xl bg-hairline/80 px-4 text-sm font-semibold text-ink transition-colors hover:bg-hairline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/60"
         >
-          <Menu className="h-5 w-5" />
+          Menu
+          <Menu className="h-4 w-4" strokeWidth={2} />
         </button>
       </SheetTrigger>
 

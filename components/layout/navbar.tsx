@@ -2,86 +2,38 @@
 
 import * as React from "react";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
-import { Phone } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
-import { Container } from "@/components/shared/container";
 import { Logo } from "@/components/shared/logo";
-import { mainNav, site } from "@/lib/site";
-import { cn } from "@/lib/utils";
 import { MobileMenu } from "./mobile-menu";
 
-/** Sticky navbar — transparent over the hero, blurred once you scroll. */
+/**
+ * EventBeds-style navbar: one full-width rounded bar on the page background,
+ * logo on the left, and only two actions on the right — a solid dark CTA pill
+ * and a neutral "Menu" pill that opens the sheet on every screen size.
+ */
 export function Navbar() {
-  const pathname = usePathname();
-  const [scrolled, setScrolled] = React.useState(false);
-
-  React.useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 8);
-    onScroll();
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
-
   return (
-    <header className="absolute inset-x-0 top-0 z-50 px-3 pt-3 md:px-4 md:pt-4">
-      <Container>
-        <div
-          className={cn(
-            "flex h-14 items-center justify-between gap-4 rounded-2xl px-4 transition-all duration-500 ease-premium md:h-[68px] md:px-6",
-            scrolled
-              ? "bg-white/85 shadow-lift backdrop-blur-md"
-              : "bg-white/60 backdrop-blur-sm",
-          )}
+    <header className="absolute inset-x-0 top-0 z-50 px-4 pt-4 md:px-6 md:pt-6">
+      <div className="flex h-16 items-center justify-between rounded-2xl bg-white/70 px-4 backdrop-blur-md md:h-[76px] md:px-6">
+        <Link
+          href="/"
+          aria-label="TrusTax — home"
+          className="rounded-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/60"
         >
-          <Link
-            href="/"
-            aria-label="TrusTax — home"
-            className="rounded-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/60"
-          >
-            <Logo />
-          </Link>
+          <Logo />
+        </Link>
 
-          <nav
-            aria-label="Primary"
-            className="hidden items-center gap-1 md:flex"
+        <div className="flex items-center gap-2.5">
+          <Button
+            asChild
+            className="hidden h-11 rounded-xl bg-ink px-5 text-sm font-semibold text-white hover:bg-ink/85 sm:inline-flex"
           >
-            {mainNav.map((item) => {
-              const active =
-                pathname === item.href || pathname?.startsWith(item.href);
-              return (
-                <Link
-                  key={item.href}
-                  href={item.href}
-                  aria-current={active ? "page" : undefined}
-                  className={cn(
-                    "rounded-md px-3 py-2 text-sm font-medium transition-colors",
-                    active ? "text-primary" : "text-body hover:text-ink",
-                  )}
-                >
-                  {item.label}
-                </Link>
-              );
-            })}
-          </nav>
-
-          <div className="flex items-center gap-2">
-            <Button asChild variant="ghost" size="sm" className="hidden lg:inline-flex">
-              <a href={site.phoneHref}>
-                <Phone className="h-4 w-4" strokeWidth={1.75} />
-                {site.phoneDisplay}
-              </a>
-            </Button>
-            <Button asChild size="sm" className="hidden md:inline-flex">
-              <Link href="/contact#book">Book Free Consultation</Link>
-            </Button>
-            <div className="md:hidden">
-              <MobileMenu />
-            </div>
-          </div>
+            <Link href="/contact#book">Book Free Consultation</Link>
+          </Button>
+          <MobileMenu />
         </div>
-      </Container>
+      </div>
     </header>
   );
 }
