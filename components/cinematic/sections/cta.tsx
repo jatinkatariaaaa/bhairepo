@@ -8,7 +8,6 @@ import { ArrowRight, Phone } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Magnetic } from "@/components/cinematic/magnetic";
 import { Marquee } from "@/components/cinematic/marquee";
-import { SectionLabel } from "@/components/cinematic/section-label";
 import { RevealText } from "@/components/cinematic/reveal-text";
 import { services } from "@/lib/services";
 import { site } from "@/lib/site";
@@ -18,7 +17,7 @@ export function CTA() {
 
   return (
     <section className="noise relative flex min-h-[92vh] items-center overflow-hidden bg-obsidian py-28 text-cream md:py-40">
-      {/* orbiting rings — contained, no overflow */}
+      {/* Orbiting rings — contained, no overflow */}
       <div className="pointer-events-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
         <div
           className={`h-[min(52vw,720px)] w-[min(52vw,720px)] rounded-full border border-cream/15 ${reduce ? "" : "animate-spin-slow"}`}
@@ -28,7 +27,7 @@ export function CTA() {
       </div>
       <div className="bg-orb-emerald pointer-events-none absolute left-1/2 top-1/2 h-[64vmin] w-[64vmin] -translate-x-1/2 -translate-y-1/2 opacity-40" />
 
-      {/* faint service marquee */}
+      {/* Faint service marquee */}
       <div className="pointer-events-none absolute inset-x-0 top-10 opacity-[0.06]">
         <Marquee pauseOnHover={false}>
           {services.map((s) => (
@@ -44,9 +43,11 @@ export function CTA() {
 
       <div className="container-page relative z-10 text-center">
         <div className="flex justify-center">
-          <SectionLabel index="12" tone="dark">
-            Ready when you are
-          </SectionLabel>
+          <div className="flex items-center gap-2.5 font-mono text-[11px] uppercase tracking-[0.24em] text-cream/60">
+            <span className="h-2 w-2 rounded-full bg-gold" />
+            <span className="text-gold">(12)</span>
+            <span>Ready when you are</span>
+          </div>
         </div>
 
         <h2 className="mx-auto mt-7 max-w-4xl font-display text-[clamp(2.5rem,7vw,5.5rem)] font-semibold leading-[0.98] tracking-[-0.035em] text-cream">
@@ -56,7 +57,7 @@ export function CTA() {
             className="block"
             delay={0.15}
             segments={[
-              { text: "easiest" , className: "font-serif italic font-normal text-accent" },
+              { text: "easiest", className: "font-serif italic font-normal text-accent" },
               { text: " part of your business." },
             ]}
           />

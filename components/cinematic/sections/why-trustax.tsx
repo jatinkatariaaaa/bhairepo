@@ -1,26 +1,18 @@
 "use client";
 
 import * as React from "react";
-import { motion, useScroll, useTransform, type MotionValue } from "framer-motion";
+import { motion, useScroll, useTransform } from "framer-motion";
 
-import { Icon } from "@/components/shared/icon";
-import { SectionLabel } from "@/components/cinematic/section-label";
-import { EASE, viewportOnce } from "@/components/cinematic/lib/motion";
-import { trustBadges } from "@/lib/content";
+import { EASE } from "@/components/cinematic/lib/motion";
 
 const STATEMENT =
-  "We turn tax season into a non-event. No missed deadlines, no penalty notices, no last-minute scramble — only clean books and filings that are always, reliably, on time.";
+  "We believe tax compliance should be invisible — not a recurring source of stress, penalties and midnight panic. So we built a firm that handles it end to end, with the rigour of a big audit team and the personal attention of a single, trusted CA.";
 
-/**
- * WHY TRUSTTAX — the "lights-down" keynote moment. Signature motion: the
- * statement illuminates word-by-word as you scroll (muted → cream), driven by a
- * single scroll clock, then trust badges settle in beneath it.
- */
 export function WhyTrustTax() {
   const ref = React.useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
     target: ref,
-    offset: ["start 0.85", "end 0.45"],
+    offset: ["start 0.8", "end 0.4"],
   });
 
   const words = STATEMENT.split(" ");
@@ -28,16 +20,17 @@ export function WhyTrustTax() {
   return (
     <section
       ref={ref}
-      className="noise relative overflow-hidden bg-obsidian py-28 text-cream md:py-40"
+      className="noise relative flex min-h-[100vh] items-center overflow-hidden bg-obsidian py-28 text-cream md:py-40"
     >
-      {/* single emerald spotlight — no rainbow gradients */}
-      <div className="bg-orb-emerald pointer-events-none absolute -right-40 top-0 h-[70vmin] w-[70vmin] opacity-40" />
+      <div className="bg-orb-emerald pointer-events-none absolute left-1/2 top-1/2 h-[70vmin] w-[70vmin] -translate-x-1/2 -translate-y-1/2 opacity-30" />
       <div className="bg-dotgrid-dark pointer-events-none absolute inset-0 opacity-40" />
 
-      <div className="container-page relative">
-        <SectionLabel index="03" tone="dark">
-          Why TrustTax
-        </SectionLabel>
+      <div className="container-page relative z-10">
+        <div className="flex items-center gap-2.5 font-mono text-[11px] uppercase tracking-[0.24em] text-cream/60">
+          <span className="h-2 w-2 rounded-full bg-gold" />
+          <span className="text-gold">(03)</span>
+          <span>Why TrustTax</span>
+        </div>
 
         <p className="mt-10 max-w-5xl font-display text-[clamp(1.6rem,4.2vw,3.6rem)] font-medium leading-[1.15] tracking-tight">
           {words.map((word, i) => (
@@ -51,32 +44,29 @@ export function WhyTrustTax() {
           ))}
         </p>
 
-        {/* trust badges */}
-        <motion.ul
-          initial="hidden"
-          whileInView="show"
-          viewport={viewportOnce}
-          variants={{ show: { transition: { staggerChildren: 0.08 } } }}
-          className="mt-14 flex flex-wrap gap-3"
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.7, ease: EASE, delay: 0.3 }}
+          className="mt-16 flex flex-wrap gap-8 border-t border-cream/10 pt-10"
         >
-          {trustBadges.map((b) => (
-            <motion.li
-              key={b.label}
-              variants={{
-                hidden: { opacity: 0, y: 16 },
-                show: {
-                  opacity: 1,
-                  y: 0,
-                  transition: { duration: 0.6, ease: EASE },
-                },
-              }}
-              className="glass-dark flex items-center gap-2 rounded-pill px-4 py-2.5 text-sm text-cream/90"
-            >
-              <Icon name={b.icon} className="h-4 w-4 text-accent" />
-              {b.label}
-            </motion.li>
+          {[
+            { v: "12,000+", l: "Returns filed" },
+            { v: "500+", l: "Clients served" },
+            { v: "40+", l: "Cities covered" },
+            { v: "10+", l: "Years of experience" },
+          ].map((s) => (
+            <div key={s.l}>
+              <div className="tnum font-display text-4xl font-semibold text-cream">
+                {s.v}
+              </div>
+              <div className="mt-1 font-mono text-xs uppercase tracking-widest text-cream/50">
+                {s.l}
+              </div>
+            </div>
           ))}
-        </motion.ul>
+        </motion.div>
       </div>
     </section>
   );
@@ -87,16 +77,14 @@ function Word({
   progress,
   range,
 }: {
-  children: React.ReactNode;
-  progress: MotionValue<number>;
+  children: string;
+  progress: ReturnType<typeof useScroll>["scrollYProgress"];
   range: [number, number];
 }) {
   const opacity = useTransform(progress, range, [0.18, 1]);
   return (
-    <>
-      <motion.span style={{ opacity }} className="inline-block">
-        {children}
-      </motion.span>{" "}
-    </>
+    <motion.span style={{ opacity }} className="mr-[0.25em] inline-block">
+      {children}
+    </motion.span>
   );
 }

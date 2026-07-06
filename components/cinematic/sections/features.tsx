@@ -1,15 +1,9 @@
 "use client";
 
 import * as React from "react";
-import {
-  motion,
-  useMotionTemplate,
-  useMotionValue,
-} from "framer-motion";
+import { motion, useMotionTemplate, useMotionValue } from "framer-motion";
 
 import { Icon } from "@/components/shared/icon";
-import { RevealText } from "@/components/cinematic/reveal-text";
-import { SectionLabel } from "@/components/cinematic/section-label";
 import { EASE, viewportOnce } from "@/components/cinematic/lib/motion";
 import { values } from "@/lib/content";
 
@@ -17,19 +11,17 @@ export function Features() {
   return (
     <section className="section-y relative overflow-hidden bg-canvas">
       <div className="container-page">
-        <div className="max-w-2xl">
-          <SectionLabel index="02">The TrustTax difference</SectionLabel>
-          <h2 className="mt-5 font-display text-display-lg font-semibold tracking-tight text-ink">
-            <RevealText
-              segments={[
-                { text: "Built for" },
-                {
-                  text: " calm",
-                  className: "font-serif italic font-normal text-primary",
-                },
-                { text: " compliance." },
-              ]}
-            />
+        {/* Editorial header — massive type like EventBeds */}
+        <div className="max-w-3xl">
+          <div className="flex items-center gap-2.5 font-mono text-[11px] uppercase tracking-[0.24em] text-muted">
+            <span className="h-2 w-2 rounded-full bg-gold" />
+            <span className="text-gold">(02)</span>
+            <span>The TrustTax difference</span>
+          </div>
+          <h2 className="mt-5 font-display text-[clamp(2.2rem,5.5vw,4.5rem)] font-semibold leading-[1.02] tracking-[-0.03em] text-ink">
+            Built for{" "}
+            <span className="font-serif italic font-normal text-primary">calm</span>{" "}
+            compliance.
           </h2>
           <p className="mt-5 max-w-lg text-body-lg leading-relaxed text-body">
             No jargon, no surprises. Just a steady, senior team that treats your
@@ -37,6 +29,7 @@ export function Features() {
           </p>
         </div>
 
+        {/* Card grid — large, spacious, with cursor spotlight */}
         <div className="mt-14 grid gap-4 md:grid-cols-2">
           {values.map((v, i) => (
             <SpotlightCard key={v.title} index={i}>
@@ -67,7 +60,6 @@ function SpotlightCard({
 }) {
   const mx = useMotionValue(-200);
   const my = useMotionValue(-200);
-  // Stronger spotlight — visible on white without being garish
   const spotlight = useMotionTemplate`radial-gradient(320px circle at ${mx}px ${my}px, rgba(16,185,129,0.10), transparent 70%)`;
 
   function move(e: React.MouseEvent<HTMLDivElement>) {
@@ -85,13 +77,11 @@ function SpotlightCard({
       transition={{ duration: 0.8, ease: EASE, delay: index * 0.08 }}
       className="group relative overflow-hidden rounded-card border border-hairline bg-white p-8 shadow-card transition-shadow duration-500 hover:shadow-lift"
     >
-      {/* cursor spotlight — larger radius, slightly stronger */}
       <motion.div
         aria-hidden
         style={{ background: spotlight }}
         className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-300 group-hover:opacity-100"
       />
-      {/* hairline draw on hover */}
       <span className="pointer-events-none absolute inset-0 rounded-card ring-1 ring-inset ring-primary/0 transition-all duration-500 group-hover:ring-primary/25" />
       <div className="relative">{children}</div>
     </motion.div>

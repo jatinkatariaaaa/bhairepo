@@ -23,9 +23,7 @@ export function SectionLabel({
     >
       <span className="h-2 w-2 rounded-full bg-gold" />
       {index && (
-        <span className="text-gold">
-          ({index})
-        </span>
+        <span className="text-gold">({index})</span>
       )}
       <span>{children}</span>
     </div>

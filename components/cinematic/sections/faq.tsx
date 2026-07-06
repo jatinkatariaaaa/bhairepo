@@ -5,7 +5,6 @@ import Link from "next/link";
 import { AnimatePresence, motion } from "framer-motion";
 import { Plus } from "lucide-react";
 
-import { SectionLabel } from "@/components/cinematic/section-label";
 import { RevealText } from "@/components/cinematic/reveal-text";
 import { EASE } from "@/components/cinematic/lib/motion";
 import { homeFaqs } from "@/lib/content";
@@ -16,10 +15,14 @@ export function Faq() {
   return (
     <section className="section-y bg-canvas">
       <div className="container-page grid gap-12 lg:grid-cols-[0.8fr_1.4fr] lg:gap-20">
-        {/* sticky rail */}
+        {/* Sticky rail */}
         <div className="lg:sticky lg:top-28 lg:h-fit">
-          <SectionLabel index="11">FAQ</SectionLabel>
-          <h2 className="mt-5 font-display text-display-lg font-semibold tracking-tight text-ink">
+          <div className="flex items-center gap-2.5 font-mono text-[11px] uppercase tracking-[0.24em] text-muted">
+            <span className="h-2 w-2 rounded-full bg-gold" />
+            <span className="text-gold">(11)</span>
+            <span>FAQ</span>
+          </div>
+          <h2 className="mt-5 font-display text-[clamp(2.2rem,5.5vw,4.5rem)] font-semibold leading-[1.02] tracking-[-0.03em] text-ink">
             <RevealText
               segments={[
                 { text: "Questions," },
@@ -31,6 +34,7 @@ export function Faq() {
             />
           </h2>
 
+          {/* Animated counter */}
           <div className="mt-10 flex items-end gap-4">
             <div className="relative h-20 w-20 overflow-hidden">
               <AnimatePresence mode="popLayout">
@@ -59,7 +63,7 @@ export function Faq() {
           </Link>
         </div>
 
-        {/* accordion */}
+        {/* Accordion */}
         <ul className="divide-y divide-hairline border-t border-hairline">
           {homeFaqs.map((f, i) => {
             const isOpen = open === i;

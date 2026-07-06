@@ -2,117 +2,98 @@
 
 import * as React from "react";
 import Link from "next/link";
-import { animate, motion, useInView } from "framer-motion";
+import { motion } from "framer-motion";
 import { ArrowUpRight, Check } from "lucide-react";
 
-import { SectionLabel } from "@/components/cinematic/section-label";
-import { RevealText } from "@/components/cinematic/reveal-text";
+import { PhoneMockup } from "@/components/cinematic/phone";
+import { ItrScreen } from "@/components/cinematic/app-screens";
 import { EASE, viewportOnce } from "@/components/cinematic/lib/motion";
 import { getService } from "@/lib/services";
 
-/**
- * TAX FILING — sticky-left editorial column against a scroll-right card stack,
- * anchored by a count-up "returns filed" figure. Signature motion: pinned
- * headline + animated number + staggered right-hand reveal.
- */
 export function TaxFiling() {
   const itr = getService("income-tax");
   const items = itr?.included ?? [];
 
   return (
-    <section className="section-y bg-canvas">
-      <div className="container-page grid gap-12 lg:grid-cols-[0.9fr_1.1fr] lg:gap-16">
-        {/* sticky left */}
-        <div className="lg:sticky lg:top-28 lg:h-fit">
-          <SectionLabel index="06">Income tax &amp; ITR</SectionLabel>
-          <h2 className="mt-5 font-display text-display-lg font-semibold tracking-tight text-ink">
-            <RevealText
-              segments={[
-                { text: "Filing, without" },
-                { text: " the fire drill.", className: "text-primary" },
-              ]}
-            />
+    <section className="section-y relative overflow-hidden bg-canvas">
+      <div className="container-page grid items-center gap-12 lg:grid-cols-[1fr_0.95fr] lg:gap-20">
+        {/* Copy + checklist */}
+        <div>
+          <div className="flex items-center gap-2.5 font-mono text-[11px] uppercase tracking-[0.24em] text-muted">
+            <span className="h-2 w-2 rounded-full bg-gold" />
+            <span className="text-gold">(06)</span>
+            <span>Income tax & ITR</span>
+          </div>
+          <h2 className="mt-5 font-display text-[clamp(2.2rem,5.5vw,4.5rem)] font-semibold leading-[1.02] tracking-[-0.03em] text-ink">
+            File early.{" "}
+            <span className="font-serif italic font-normal text-primary">Refund faster.</span>
           </h2>
           <p className="mt-6 max-w-md text-body-lg leading-relaxed text-body">
             We compute your tax, claim every legitimate deduction and file the
             right form — early, so refunds land sooner.
           </p>
 
-          <div className="mt-10 flex items-baseline gap-3">
-            <span className="font-mono text-6xl font-bold text-primary md:text-7xl">
-              <CountUp value={12000} />+
-            </span>
-            <span className="max-w-[8rem] text-sm text-muted">
-              returns filed &amp; counting
-            </span>
-          </div>
+          <motion.ul
+            initial="hidden"
+            whileInView="show"
+            viewport={viewportOnce}
+            variants={{ show: { transition: { staggerChildren: 0.08 } } }}
+            className="mt-8 space-y-4"
+          >
+            {items.slice(0, 5).map((it) => (
+              <motion.li
+                key={it}
+                variants={{
+                  hidden: { opacity: 0, x: -14 },
+                  show: { opacity: 1, x: 0, transition: { duration: 0.55, ease: EASE } },
+                }}
+                className="relative flex items-start gap-4 pl-5"
+              >
+                <motion.span
+                  variants={{
+                    hidden: { scaleY: 0 },
+                    show: { scaleY: 1, transition: { duration: 0.5, ease: EASE } },
+                  }}
+                  className="absolute left-0 top-1 h-[calc(100%-0.5rem)] w-0.5 origin-top rounded bg-primary/25"
+                />
+                <motion.span
+                  variants={{
+                    hidden: { scale: 0, rotate: -30 },
+                    show: { scale: 1, rotate: 0, transition: { type: "spring", stiffness: 320, damping: 18 } },
+                  }}
+                  className="mt-0.5 grid h-6 w-6 shrink-0 place-items-center rounded-full bg-primary text-white"
+                >
+                  <Check className="h-3.5 w-3.5" strokeWidth={3} />
+                </motion.span>
+                <span className="text-[15px] leading-relaxed text-body">{it}</span>
+              </motion.li>
+            ))}
+          </motion.ul>
 
           <Link
             href="/services/income-tax"
-            className="link-underline mt-8 inline-flex items-center gap-2 font-medium text-ink"
+            className="link-underline mt-9 inline-flex items-center gap-2 font-medium text-ink"
           >
-            See income-tax plans
+            File your ITR
             <ArrowUpRight className="h-4 w-4" />
           </Link>
         </div>
 
-        {/* scrolling right */}
-        <motion.ul
-          initial="hidden"
-          whileInView="show"
+        {/* Phone */}
+        <motion.div
+          initial={{ opacity: 0, y: 40, rotate: 3 }}
+          whileInView={{ opacity: 1, y: 0, rotate: 0 }}
           viewport={viewportOnce}
-          variants={{ show: { transition: { staggerChildren: 0.09 } } }}
-          className="space-y-3"
+          transition={{ duration: 0.9, ease: EASE }}
+          className="mx-auto w-[248px] md:w-[280px]"
         >
-          {items.map((it, i) => (
-            <motion.li
-              key={it}
-              variants={{
-                hidden: { opacity: 0, y: 24 },
-                show: {
-                  opacity: 1,
-                  y: 0,
-                  transition: { duration: 0.6, ease: EASE },
-                },
-              }}
-              className="group flex items-start gap-4 rounded-card border border-hairline bg-white p-5 shadow-card transition-transform duration-500 hover:-translate-y-0.5 hover:shadow-lift"
-            >
-              <span className="mt-0.5 grid h-8 w-8 shrink-0 place-items-center rounded-full bg-mint text-primary transition-colors group-hover:bg-primary group-hover:text-white">
-                <Check className="h-4 w-4" strokeWidth={2.5} />
-              </span>
-              <div>
-                <span className="font-mono text-xs text-muted">
-                  {String(i + 1).padStart(2, "0")}
-                </span>
-                <p className="mt-1 text-[15px] leading-relaxed text-ink">{it}</p>
-              </div>
-            </motion.li>
-          ))}
-        </motion.ul>
+          <div className="animate-float-slow">
+            <PhoneMockup>
+              <ItrScreen />
+            </PhoneMockup>
+          </div>
+        </motion.div>
       </div>
     </section>
-  );
-}
-
-/** Number that counts up (Indian grouping) once scrolled into view. */
-function CountUp({ value }: { value: number }) {
-  const ref = React.useRef<HTMLSpanElement>(null);
-  const inView = useInView(ref, { once: true, margin: "-20%" });
-  const [n, setN] = React.useState(0);
-
-  React.useEffect(() => {
-    if (!inView) return;
-    const controls = animate(0, value, {
-      duration: 1.7,
-      ease: [0.16, 1, 0.3, 1],
-      onUpdate: (v) => setN(v),
-    });
-    return () => controls.stop();
-  }, [inView, value]);
-
-  return (
-    <span ref={ref} className="tnum">
-      {Math.round(n).toLocaleString("en-IN")}
-    </span>
   );
 }

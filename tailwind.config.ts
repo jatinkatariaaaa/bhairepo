@@ -114,6 +114,7 @@ const config: Config = {
       },
       maxWidth: {
         container: "1200px",
+        wide: "1600px",
         prose: "68ch",
       },
       spacing: {
@@ -122,9 +123,9 @@ const config: Config = {
         "section-sm": "4.5rem", // 72px mobile section padding
       },
       borderRadius: {
-        card: "20px",
-        button: "12px",
-        input: "12px",
+        card: "24px",
+        button: "14px",
+        input: "14px",
         pill: "9999px",
       },
       boxShadow: {

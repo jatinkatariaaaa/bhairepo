@@ -8,36 +8,21 @@ import { ArrowUpRight, Check } from "lucide-react";
 import { PhoneMockup } from "@/components/cinematic/phone";
 import { GstScreen } from "@/components/cinematic/app-screens";
 import { Marquee } from "@/components/cinematic/marquee";
-import { SectionLabel } from "@/components/cinematic/section-label";
-import { RevealText } from "@/components/cinematic/reveal-text";
 import { EASE, viewportOnce } from "@/components/cinematic/lib/motion";
 import { getService } from "@/lib/services";
 
 const TERMS = [
-  "GSTR-1",
-  "GSTR-3B",
-  "GSTR-2B",
-  "Input tax credit",
-  "LUT filing",
-  "e-Invoicing",
-  "GSTR-9",
-  "Nil returns",
-  "Amendments",
-  "Notices",
+  "GSTR-1", "GSTR-3B", "GSTR-2B", "Input tax credit", "LUT filing",
+  "e-Invoicing", "GSTR-9", "Nil returns", "Amendments", "Notices",
 ];
 
-/**
- * GST — an infinite marquee of GST terminology over a compliance checklist that
- * "draws in" (left rail scales, checks pop) beside a floating device.
- * Signature motion: term marquee + rail-draw list.
- */
 export function GST() {
   const gst = getService("gst");
   const items = gst?.included ?? [];
 
   return (
     <section className="section-y relative overflow-hidden bg-canvas">
-      {/* term marquee */}
+      {/* Term marquee — editorial band */}
       <Marquee className="border-y border-hairline py-5">
         {TERMS.map((t) => (
           <span
@@ -52,21 +37,18 @@ export function GST() {
 
       <div className="container-page mt-16 grid items-center gap-12 lg:grid-cols-2 lg:gap-20">
         <div>
-          <SectionLabel index="07">GST services</SectionLabel>
+          <div className="flex items-center gap-2.5 font-mono text-[11px] uppercase tracking-[0.24em] text-muted">
+            <span className="h-2 w-2 rounded-full bg-gold" />
+            <span className="text-gold">(07)</span>
+            <span>GST services</span>
+          </div>
           <div className="mt-4 inline-flex items-center gap-2 rounded-pill bg-mint px-3 py-1 font-mono text-xs text-primary">
             <span className="h-1.5 w-1.5 rounded-full bg-accent" />
             Registration &amp; returns · from ₹999
           </div>
-          <h2 className="mt-5 font-display text-display-lg font-semibold tracking-tight text-ink">
-            <RevealText
-              segments={[
-                { text: "GST that never keeps you" },
-                {
-                  text: " up at night.",
-                  className: "font-serif italic font-normal text-primary",
-                },
-              ]}
-            />
+          <h2 className="mt-5 font-display text-[clamp(2.2rem,5.5vw,4.5rem)] font-semibold leading-[1.02] tracking-[-0.03em] text-ink">
+            GST that never keeps you{" "}
+            <span className="font-serif italic font-normal text-primary">up at night.</span>
           </h2>
 
           <motion.ul
@@ -81,11 +63,7 @@ export function GST() {
                 key={it}
                 variants={{
                   hidden: { opacity: 0, x: -14 },
-                  show: {
-                    opacity: 1,
-                    x: 0,
-                    transition: { duration: 0.55, ease: EASE },
-                  },
+                  show: { opacity: 1, x: 0, transition: { duration: 0.55, ease: EASE } },
                 }}
                 className="relative flex items-start gap-4 pl-5"
               >
@@ -99,11 +77,7 @@ export function GST() {
                 <motion.span
                   variants={{
                     hidden: { scale: 0, rotate: -30 },
-                    show: {
-                      scale: 1,
-                      rotate: 0,
-                      transition: { type: "spring", stiffness: 320, damping: 18 },
-                    },
+                    show: { scale: 1, rotate: 0, transition: { type: "spring", stiffness: 320, damping: 18 } },
                   }}
                   className="mt-0.5 grid h-6 w-6 shrink-0 place-items-center rounded-full bg-primary text-white"
                 >
@@ -123,7 +97,7 @@ export function GST() {
           </Link>
         </div>
 
-        {/* floating device */}
+        {/* Floating device */}
         <motion.div
           initial={{ opacity: 0, y: 40, rotate: -3 }}
           whileInView={{ opacity: 1, y: 0, rotate: 0 }}

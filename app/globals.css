@@ -2,12 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-/*
- * TrusTax — global styles & design tokens
- * These CSS variables document the palette and are consumed by a few
- * inline gradients. The canonical source for Tailwind classes is
- * tailwind.config.ts (kept in sync with the values below).
- */
 :root {
   --canvas: #fafaf7;
   --ink: #0b0f0e;
@@ -20,11 +14,8 @@
   --primary-dark: #0a4a36;
   --accent: #10b981;
   --accent-dark: #0e9e70;
-
-  --radius-card: 20px;
-  --radius-button: 12px;
-
-  /* offset for in-page anchor links so the sticky navbar doesn't cover them */
+  --radius-card: 24px;
+  --radius-button: 14px;
   scroll-padding-top: 6rem;
 }
 
@@ -42,19 +33,14 @@
     @apply bg-canvas font-sans text-body antialiased;
     font-feature-settings: "cv11", "ss01";
     text-rendering: optimizeLegibility;
+    overflow-x: hidden;
   }
 
-  h1,
-  h2,
-  h3,
-  h4,
-  h5,
-  h6 {
+  h1, h2, h3, h4, h5, h6 {
     @apply font-display font-semibold text-ink;
     text-wrap: balance;
   }
 
-  /* Consistent, on-brand focus ring for keyboard users */
   :focus-visible {
     @apply outline-none ring-2 ring-accent/60 ring-offset-2 ring-offset-canvas;
     border-radius: 4px;
@@ -65,7 +51,6 @@
     color: var(--primary);
   }
 
-  /* Tabular, emerald-tinted number rendering for stats */
   .tnum {
     font-variant-numeric: tabular-nums;
     font-feature-settings: "tnum";
@@ -73,18 +58,20 @@
 }
 
 @layer components {
-  /* Page container — 1200px max, 24px gutters */
   .container-page {
     @apply mx-auto w-full max-w-container px-6;
   }
 
-  /* Animated underline for text/ghost links */
+  .container-wide {
+    @apply mx-auto w-full max-w-[1600px] px-6;
+  }
+
   .link-underline {
     @apply relative inline-flex items-center;
   }
   .link-underline::after {
     content: "";
-    @apply absolute -bottom-0.5 left-0 h-px w-full origin-right scale-x-0 bg-current transition-transform duration-300 ease-premium;
+    @apply absolute -bottom-0.5 left-0 h-px w-full origin-right scale-x-0 bg-current transition-transform duration-500 ease-premium;
   }
   .link-underline:hover::after {
     @apply origin-left scale-x-100;
@@ -92,180 +79,107 @@
 }
 
 @layer utilities {
-  .text-balance {
-    text-wrap: balance;
-  }
-  .text-pretty {
-    text-wrap: pretty;
-  }
+  .text-balance { text-wrap: balance; }
+  .text-pretty { text-wrap: pretty; }
 
-  /* Soft radial "orb" used behind the hero — no images required */
   .bg-orb {
-    background: radial-gradient(
-      closest-side,
-      rgba(16, 185, 129, 0.28),
-      rgba(16, 185, 129, 0.06) 70%,
-      transparent
-    );
+    background: radial-gradient(closest-side, rgba(16,185,129,0.28), rgba(16,185,129,0.06) 70%, transparent);
   }
 
-  /* Subtle dotted grid backdrop for section texture */
   .bg-dotgrid {
-    background-image: radial-gradient(
-      rgba(11, 15, 14, 0.05) 1px,
-      transparent 1px
-    );
-    background-size: 22px 22px;
+    background-image: radial-gradient(rgba(11,15,14,0.04) 1px, transparent 1px);
+    background-size: 24px 24px;
   }
 
-  /* Fades the marquee edges so logos scroll in/out cleanly */
   .mask-fade-x {
-    -webkit-mask-image: linear-gradient(
-      to right,
-      transparent,
-      #000 8%,
-      #000 92%,
-      transparent
-    );
-    mask-image: linear-gradient(
-      to right,
-      transparent,
-      #000 8%,
-      #000 92%,
-      transparent
-    );
+    -webkit-mask-image: linear-gradient(to right, transparent, #000 6%, #000 94%, transparent);
+    mask-image: linear-gradient(to right, transparent, #000 6%, #000 94%, transparent);
+  }
+
+  .mask-fade-b {
+    -webkit-mask-image: linear-gradient(to bottom, #000 60%, transparent);
+    mask-image: linear-gradient(to bottom, #000 60%, transparent);
   }
 }
 
-/* ------------------------------------------------------------------ *
- * Cinematic layer — smooth scroll, glass, depth & texture utilities
- * used only by the home "Fiscal Cinema" experience.
- * ------------------------------------------------------------------ */
-
-/* Lenis smooth-scroll base styles (from lenis/dist/lenis.css) */
-html.lenis,
-html.lenis body {
-  height: auto;
-}
-.lenis.lenis-smooth {
-  scroll-behavior: auto !important;
-}
-.lenis.lenis-smooth [data-lenis-prevent] {
-  overscroll-behavior: contain;
-}
-.lenis.lenis-stopped {
-  overflow: hidden;
-}
-.lenis.lenis-smooth iframe {
-  pointer-events: none;
-}
+/* Cinematic layer */
+html.lenis, html.lenis body { height: auto; }
+.lenis.lenis-smooth { scroll-behavior: auto !important; }
+.lenis.lenis-smooth [data-lenis-prevent] { overscroll-behavior: contain; }
+.lenis.lenis-stopped { overflow: hidden; }
+.lenis.lenis-smooth iframe { pointer-events: none; }
 
 @layer components {
-  /* Vertical section rhythm — 128px desktop / 72px mobile */
   .section-y {
-    @apply py-[4.5rem] md:py-section;
+    @apply py-[5rem] md:py-[9rem];
   }
 
-  /* Light glass chip (proof-tags on the ivory canvas) */
   .glass {
-    background: rgba(255, 255, 255, 0.62);
-    -webkit-backdrop-filter: blur(14px) saturate(1.4);
-    backdrop-filter: blur(14px) saturate(1.4);
-    border: 1px solid rgba(255, 255, 255, 0.7);
+    background: rgba(255,255,255,0.72);
+    -webkit-backdrop-filter: blur(16px) saturate(1.4);
+    backdrop-filter: blur(16px) saturate(1.4);
+    border: 1px solid rgba(255,255,255,0.8);
     @apply shadow-glass;
   }
 
-  /* Dark glass (used inside obsidian sections) */
   .glass-dark {
-    background: rgba(255, 255, 255, 0.05);
-    -webkit-backdrop-filter: blur(16px) saturate(1.3);
-    backdrop-filter: blur(16px) saturate(1.3);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: rgba(255,255,255,0.06);
+    -webkit-backdrop-filter: blur(18px) saturate(1.3);
+    backdrop-filter: blur(18px) saturate(1.3);
+    border: 1px solid rgba(255,255,255,0.12);
     @apply shadow-glass-dark;
   }
 
-  /* Champagne hairline rule */
   .rule-gold {
     height: 1px;
-    background: linear-gradient(
-      to right,
-      transparent,
-      rgba(198, 161, 91, 0.55),
-      transparent
-    );
+    background: linear-gradient(to right, transparent, rgba(198,161,91,0.55), transparent);
   }
 }
 
 @layer utilities {
-  /* 3D depth helpers for phone / device choreography */
-  .perspective-1000 {
-    perspective: 1000px;
-  }
-  .perspective-1600 {
-    perspective: 1600px;
-  }
-  .preserve-3d {
-    transform-style: preserve-3d;
-  }
-  .backface-hidden {
-    -webkit-backface-visibility: hidden;
-    backface-visibility: hidden;
-  }
-  .gpu {
-    transform: translateZ(0);
-    will-change: transform;
-  }
+  .perspective-1000 { perspective: 1000px; }
+  .perspective-1600 { perspective: 1600px; }
+  .perspective-2000 { perspective: 2000px; }
+  .preserve-3d { transform-style: preserve-3d; }
+  .backface-hidden { -webkit-backface-visibility: hidden; backface-visibility: hidden; }
+  .gpu { transform: translateZ(0); will-change: transform; }
 
-  /* Emerald keynote spotlight (single radial — no rainbow gradients) */
   .bg-orb-emerald {
-    background: radial-gradient(
-      closest-side,
-      rgba(16, 185, 129, 0.35),
-      rgba(16, 185, 129, 0.08) 62%,
-      transparent
-    );
+    background: radial-gradient(closest-side, rgba(16,185,129,0.35), rgba(16,185,129,0.08) 62%, transparent);
   }
   .bg-orb-gold {
-    background: radial-gradient(
-      closest-side,
-      rgba(198, 161, 91, 0.28),
-      transparent 70%
-    );
+    background: radial-gradient(closest-side, rgba(198,161,91,0.28), transparent 70%);
   }
 
-  /* Fine dotted texture for dark sections */
   .bg-dotgrid-dark {
-    background-image: radial-gradient(
-      rgba(255, 255, 255, 0.06) 1px,
-      transparent 1px
-    );
-    background-size: 26px 26px;
+    background-image: radial-gradient(rgba(255,255,255,0.05) 1px, transparent 1px);
+    background-size: 28px 28px;
   }
 
-  /* Ultra-subtle film grain (data-uri, no request) for cinematic depth */
   .noise::after {
     content: "";
     position: absolute;
     inset: 0;
     pointer-events: none;
-    opacity: 0.035;
+    opacity: 0.04;
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
   }
 
-  /* Vertical clip used by the preloader curtain */
-  .clip-open {
-    clip-path: inset(0 0 0 0);
+  .clip-open { clip-path: inset(0 0 0 0); }
+  .clip-closed-top { clip-path: inset(0 0 100% 0); }
+
+  .text-stroke {
+    -webkit-text-stroke: 1px rgba(244,241,233,0.3);
+    color: transparent;
   }
-  .clip-closed-top {
-    clip-path: inset(0 0 100% 0);
+  .text-stroke-ink {
+    -webkit-text-stroke: 1px rgba(11,15,14,0.15);
+    color: transparent;
   }
 }
 
-/* Respect users who prefer reduced motion — disable non-essential animation */
 @media (prefers-reduced-motion: reduce) {
-  *,
-  ::before,
-  ::after {
+  *, ::before, ::after {
     animation-duration: 0.001ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.001ms !important;

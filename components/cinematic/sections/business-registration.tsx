@@ -6,42 +6,29 @@ import { motion } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
 
 import { Icon } from "@/components/shared/icon";
-import { SectionLabel } from "@/components/cinematic/section-label";
-import { RevealText } from "@/components/cinematic/reveal-text";
 import { EASE, viewportOnce } from "@/components/cinematic/lib/motion";
 import { services } from "@/lib/services";
 import { cn } from "@/lib/utils";
 
 const SLUGS = ["msme", "shop-act", "food-license", "business-consulting"];
 
-/**
- * BUSINESS REGISTRATION — an expanding gallery. On desktop the panels are a
- * horizontal accordion: hover expands one panel (obsidian) while the rest
- * collapse to vertical labels. Uses animated width (GPU-friendly) instead of
- * flex-grow (layout-thrashing). On mobile it falls back to a clean card grid.
- */
 export function BusinessRegistration() {
-  const panels = SLUGS.map((s) => services.find((x) => x.slug === s)!).filter(
-    Boolean,
-  );
+  const panels = SLUGS.map((s) => services.find((x) => x.slug === s)!).filter(Boolean);
   const [active, setActive] = React.useState(0);
 
   return (
     <section className="section-y bg-canvas">
       <div className="container-page">
         <div className="max-w-2xl">
-          <SectionLabel index="09">Registrations &amp; licenses</SectionLabel>
-          <h2 className="mt-5 font-display text-display-lg font-semibold tracking-tight text-ink">
-            <RevealText
-              segments={[
-                { text: "Get" },
-                {
-                  text: " legitimate,",
-                  className: "font-serif italic font-normal text-primary",
-                },
-                { text: " fast." },
-              ]}
-            />
+          <div className="flex items-center gap-2.5 font-mono text-[11px] uppercase tracking-[0.24em] text-muted">
+            <span className="h-2 w-2 rounded-full bg-gold" />
+            <span className="text-gold">(09)</span>
+            <span>Registrations &amp; licenses</span>
+          </div>
+          <h2 className="mt-5 font-display text-[clamp(2.2rem,5.5vw,4.5rem)] font-semibold leading-[1.02] tracking-[-0.03em] text-ink">
+            Get{" "}
+            <span className="font-serif italic font-normal text-primary">legitimate,</span>{" "}
+            fast.
           </h2>
           <p className="mt-5 max-w-lg text-body-lg leading-relaxed text-body">
             MSME, Shop Act, FSSAI or a whole new company — the right paperwork,
@@ -49,7 +36,7 @@ export function BusinessRegistration() {
           </p>
         </div>
 
-        {/* desktop: expanding accordion — width-based for smooth GPU transitions */}
+        {/* Desktop: expanding accordion */}
         <div className="mt-14 hidden h-[64vh] gap-3 lg:flex">
           {panels.map((p, i) => {
             const isActive = active === i;
@@ -118,7 +105,7 @@ export function BusinessRegistration() {
           })}
         </div>
 
-        {/* mobile / tablet: card grid */}
+        {/* Mobile: card grid */}
         <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:hidden">
           {panels.map((p) => (
             <Link
