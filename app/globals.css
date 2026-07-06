@@ -3,19 +3,19 @@
 @tailwind utilities;
 
 :root {
-  --canvas: #e9eae8;
-  --ink: #141514;
-  --body: #4c504e;
-  --muted: #8b908d;
-  --hairline: #c9cbc8;
-  --mint: #dfe3df;
-  --gold: #c2a338;
-  --primary: #141514;
-  --primary-dark: #000000;
-  --accent: #b5442e;
-  --accent-dark: #993a27;
-  --radius-card: 2px;
-  --radius-button: 2px;
+  --canvas: #fafaf7;
+  --ink: #0b0f0e;
+  --body: #5b6b66;
+  --muted: #8a968f;
+  --hairline: #e7e5e0;
+  --mint: #e7f5ef;
+  --gold: #c6a15b;
+  --primary: #0e5c43;
+  --primary-dark: #0a4a36;
+  --accent: #10b981;
+  --accent-dark: #0e9e70;
+  --radius-card: 24px;
+  --radius-button: 14px;
   scroll-padding-top: 6rem;
 }
 
@@ -47,8 +47,8 @@
   }
 
   ::selection {
-    background-color: var(--ink);
-    color: var(--canvas);
+    background-color: var(--mint);
+    color: var(--primary);
   }
 
   .tnum {
@@ -99,28 +99,6 @@
   .mask-fade-b {
     -webkit-mask-image: linear-gradient(to bottom, #000 60%, transparent);
     mask-image: linear-gradient(to bottom, #000 60%, transparent);
-  }
-
-  /* Radial fades — melt porcelain renders into the canvas, no visible bounds */
-  .mask-fade-radial {
-    -webkit-mask-image: radial-gradient(closest-side, #000 52%, transparent 96%);
-    mask-image: radial-gradient(closest-side, #000 52%, transparent 96%);
-  }
-
-  .mask-fade-ground {
-    -webkit-mask-image: radial-gradient(95% 100% at 50% 100%, #000 42%, transparent 88%);
-    mask-image: radial-gradient(95% 100% at 50% 100%, #000 42%, transparent 88%);
-  }
-
-  .mask-fade-corner-br {
-    -webkit-mask-image: radial-gradient(110% 110% at 100% 100%, #000 45%, transparent 92%);
-    mask-image: radial-gradient(110% 110% at 100% 100%, #000 45%, transparent 92%);
-  }
-
-  /* Lift render backgrounds toward pure white so mix-blend-multiply leaves no halo */
-  .blend-porcelain {
-    mix-blend-mode: multiply;
-    filter: brightness(1.07) contrast(1.02);
   }
 }
 
@@ -195,22 +173,8 @@ html.lenis, html.lenis body { height: auto; }
     color: transparent;
   }
   .text-stroke-ink {
-    -webkit-text-stroke: 1.5px rgba(20,21,20,0.55);
+    -webkit-text-stroke: 1px rgba(11,15,14,0.15);
     color: transparent;
-  }
-
-  /* Swiss Ledger — giant outlined figure (hero ₹ number) */
-  .text-outline {
-    -webkit-text-stroke: 1.5px var(--ink);
-    color: transparent;
-  }
-
-  /* Blurred report bars (editorial data motif) */
-  .bar-blur {
-    filter: blur(14px);
-  }
-  @media (min-width: 768px) {
-    .bar-blur { filter: blur(20px); }
   }
 }
 

@@ -23,7 +23,7 @@ export function Testimonials() {
           </div>
           <h2 className="mt-5 font-display text-[clamp(2.2rem,5.5vw,4.5rem)] font-semibold leading-[1.02] tracking-[-0.03em] text-ink">
             Trusted by{" "}
-            <span className="font-display font-extrabold text-primary">founders</span>{" "}
+            <span className="font-serif italic font-normal text-primary">founders</span>{" "}
             across India.
           </h2>
         </div>

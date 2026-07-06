@@ -44,7 +44,7 @@ export function DashboardPreview() {
           </div>
           <h2 className="mt-5 font-display text-[clamp(2rem,4.5vw,3.5rem)] font-semibold leading-[1.05] tracking-tight text-cream">
             Your compliance,{" "}
-            <span className="font-display font-extrabold text-accent">visualised.</span>
+            <span className="font-serif italic font-normal text-accent">visualised.</span>
           </h2>
           <p className="mt-4 max-w-sm text-body-lg leading-relaxed text-cream/70">
             Track every filing, deadline and document in one place — with

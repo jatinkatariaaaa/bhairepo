@@ -1,19 +1,24 @@
 import { FaqJsonLd, OrganizationJsonLd } from "@/components/shared/json-ld";
 import { homeFaqs } from "@/lib/content";
 
+import { Preloader } from "@/components/cinematic/sections/preloader";
 import { Hero } from "@/components/cinematic/sections/hero";
-import { StepsStrip } from "@/components/editorial/steps-strip";
-import { Report } from "@/components/editorial/report";
-import { ServicesIndex } from "@/components/editorial/services-index";
-import { ProcessLedger } from "@/components/editorial/process-ledger";
-import { TestimonialsRules } from "@/components/editorial/testimonials-rules";
-import { FaqLedger } from "@/components/editorial/faq-ledger";
-import { CtaBand } from "@/components/editorial/cta-band";
+import { Features } from "@/components/cinematic/sections/features";
+import { WhyTrustTax } from "@/components/cinematic/sections/why-trustax";
+import { Workflow } from "@/components/cinematic/sections/workflow";
+import { DashboardPreview } from "@/components/cinematic/sections/dashboard-preview";
+import { TaxFiling } from "@/components/cinematic/sections/tax-filing";
+import { GST } from "@/components/cinematic/sections/gst";
+import { ITR } from "@/components/cinematic/sections/itr";
+import { BusinessRegistration } from "@/components/cinematic/sections/business-registration";
+import { Testimonials } from "@/components/cinematic/sections/testimonials";
+import { Faq } from "@/components/cinematic/sections/faq";
+import { CTA } from "@/components/cinematic/sections/cta";
 
 /**
- * TrusTax — "Swiss Ledger" home. An editorial, annual-report-inspired layout:
- * masthead hero with a giant outlined figure → tricolor step band →
- * report spread → rule-divided indexes for services, process, quotes and Q&A.
+ * TrustTax — "Fiscal Cinema" home. A cinematic, scroll-driven experience:
+ * preloader curtain → layered hero → editorial + keynote sections, each with a
+ * distinct animation. Real brand content is sourced from lib/content & services.
  */
 export default function HomePage() {
   return (
@@ -21,14 +26,19 @@ export default function HomePage() {
       <OrganizationJsonLd />
       <FaqJsonLd items={homeFaqs} />
 
+      <Preloader />
       <Hero />
-      <StepsStrip />
-      <Report />
-      <ServicesIndex />
-      <ProcessLedger />
-      <TestimonialsRules />
-      <FaqLedger />
-      <CtaBand />
+      <Features />
+      <WhyTrustTax />
+      <Workflow />
+      <DashboardPreview />
+      <TaxFiling />
+      <GST />
+      <ITR />
+      <BusinessRegistration />
+      <Testimonials />
+      <Faq />
+      <CTA />
     </>
   );
 }

@@ -2,7 +2,6 @@
 
 import * as React from "react";
 import Link from "next/link";
-import Image from "next/image";
 import { motion } from "framer-motion";
 import { ArrowUpRight, Check } from "lucide-react";
 
@@ -49,7 +48,7 @@ export function GST() {
           </div>
           <h2 className="mt-5 font-display text-[clamp(2.2rem,5.5vw,4.5rem)] font-semibold leading-[1.02] tracking-[-0.03em] text-ink">
             GST that never keeps you{" "}
-            <span className="font-display font-extrabold text-primary">up at night.</span>
+            <span className="font-serif italic font-normal text-primary">up at night.</span>
           </h2>
 
           <motion.ul
@@ -98,38 +97,20 @@ export function GST() {
           </Link>
         </div>
 
-        {/* Floating device over porcelain ledger stack */}
-        <div className="relative mx-auto">
-          <motion.div
-            initial={{ opacity: 0, scale: 0.92, rotate: 4 }}
-            whileInView={{ opacity: 1, scale: 1, rotate: 8 }}
-            viewport={viewportOnce}
-            transition={{ duration: 1.1, ease: EASE, delay: 0.15 }}
-            className="pointer-events-none absolute -right-6 -top-16 hidden h-[300px] w-[300px] md:block lg:-right-16 lg:h-[360px] lg:w-[360px]"
-          >
-            <Image
-              src="/images/porcelain/gst-ledger.png"
-              alt=""
-              fill
-              sizes="360px"
-              className="mask-fade-radial object-contain blend-porcelain"
-            />
-          </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0, y: 40, rotate: -3 }}
-            whileInView={{ opacity: 1, y: 0, rotate: 0 }}
-            viewport={viewportOnce}
-            transition={{ duration: 0.9, ease: EASE }}
-            className="relative z-10 mx-auto w-[248px] md:w-[280px]"
-          >
-            <div className="animate-float-slow">
-              <PhoneMockup>
-                <GstScreen />
-              </PhoneMockup>
-            </div>
-          </motion.div>
-        </div>
+        {/* Floating device */}
+        <motion.div
+          initial={{ opacity: 0, y: 40, rotate: -3 }}
+          whileInView={{ opacity: 1, y: 0, rotate: 0 }}
+          viewport={viewportOnce}
+          transition={{ duration: 0.9, ease: EASE }}
+          className="mx-auto w-[248px] md:w-[280px]"
+        >
+          <div className="animate-float-slow">
+            <PhoneMockup>
+              <GstScreen />
+            </PhoneMockup>
+          </div>
+        </motion.div>
       </div>
     </section>
   );

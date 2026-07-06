@@ -19,7 +19,7 @@ export function Workflow() {
           </div>
           <h2 className="mt-5 font-display text-[clamp(2.2rem,5.5vw,4.5rem)] font-semibold leading-[1.02] tracking-[-0.03em] text-ink">
             Four steps, then{" "}
-            <span className="font-display font-extrabold text-primary">silence.</span>
+            <span className="font-serif italic font-normal text-primary">silence.</span>
           </h2>
           <p className="mt-4 max-w-md text-body-lg leading-relaxed text-body">
             You send a few documents once. We take it from there — and keep it there.

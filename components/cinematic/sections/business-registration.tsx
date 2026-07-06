@@ -2,7 +2,6 @@
 
 import * as React from "react";
 import Link from "next/link";
-import Image from "next/image";
 import { motion } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
 
@@ -18,24 +17,7 @@ export function BusinessRegistration() {
   const [active, setActive] = React.useState(0);
 
   return (
-    <section className="section-y relative overflow-hidden bg-canvas">
-      {/* Porcelain storefront — the business you're about to make official */}
-      <motion.div
-        initial={{ opacity: 0, y: 40 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={viewportOnce}
-        transition={{ duration: 1.1, ease: EASE, delay: 0.2 }}
-        className="pointer-events-none absolute right-[2%] top-10 hidden h-[340px] w-[340px] lg:block xl:right-[6%] xl:h-[400px] xl:w-[400px]"
-      >
-        <Image
-          src="/images/porcelain/registration-facade.png"
-          alt=""
-          fill
-          sizes="400px"
-          className="mask-fade-radial object-contain blend-porcelain"
-        />
-      </motion.div>
-
+    <section className="section-y bg-canvas">
       <div className="container-page">
         <div className="max-w-2xl">
           <div className="flex items-center gap-2.5 font-mono text-[11px] uppercase tracking-[0.24em] text-muted">
@@ -45,7 +27,7 @@ export function BusinessRegistration() {
           </div>
           <h2 className="mt-5 font-display text-[clamp(2.2rem,5.5vw,4.5rem)] font-semibold leading-[1.02] tracking-[-0.03em] text-ink">
             Get{" "}
-            <span className="font-display font-extrabold text-primary">legitimate,</span>{" "}
+            <span className="font-serif italic font-normal text-primary">legitimate,</span>{" "}
             fast.
           </h2>
           <p className="mt-5 max-w-lg text-body-lg leading-relaxed text-body">

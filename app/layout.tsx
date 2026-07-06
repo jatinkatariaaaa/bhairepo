@@ -1,5 +1,10 @@
 import type { Metadata, Viewport } from "next";
-import { Archivo, JetBrains_Mono } from "next/font/google";
+import {
+  Inter,
+  Inter_Tight,
+  Instrument_Serif,
+  JetBrains_Mono,
+} from "next/font/google";
 
 import { Navbar } from "@/components/layout/navbar";
 import { Footer } from "@/components/layout/footer";
@@ -7,14 +12,30 @@ import { SmoothScrollProvider } from "@/components/providers/smooth-scroll";
 import { site } from "@/lib/site";
 import "./globals.css";
 
-// Swiss Ledger — one grotesk for everything (Helvetica flavor), mono for data
-const archivo = Archivo({
+// Body — Inter (variable weight)
+const inter = Inter({
   subsets: ["latin"],
   display: "swap",
-  variable: "--font-archivo",
+  variable: "--font-inter",
 });
 
-// Numbers / labels — JetBrains Mono
+// Display / headings — Inter Tight (Satoshi/General Sans fallback; see README)
+const interTight = Inter_Tight({
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-inter-tight",
+});
+
+// Editorial accent — Instrument Serif (italic used for one hero word)
+const instrumentSerif = Instrument_Serif({
+  subsets: ["latin"],
+  weight: "400",
+  style: ["normal", "italic"],
+  display: "swap",
+  variable: "--font-instrument-serif",
+});
+
+// Numbers / stats — JetBrains Mono
 const jetbrainsMono = JetBrains_Mono({
   subsets: ["latin"],
   display: "swap",
@@ -73,7 +94,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#141514",
+  themeColor: "#0E5C43",
   colorScheme: "light",
 };
 
@@ -85,7 +106,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${archivo.variable} ${jetbrainsMono.variable} bg-canvas`}
+      className={`${inter.variable} ${interTight.variable} ${instrumentSerif.variable} ${jetbrainsMono.variable}`}
     >
       <body className="min-h-screen bg-canvas font-sans text-body antialiased">
         <a
