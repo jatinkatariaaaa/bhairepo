@@ -3,85 +3,87 @@
 import * as React from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Phone } from "lucide-react";
+import { ArrowUpRight } from "lucide-react";
 
-import { Button } from "@/components/ui/button";
-import { Container } from "@/components/shared/container";
-import { Logo } from "@/components/shared/logo";
 import { mainNav, site } from "@/lib/site";
 import { cn } from "@/lib/utils";
 import { MobileMenu } from "./mobile-menu";
 
-/** Sticky navbar — transparent over the hero, blurred once you scroll. */
+const DATE_FORMAT = new Intl.DateTimeFormat("en-IN", {
+  day: "numeric",
+  month: "long",
+});
+
+/**
+ * Swiss Ledger header — two rule-divided rows like an editorial masthead.
+ * Row 1: wordmark + tax-season date. Row 2: primary nav + contact.
+ */
 export function Navbar() {
   const pathname = usePathname();
-  const [scrolled, setScrolled] = React.useState(false);
-
-  React.useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 8);
-    onScroll();
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
+  const today = DATE_FORMAT.format(new Date());
 
   return (
-    <header className="absolute inset-x-0 top-0 z-50 px-3 pt-3 md:px-4 md:pt-4">
-      <Container>
-        <div
-          className={cn(
-            "flex h-14 items-center justify-between gap-4 rounded-2xl px-4 transition-all duration-500 ease-premium md:h-[68px] md:px-6",
-            scrolled
-              ? "bg-white/85 shadow-lift backdrop-blur-md"
-              : "bg-white/60 backdrop-blur-sm",
-          )}
-        >
+    <header className="relative z-50 border-b border-hairline bg-canvas">
+      {/* Row 1 — masthead */}
+      <div className="border-b border-hairline">
+        <div className="container-wide flex h-12 items-center justify-between md:h-14">
           <Link
             href="/"
             aria-label="TrusTax — home"
-            className="rounded-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/60"
+            className="font-display text-sm font-extrabold uppercase tracking-[0.02em] text-ink"
           >
-            <Logo />
+            TrusTax <span aria-hidden="true">®</span>
           </Link>
-
-          <nav
-            aria-label="Primary"
-            className="hidden items-center gap-1 md:flex"
-          >
-            {mainNav.map((item) => {
-              const active =
-                pathname === item.href || pathname?.startsWith(item.href);
-              return (
-                <Link
-                  key={item.href}
-                  href={item.href}
-                  aria-current={active ? "page" : undefined}
-                  className={cn(
-                    "rounded-md px-3 py-2 text-sm font-medium transition-colors",
-                    active ? "text-primary" : "text-body hover:text-ink",
-                  )}
-                >
-                  {item.label}
-                </Link>
-              );
-            })}
-          </nav>
-
-          <div className="flex items-center gap-2">
-            <Button asChild variant="ghost" size="sm" className="hidden lg:inline-flex">
-              <a href={site.phoneHref}>
-                <Phone className="h-4 w-4" strokeWidth={1.75} />
-                {site.phoneDisplay}
-              </a>
-            </Button>
-            <Button asChild size="sm" className="hidden md:inline-flex">
-              <Link href="/contact#book">Book Free Consultation</Link>
-            </Button>
-            <div className="md:hidden">
-              <MobileMenu />
-            </div>
+          <div className="flex items-center gap-6">
+            <span className="hidden font-mono text-[10px] uppercase tracking-[0.2em] text-muted sm:inline">
+              Tax season 2026
+            </span>
+            <span className="font-display text-xs font-bold uppercase tracking-[0.04em] text-ink">
+              {today}
+            </span>
           </div>
         </div>
-      </Container>
+      </div>
+
+      {/* Row 2 — primary nav */}
+      <div className="container-wide flex h-11 items-center justify-between md:h-12">
+        <nav aria-label="Primary" className="hidden items-center gap-7 md:flex">
+          {mainNav.map((item, i) => {
+            const active =
+              pathname === item.href || pathname?.startsWith(item.href);
+            return (
+              <Link
+                key={item.href}
+                href={item.href}
+                aria-current={active ? "page" : undefined}
+                className={cn(
+                  "text-[11px] font-bold uppercase tracking-[0.14em] transition-colors",
+                  active || i === 0
+                    ? "text-ink"
+                    : "text-muted hover:text-ink",
+                )}
+              >
+                {item.label}
+              </Link>
+            );
+          })}
+        </nav>
+
+        <div className="md:hidden">
+          <MobileMenu />
+        </div>
+
+        <a
+          href={site.phoneHref}
+          className="group inline-flex items-center gap-1 text-[11px] font-bold uppercase tracking-[0.14em] text-muted transition-colors hover:text-ink"
+        >
+          Call us
+          <ArrowUpRight
+            className="h-3 w-3 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
+            strokeWidth={2}
+          />
+        </a>
+      </div>
     </header>
   );
 }

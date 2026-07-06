@@ -3,19 +3,19 @@
 @tailwind utilities;
 
 :root {
-  --canvas: #f4f4f3;
-  --ink: #161918;
-  --body: #5d6663;
-  --muted: #9aa19d;
-  --hairline: #e4e4e1;
-  --mint: #e7f5ef;
-  --gold: #c6a15b;
-  --primary: #0e5c43;
-  --primary-dark: #0a4a36;
-  --accent: #10b981;
-  --accent-dark: #0e9e70;
-  --radius-card: 24px;
-  --radius-button: 14px;
+  --canvas: #e9eae8;
+  --ink: #141514;
+  --body: #4c504e;
+  --muted: #8b908d;
+  --hairline: #c9cbc8;
+  --mint: #dfe3df;
+  --gold: #c2a338;
+  --primary: #141514;
+  --primary-dark: #000000;
+  --accent: #b5442e;
+  --accent-dark: #993a27;
+  --radius-card: 2px;
+  --radius-button: 2px;
   scroll-padding-top: 6rem;
 }
 
@@ -47,8 +47,8 @@
   }
 
   ::selection {
-    background-color: var(--mint);
-    color: var(--primary);
+    background-color: var(--ink);
+    color: var(--canvas);
   }
 
   .tnum {
@@ -195,8 +195,22 @@ html.lenis, html.lenis body { height: auto; }
     color: transparent;
   }
   .text-stroke-ink {
-    -webkit-text-stroke: 1px rgba(11,15,14,0.15);
+    -webkit-text-stroke: 1.5px rgba(20,21,20,0.55);
     color: transparent;
+  }
+
+  /* Swiss Ledger — giant outlined figure (hero ₹ number) */
+  .text-outline {
+    -webkit-text-stroke: 1.5px var(--ink);
+    color: transparent;
+  }
+
+  /* Blurred report bars (editorial data motif) */
+  .bar-blur {
+    filter: blur(14px);
+  }
+  @media (min-width: 768px) {
+    .bar-blur { filter: blur(20px); }
   }
 }
 

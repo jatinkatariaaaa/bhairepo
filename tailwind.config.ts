@@ -15,27 +15,32 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        // Surfaces
-        canvas: "#FAFAF7", // off-white page background
-        ink: "#0B0F0E", // near-black headings
-        body: "#5B6B66", // slate body text
-        muted: "#8A968F", // muted / captions
-        hairline: "#E7E5E0", // 1px borders
+        // Surfaces — Swiss Ledger: cool gray gallery canvas, near-black ink
+        canvas: "#E9EAE8", // light gallery gray page background
+        ink: "#141514", // near-black headings
+        body: "#4c504e", // graphite body text
+        muted: "#8b908d", // muted / captions
+        hairline: "#c9cbc8", // 1px rules
 
         mint: {
-          DEFAULT: "#E7F5EF", // soft tint (badges / section backgrounds)
-          deep: "#B6DFC9", // stronger tint — used for FAQ index counter
+          DEFAULT: "#dfe3df", // soft tint (badges / section backgrounds)
+          deep: "#c2c9c3", // stronger tint — FAQ index counter
         },
-        gold: "#C6A15B", // premium accent — use sparingly
+        gold: "#c2a338", // ochre — step block 01
+
+        // Editorial color blocks
+        ochre: { DEFAULT: "#c9b458", ink: "#211d0a" },
+        slate: { DEFAULT: "#8fa3ab", ink: "#101a1e" },
+        brick: { DEFAULT: "#b5442e", ink: "#FFF6F2" },
 
         primary: {
-          DEFAULT: "#0E5C43", // deep emerald (brand)
-          dark: "#0A4A36", // hover / active
+          DEFAULT: "#141514", // ink black — buttons & emphasis
+          dark: "#000000", // hover / active
           foreground: "#FFFFFF",
         },
         accent: {
-          DEFAULT: "#10B981", // bright emerald (accents / highlights)
-          dark: "#0E9E70",
+          DEFAULT: "#b5442e", // brick red — the single warm accent
+          dark: "#993a27",
           foreground: "#FFFFFF",
         },
 
@@ -57,25 +62,23 @@ const config: Config = {
       },
       fontFamily: {
         sans: [
-          "var(--font-inter)",
-          "ui-sans-serif",
-          "system-ui",
-          "-apple-system",
-          "Segoe UI",
-          "Roboto",
+          "var(--font-archivo)",
+          "Helvetica Neue",
           "Helvetica",
           "Arial",
+          "ui-sans-serif",
+          "system-ui",
           "sans-serif",
         ],
         display: [
-          "var(--font-inter-tight)",
-          "var(--font-inter)",
+          "var(--font-archivo)",
+          "Helvetica Neue",
+          "Helvetica",
+          "Arial",
           "ui-sans-serif",
-          "system-ui",
           "sans-serif",
         ],
         serif: [
-          "var(--font-instrument-serif)",
           "ui-serif",
           "Georgia",
           "Cambria",
