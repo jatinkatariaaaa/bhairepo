@@ -5,7 +5,7 @@ import { Hero } from "@/components/cinematic/sections/hero";
 import { Features } from "@/components/cinematic/sections/features";
 import { WhyTrustTax } from "@/components/cinematic/sections/why-trustax";
 import { Workflow } from "@/components/cinematic/sections/workflow";
-import { DashboardPreview } from "@/components/cinematic/sections/dashboard-preview";
+import { Discover } from "@/components/cinematic/sections/discover";
 import { TaxFiling } from "@/components/cinematic/sections/tax-filing";
 import { GST } from "@/components/cinematic/sections/gst";
 import { ITR } from "@/components/cinematic/sections/itr";
@@ -30,7 +30,7 @@ export default function HomePage() {
       <Features />
       <WhyTrustTax />
       <Workflow />
-      <DashboardPreview />
+      <Discover />
       <TaxFiling />
       <GST />
       <ITR />
