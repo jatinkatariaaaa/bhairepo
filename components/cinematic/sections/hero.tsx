@@ -36,6 +36,10 @@ export function Hero() {
   const yText = useTransform(scrollYProgress, [0, 0.5], r(0, -80 * k));
   const opacityText = useTransform(scrollYProgress, [0, 0.42], r(1, k ? 0 : 1));
 
+  // Side phones straighten to 0° on scroll — perfectly upright like the center phone
+  const rotateLeft = useTransform(scrollYProgress, [0, 0.3], r(-10 * k, 0));
+  const rotateRight = useTransform(scrollYProgress, [0, 0.3], r(10 * k, 0));
+
   return (
     <section
       ref={ref}
@@ -95,13 +99,14 @@ export function Hero() {
           style={{ y: yPhone }}
           className="pointer-events-none absolute inset-x-0 top-[46%] z-20 flex items-start justify-center will-change-transform"
         >
-          {/* Left phone — GST filing */}
+          {/* Left phone — GST filing, straightens upright on scroll */}
           <motion.div
-            initial={reduce ? {} : { opacity: 0, y: 180, rotate: 0 }}
-            animate={{ opacity: 1, y: 0, rotate: -10 }}
+            initial={reduce ? {} : { opacity: 0, y: 180 }}
+            animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1.3, ease: EASE, delay: 0.62 }}
             className="z-10 -mr-10 mt-16 hidden w-[190px] sm:block md:-mr-12 md:mt-20 md:w-[230px]"
           >
+            <motion.div style={{ rotate: rotateLeft }} className="will-change-transform">
             <PhoneMockup className="shadow-phone" island={false}>
               <Image
                 src="/images/screens/gst-filing.png"
@@ -111,6 +116,7 @@ export function Hero() {
                 className="object-cover"
               />
             </PhoneMockup>
+            </motion.div>
           </motion.div>
 
           {/* Center phone — dashboard, front and tallest */}
@@ -132,13 +138,14 @@ export function Hero() {
             </PhoneMockup>
           </motion.div>
 
-          {/* Right phone — refund tracker */}
+          {/* Right phone — refund tracker, straightens upright on scroll */}
           <motion.div
-            initial={reduce ? {} : { opacity: 0, y: 180, rotate: 0 }}
-            animate={{ opacity: 1, y: 0, rotate: 10 }}
+            initial={reduce ? {} : { opacity: 0, y: 180 }}
+            animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1.3, ease: EASE, delay: 0.78 }}
             className="z-10 -ml-10 mt-16 hidden w-[190px] sm:block md:-ml-12 md:mt-20 md:w-[230px]"
           >
+            <motion.div style={{ rotate: rotateRight }} className="will-change-transform">
             <PhoneMockup className="shadow-phone" island={false}>
               <Image
                 src="/images/screens/refund-tracker.png"
@@ -148,6 +155,7 @@ export function Hero() {
                 className="object-cover"
               />
             </PhoneMockup>
+            </motion.div>
           </motion.div>
         </motion.div>
 
