@@ -40,6 +40,10 @@ export function Hero() {
   const rotateLeft = useTransform(scrollYProgress, [0, 0.3], r(-10 * k, 0));
   const rotateRight = useTransform(scrollYProgress, [0, 0.3], r(10 * k, 0));
 
+  // ...and drift outward so a clean gap opens between all three phones
+  const xLeft = useTransform(scrollYProgress, [0, 0.3], r(0, -72 * k));
+  const xRight = useTransform(scrollYProgress, [0, 0.3], r(0, 72 * k));
+
   return (
     <section
       ref={ref}
@@ -106,7 +110,7 @@ export function Hero() {
             transition={{ duration: 1.3, ease: EASE, delay: 0.62 }}
             className="z-10 -mr-10 mt-16 hidden w-[190px] sm:block md:-mr-12 md:mt-20 md:w-[230px]"
           >
-            <motion.div style={{ rotate: rotateLeft }} className="will-change-transform">
+            <motion.div style={{ rotate: rotateLeft, x: xLeft }} className="will-change-transform">
             <PhoneMockup className="shadow-phone" island={false}>
               <Image
                 src="/images/screens/expense-books.png"
@@ -145,7 +149,7 @@ export function Hero() {
             transition={{ duration: 1.3, ease: EASE, delay: 0.78 }}
             className="z-10 -ml-10 mt-16 hidden w-[190px] sm:block md:-ml-12 md:mt-20 md:w-[230px]"
           >
-            <motion.div style={{ rotate: rotateRight }} className="will-change-transform">
+            <motion.div style={{ rotate: rotateRight, x: xRight }} className="will-change-transform">
             <PhoneMockup className="shadow-phone" island={false}>
               <Image
                 src="/images/screens/compliance-calendar.png"

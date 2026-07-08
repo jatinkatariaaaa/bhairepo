@@ -11,53 +11,19 @@ type LogoProps = {
 };
 
 /**
- * TrusTax logo — an emerald rounded-square mark with a trust checkmark,
- * paired with the wordmark. Pure SVG, no image assets.
+ * TrusTax logo — a minimal uppercase wordmark set in the display face,
+ * matching the hero's "TAXES, DONE" headline. No mark, no image assets.
  */
-export function Logo({ className, markOnly = false, invert = false }: LogoProps) {
+export function Logo({ className, markOnly: _markOnly = false, invert = false }: LogoProps) {
   return (
-    <span className={cn("inline-flex items-center gap-2.5", className)}>
-      <svg
-        width="34"
-        height="34"
-        viewBox="0 0 34 34"
-        fill="none"
-        xmlns="http://www.w3.org/2000/svg"
-        aria-hidden="true"
-        className="shrink-0"
-      >
-        <rect width="34" height="34" rx="9.5" fill="url(#trustax-mark)" />
-        <path
-          d="M10 17.5L15 22.5L24.5 12"
-          stroke="white"
-          strokeWidth="2.6"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        />
-        <defs>
-          <linearGradient
-            id="trustax-mark"
-            x1="4"
-            y1="3"
-            x2="30"
-            y2="31"
-            gradientUnits="userSpaceOnUse"
-          >
-            <stop stopColor="#10B981" />
-            <stop offset="1" stopColor="#0E5C43" />
-          </linearGradient>
-        </defs>
-      </svg>
-      {!markOnly && (
-        <span
-          className={cn(
-            "font-display text-xl font-bold tracking-tight",
-            invert ? "text-white" : "text-ink",
-          )}
-        >
-          Trus<span className="text-accent">Tax</span>
-        </span>
+    <span
+      className={cn(
+        "font-display text-xl font-extrabold uppercase leading-none tracking-[-0.04em]",
+        invert ? "text-white" : "text-ink",
+        className,
       )}
+    >
+      TrusTax
     </span>
   );
 }
