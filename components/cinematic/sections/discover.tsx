@@ -4,15 +4,12 @@ import * as React from "react";
 import Image from "next/image";
 import { motion, useReducedMotion, useScroll, useTransform } from "framer-motion";
 
-import { PhoneMockup } from "@/components/cinematic/phone";
-
-const EASE = [0.16, 1, 0.3, 1] as const;
+import { Icon } from "@/components/shared/icon";
 
 /**
- * "Discover / Easy search" section — EventBeds pattern. A black rounded panel
- * with a small eyebrow, a massive white headline that sits BEHIND the phones,
- * and three iPhones that rise into view at different speeds as you scroll
- * (center front, sides behind and peeking).
+ * "Discover / Easy filing" — EventBeds-style black rounded panel, but instead
+ * of another phone trio, a large desktop dashboard in a browser frame rises
+ * into view with floating stat cards drifting at parallax speeds around it.
  */
 export function Discover() {
   const ref = React.useRef<HTMLDivElement>(null);
@@ -24,16 +21,17 @@ export function Discover() {
     offset: ["start end", "center center"],
   });
 
-  // Phones rise at staggered speeds — center leads, sides trail behind it
-  const yCenter = useTransform(scrollYProgress, [0, 1], [260 * k, 0]);
-  const ySides = useTransform(scrollYProgress, [0, 1], [420 * k, 0]);
+  // Dashboard rises into view; floating cards trail at different speeds
+  const yBrowser = useTransform(scrollYProgress, [0, 1], [220 * k, 0]);
+  const yCardA = useTransform(scrollYProgress, [0, 1], [340 * k, 0]);
+  const yCardB = useTransform(scrollYProgress, [0, 1], [420 * k, 0]);
   const headlineY = useTransform(scrollYProgress, [0, 1], [60 * k, 0]);
   const headlineOpacity = useTransform(scrollYProgress, [0, 0.6], [k ? 0 : 1, 1]);
 
   return (
     <section ref={ref} className="px-3 py-2 md:px-4 md:py-3">
       <div className="noise relative overflow-hidden rounded-[32px] bg-obsidian pt-20 text-cream md:rounded-[40px] md:pt-28">
-        {/* Eyebrow + massive headline — phones rise over its lower half */}
+        {/* Eyebrow + massive headline — the dashboard rises over its lower half */}
         <motion.div
           style={{ y: headlineY, opacity: headlineOpacity }}
           className="container-page relative z-10 text-center"
@@ -46,54 +44,70 @@ export function Discover() {
           </h2>
         </motion.div>
 
-        {/* Phone trio — clipped by panel bottom, EventBeds-style */}
-        <div className="relative z-20 mx-auto -mt-6 flex h-[420px] items-start justify-center overflow-hidden md:h-[560px]">
-          {/* Left phone — document vault */}
+        {/* Desktop dashboard in a browser frame — clipped by the panel bottom */}
+        <div className="relative z-20 mx-auto -mt-4 flex h-[340px] items-start justify-center overflow-hidden md:h-[520px]">
           <motion.div
-            style={{ y: ySides }}
-            className="z-10 -mr-14 mt-24 w-[200px] shrink-0 will-change-transform md:-mr-20 md:mt-28 md:w-[280px]"
+            style={{ y: yBrowser }}
+            className="relative mt-10 w-[92%] max-w-4xl will-change-transform md:mt-14"
           >
-            <PhoneMockup className="shadow-phone" island={false} glare={false}>
-              <Image
-                src="/images/screens/document-vault.png"
-                alt="TrustTax document vault screen"
-                fill
-                sizes="280px"
-                className="object-cover"
-              />
-            </PhoneMockup>
-          </motion.div>
+            {/* Browser chrome */}
+            <div className="overflow-hidden rounded-t-2xl border border-white/10 bg-[#161B18] shadow-phone">
+              <div className="flex items-center gap-2 px-4 py-3">
+                <span className="h-2.5 w-2.5 rounded-full bg-white/15" />
+                <span className="h-2.5 w-2.5 rounded-full bg-white/15" />
+                <span className="h-2.5 w-2.5 rounded-full bg-white/15" />
+                <span className="mx-auto flex items-center gap-1.5 rounded-pill bg-white/5 px-4 py-1 font-mono text-[11px] text-cream/40">
+                  <Icon name="Lock" className="h-3 w-3" />
+                  app.trustax.in
+                </span>
+                <span className="w-16" />
+              </div>
+              <div className="relative aspect-[16/10] w-full">
+                <Image
+                  src="/images/screens/desktop-dashboard.png"
+                  alt="TrustTax web dashboard with refund, savings and compliance overview"
+                  fill
+                  sizes="(min-width: 768px) 896px, 92vw"
+                  className="object-cover"
+                />
+              </div>
+            </div>
 
-          {/* Center phone — tax savings planner, front and tallest */}
-          <motion.div
-            style={{ y: yCenter }}
-            className="z-20 mt-6 w-[240px] shrink-0 will-change-transform md:w-[330px]"
-          >
-            <PhoneMockup className="shadow-phone" island={false}>
-              <Image
-                src="/images/screens/tax-savings.png"
-                alt="TrustTax tax savings planner screen"
-                fill
-                sizes="330px"
-                className="object-cover"
-              />
-            </PhoneMockup>
-          </motion.div>
+            {/* Floating stat card — left, trails slower */}
+            <motion.div
+              style={{ y: yCardA }}
+              className="absolute -left-4 top-[18%] hidden rounded-2xl bg-cream p-4 shadow-lift md:-left-16 md:block"
+            >
+              <div className="flex items-center gap-3">
+                <span className="grid h-9 w-9 place-items-center rounded-full bg-mint text-primary">
+                  <Icon name="IndianRupee" className="h-4 w-4" />
+                </span>
+                <div>
+                  <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-muted">
+                    Refund expected
+                  </p>
+                  <p className="font-display text-lg font-bold text-ink">₹48,200</p>
+                </div>
+              </div>
+            </motion.div>
 
-          {/* Right phone — CA chat */}
-          <motion.div
-            style={{ y: ySides }}
-            className="z-10 -ml-14 mt-24 w-[200px] shrink-0 will-change-transform md:-ml-20 md:mt-28 md:w-[280px]"
-          >
-            <PhoneMockup className="shadow-phone" island={false} glare={false}>
-              <Image
-                src="/images/screens/ca-chat.png"
-                alt="TrustTax CA chat screen"
-                fill
-                sizes="280px"
-                className="object-cover"
-              />
-            </PhoneMockup>
+            {/* Floating status card — right, trails slowest */}
+            <motion.div
+              style={{ y: yCardB }}
+              className="absolute -right-4 top-[52%] hidden rounded-2xl bg-primary p-4 text-white shadow-lift md:-right-16 md:block"
+            >
+              <div className="flex items-center gap-3">
+                <span className="grid h-9 w-9 place-items-center rounded-full bg-white/15">
+                  <Icon name="BadgeCheck" className="h-4 w-4" />
+                </span>
+                <div>
+                  <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-white/60">
+                    GSTR-3B
+                  </p>
+                  <p className="font-display text-lg font-bold">Filed on time</p>
+                </div>
+              </div>
+            </motion.div>
           </motion.div>
         </div>
       </div>
