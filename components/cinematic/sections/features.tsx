@@ -101,8 +101,8 @@ export function Features() {
           >
             <PhoneMockup className="shadow-phone" island={false}>
               <Image
-                src="/images/screens/dashboard-main.png"
-                alt="TrustTax compliance dashboard"
+                src="/images/screens/tax-savings.png"
+                alt="TrustTax tax savings planner"
                 fill
                 sizes="300px"
                 className="object-cover"
