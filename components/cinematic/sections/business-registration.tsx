@@ -123,58 +123,32 @@ export function BusinessRegistration() {
           })}
         </div>
 
-        {/* Mobile: color-block card grid */}
-        <div className="mt-12 grid gap-3 sm:grid-cols-2 lg:hidden">
-          {panels.map((p, i) => {
-            const dark = i % 2 === 1;
-            return (
-              <Link
-                key={p.slug}
-                href={`/services/${p.slug}`}
-                className={`group relative flex min-h-[240px] flex-col overflow-hidden rounded-[28px] p-7 transition-transform hover:-translate-y-1 ${
-                  dark ? "bg-obsidian text-cream" : "bg-white shadow-card hover:shadow-lift"
-                }`}
-              >
-                <Icon
-                  name={p.icon}
-                  aria-hidden
-                  className={`pointer-events-none absolute -right-6 -top-6 h-36 w-36 ${
-                    dark ? "text-white/[0.06]" : "text-canvas"
-                  }`}
-                  strokeWidth={1}
-                />
-                <span
-                  className={`relative grid h-11 w-11 place-items-center rounded-2xl ${
-                    dark ? "bg-white/10 text-gold" : "bg-mint text-primary"
-                  }`}
-                >
-                  <Icon name={p.icon} className="h-5 w-5" />
-                </span>
-                <h3
-                  className={`relative mt-auto pt-8 font-display text-2xl font-extrabold tracking-[-0.01em] ${
-                    dark ? "text-cream" : "text-ink"
-                  }`}
-                >
+        {/* Mobile: editorial list — hairline rules, no boxes */}
+        <div className="mt-12 lg:hidden">
+          {panels.map((p) => (
+            <Link
+              key={p.slug}
+              href={`/services/${p.slug}`}
+              className="group flex items-start gap-4 border-t border-hairline py-7 transition-colors last:border-b"
+            >
+              <span className="grid h-11 w-11 shrink-0 place-items-center rounded-2xl bg-mint text-primary transition-transform duration-500 group-hover:-rotate-6 group-hover:scale-110">
+                <Icon name={p.icon} className="h-5 w-5" />
+              </span>
+              <span className="flex-1">
+                <h3 className="text-lg font-semibold tracking-[-0.01em] text-ink">
                   {p.name}
                 </h3>
-                <p
-                  className={`relative mt-2 text-sm leading-relaxed ${
-                    dark ? "text-cream/65" : "text-body"
-                  }`}
-                >
-                  {p.short}
-                </p>
-                <span
-                  className={`relative mt-4 inline-flex items-center gap-1.5 text-sm font-bold ${
-                    dark ? "text-gold" : "text-primary"
-                  }`}
-                >
+                <p className="mt-1.5 text-sm leading-relaxed text-muted">{p.short}</p>
+                <span className="mt-3 inline-flex items-center gap-1.5 rounded-full bg-white py-1.5 pl-2 pr-3.5 text-sm font-bold text-ink shadow-card">
+                  <span className="grid h-6 w-6 place-items-center rounded-full bg-primary font-display text-[11px] font-extrabold text-white">
+                    ₹
+                  </span>
                   From {p.priceFrom}
-                  <ArrowUpRight className="h-4 w-4" />
                 </span>
-              </Link>
-            );
-          })}
+              </span>
+              <ArrowUpRight className="mt-1 h-5 w-5 shrink-0 text-muted transition-all duration-300 group-hover:translate-x-0.5 group-hover:text-ink" />
+            </Link>
+          ))}
         </div>
       </div>
     </section>

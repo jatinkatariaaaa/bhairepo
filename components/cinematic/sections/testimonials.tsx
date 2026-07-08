@@ -43,58 +43,33 @@ export function Testimonials() {
 
 function TestimonialCard({
   t,
-  dark,
+  dark: _dark,
 }: {
   t: typeof testimonials[number];
   dark?: boolean;
 }) {
   return (
-    <figure
-      className={`relative mx-2.5 flex min-h-[300px] w-[300px] shrink-0 flex-col overflow-hidden rounded-[28px] p-8 transition-transform duration-500 hover:-translate-y-1.5 md:w-[420px] ${
-        dark ? "bg-obsidian text-cream" : "bg-white text-ink shadow-card hover:shadow-lift"
-      }`}
-    >
-      {/* Oversized quotation mark — editorial anchor */}
-      <span
-        aria-hidden
-        className={`pointer-events-none absolute -top-7 right-5 font-display text-[9rem] font-extrabold leading-none ${
-          dark ? "text-white/[0.07]" : "text-canvas"
-        }`}
-      >
-        &rdquo;
-      </span>
-
-      <div className="relative flex items-center gap-0.5">
+    <figure className="relative mx-2.5 flex min-h-[280px] w-[300px] shrink-0 flex-col rounded-[24px] bg-white p-8 shadow-card transition-all duration-500 hover:-translate-y-1.5 hover:shadow-lift md:w-[420px]">
+      <div className="flex items-center gap-0.5">
         {Array.from({ length: 5 }).map((_, i) => (
           <Star key={i} className="h-4 w-4 fill-gold text-gold" />
         ))}
       </div>
 
-      <blockquote
-        className={`relative mt-6 font-display text-[17px] font-medium leading-[1.5] tracking-[-0.01em] md:text-lg ${
-          dark ? "text-cream/90" : "text-ink"
-        }`}
-      >
+      <blockquote className="mt-6 font-display text-[17px] font-medium leading-[1.5] tracking-[-0.01em] text-ink md:text-lg">
         &ldquo;{t.quote}&rdquo;
       </blockquote>
 
-      <figcaption
-        className={`relative mt-auto flex items-center gap-3.5 border-t pt-6 ${
-          dark ? "border-white/10" : "border-hairline"
-        }`}
-      >
-        <span
-          className={`grid h-12 w-12 place-items-center rounded-full text-xs font-bold ${
-            dark ? "bg-gold text-obsidian" : "bg-primary text-white"
-          }`}
-        >
+      {/* Hairline that fades — EventBeds divider language */}
+      <div className="mt-auto h-px w-full bg-gradient-to-r from-hairline to-transparent" />
+
+      <figcaption className="flex items-center gap-3.5 pt-6">
+        <span className="grid h-12 w-12 place-items-center rounded-full bg-primary text-xs font-bold text-white">
           {t.initials}
         </span>
         <div>
-          <div className="text-sm font-bold">{t.name}</div>
-          <div className={`mt-0.5 text-xs ${dark ? "text-cream/50" : "text-muted"}`}>
-            {t.role}
-          </div>
+          <div className="text-sm font-bold text-ink">{t.name}</div>
+          <div className="mt-0.5 text-xs text-muted">{t.role}</div>
         </div>
       </figcaption>
     </figure>
