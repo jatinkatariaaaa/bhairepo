@@ -10,6 +10,7 @@ import { TaxFiling } from "@/components/cinematic/sections/tax-filing";
 import { GST } from "@/components/cinematic/sections/gst";
 import { ITR } from "@/components/cinematic/sections/itr";
 import { BusinessRegistration } from "@/components/cinematic/sections/business-registration";
+import { Showcase } from "@/components/cinematic/sections/showcase";
 import { Testimonials } from "@/components/cinematic/sections/testimonials";
 import { Faq } from "@/components/cinematic/sections/faq";
 import { CTA } from "@/components/cinematic/sections/cta";
@@ -34,6 +35,7 @@ export default function HomePage() {
       <GST />
       <ITR />
       <BusinessRegistration />
+      <Showcase />
       <Testimonials />
       <Faq />
       <CTA />
