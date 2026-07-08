@@ -99,7 +99,7 @@ export function Hero() {
           style={{ y: yPhone }}
           className="pointer-events-none absolute inset-x-0 top-[46%] z-20 flex items-start justify-center will-change-transform"
         >
-          {/* Left phone — GST filing, straightens upright on scroll */}
+          {/* Left phone — business bookkeeping, straightens upright on scroll */}
           <motion.div
             initial={reduce ? {} : { opacity: 0, y: 180 }}
             animate={{ opacity: 1, y: 0 }}
@@ -109,8 +109,8 @@ export function Hero() {
             <motion.div style={{ rotate: rotateLeft }} className="will-change-transform">
             <PhoneMockup className="shadow-phone" island={false}>
               <Image
-                src="/images/screens/gst-filing.png"
-                alt="TrustTax GST filing screen"
+                src="/images/screens/expense-books.png"
+                alt="TrustTax business bookkeeping screen"
                 fill
                 sizes="230px"
                 className="object-cover"
@@ -138,7 +138,7 @@ export function Hero() {
             </PhoneMockup>
           </motion.div>
 
-          {/* Right phone — refund tracker, straightens upright on scroll */}
+          {/* Right phone — compliance calendar, straightens upright on scroll */}
           <motion.div
             initial={reduce ? {} : { opacity: 0, y: 180 }}
             animate={{ opacity: 1, y: 0 }}
@@ -148,8 +148,8 @@ export function Hero() {
             <motion.div style={{ rotate: rotateRight }} className="will-change-transform">
             <PhoneMockup className="shadow-phone" island={false}>
               <Image
-                src="/images/screens/refund-tracker.png"
-                alt="TrustTax refund tracker screen"
+                src="/images/screens/compliance-calendar.png"
+                alt="TrustTax compliance deadlines screen"
                 fill
                 sizes="230px"
                 className="object-cover"

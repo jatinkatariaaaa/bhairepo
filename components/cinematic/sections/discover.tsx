@@ -48,15 +48,15 @@ export function Discover() {
 
         {/* Phone trio — clipped by panel bottom, EventBeds-style */}
         <div className="relative z-20 mx-auto -mt-6 flex h-[420px] items-start justify-center overflow-hidden md:h-[560px]">
-          {/* Left phone — GST */}
+          {/* Left phone — document vault */}
           <motion.div
             style={{ y: ySides }}
             className="z-10 -mr-14 mt-24 w-[200px] shrink-0 will-change-transform md:-mr-20 md:mt-28 md:w-[280px]"
           >
             <PhoneMockup className="shadow-phone" island={false} glare={false}>
               <Image
-                src="/images/screens/gst-filing.png"
-                alt="TrustTax GST filing screen"
+                src="/images/screens/document-vault.png"
+                alt="TrustTax document vault screen"
                 fill
                 sizes="280px"
                 className="object-cover"
@@ -64,15 +64,15 @@ export function Discover() {
             </PhoneMockup>
           </motion.div>
 
-          {/* Center phone — dashboard, front and tallest */}
+          {/* Center phone — tax savings planner, front and tallest */}
           <motion.div
             style={{ y: yCenter }}
             className="z-20 mt-6 w-[240px] shrink-0 will-change-transform md:w-[330px]"
           >
             <PhoneMockup className="shadow-phone" island={false}>
               <Image
-                src="/images/screens/dashboard-main.png"
-                alt="TrustTax dashboard screen"
+                src="/images/screens/tax-savings.png"
+                alt="TrustTax tax savings planner screen"
                 fill
                 sizes="330px"
                 className="object-cover"
@@ -80,15 +80,15 @@ export function Discover() {
             </PhoneMockup>
           </motion.div>
 
-          {/* Right phone — refund tracker */}
+          {/* Right phone — CA chat */}
           <motion.div
             style={{ y: ySides }}
             className="z-10 -ml-14 mt-24 w-[200px] shrink-0 will-change-transform md:-ml-20 md:mt-28 md:w-[280px]"
           >
             <PhoneMockup className="shadow-phone" island={false} glare={false}>
               <Image
-                src="/images/screens/refund-tracker.png"
-                alt="TrustTax refund tracker screen"
+                src="/images/screens/ca-chat.png"
+                alt="TrustTax CA chat screen"
                 fill
                 sizes="280px"
                 className="object-cover"
