@@ -13,6 +13,13 @@ import { cn } from "@/lib/utils";
 
 const SLUGS = ["msme", "shop-act", "food-license", "business-consulting"];
 
+const PANEL_IMAGES: Record<string, string> = {
+  msme: "/images/registrations/msme.png",
+  "shop-act": "/images/registrations/shop-act.png",
+  "food-license": "/images/registrations/food-license.png",
+  "business-consulting": "/images/registrations/consulting.png",
+};
+
 export function BusinessRegistration() {
   const panels = SLUGS.map((s) => services.find((x) => x.slug === s)!).filter(Boolean);
   const [active, setActive] = React.useState(0);
@@ -76,7 +83,31 @@ export function BusinessRegistration() {
                 )}
                 style={{ originX: 0 }}
               >
-                <div className="flex items-start justify-between">
+                {/* Card photography — fills the previously blank middle */}
+                <div
+                  className={cn(
+                    "pointer-events-none absolute inset-0",
+                    isActive ? "opacity-40" : "opacity-100",
+                  )}
+                >
+                  <Image
+                    src={PANEL_IMAGES[p.slug] ?? PANEL_IMAGES.msme}
+                    alt=""
+                    fill
+                    sizes="(min-width: 1024px) 36vw, 100vw"
+                    className="object-cover"
+                  />
+                  <div
+                    className={cn(
+                      "absolute inset-0",
+                      isActive
+                        ? "bg-gradient-to-t from-obsidian via-obsidian/70 to-obsidian/30"
+                        : "bg-gradient-to-t from-white via-white/40 to-white/10",
+                    )}
+                  />
+                </div>
+
+                <div className="relative flex items-start justify-between">
                   <span className="font-mono text-sm opacity-50">
                     {String(i + 1).padStart(2, "0")}
                   </span>
@@ -95,6 +126,7 @@ export function BusinessRegistration() {
                     initial={{ opacity: 0, y: 12 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.5, ease: EASE, delay: 0.15 }}
+                    className="relative"
                   >
                     <div className="font-mono text-[11px] uppercase tracking-widest text-accent">
                       {p.tagline}
@@ -114,7 +146,7 @@ export function BusinessRegistration() {
                     </Link>
                   </motion.div>
                 ) : (
-                  <div className="font-display text-xl font-semibold [writing-mode:vertical-rl]">
+                  <div className="relative font-display text-xl font-semibold [writing-mode:vertical-rl]">
                     {p.name}
                   </div>
                 )}
