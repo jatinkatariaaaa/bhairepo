@@ -2,7 +2,6 @@
 
 import * as React from "react";
 import Link from "next/link";
-import Image from "next/image";
 import { motion } from "framer-motion";
 import { ArrowUpRight, Check } from "lucide-react";
 
@@ -46,7 +45,7 @@ export function ITR() {
             variants={{ show: { transition: { staggerChildren: 0.09 } } }}
             className="mt-8 flex flex-wrap gap-2.5"
           >
-            {DEDUCTIONS.map((d) => (
+            {DEDUCTIONS.map((d, i) => (
               <motion.span
                 key={d}
                 variants={{
@@ -58,7 +57,13 @@ export function ITR() {
                     transition: { type: "spring", stiffness: 300, damping: 20 },
                   },
                 }}
-                className="rounded-pill border border-hairline bg-white px-4 py-2 font-mono text-xs text-ink shadow-card"
+                className={
+                  i % 3 === 0
+                    ? "rounded-pill bg-primary px-4 py-2 font-mono text-xs text-white shadow-card"
+                    : i % 3 === 1
+                      ? "rounded-pill bg-mint px-4 py-2 font-mono text-xs text-primary shadow-card"
+                      : "rounded-pill border border-hairline bg-white px-4 py-2 font-mono text-xs text-ink shadow-card"
+                }
               >
                 {d}
               </motion.span>
@@ -74,29 +79,42 @@ export function ITR() {
           </Link>
         </div>
 
-        {/* Assembling acknowledgement card over porcelain folder */}
+        {/* Acknowledgement card anchored on a deep emerald panel */}
+        <div className="noise relative overflow-hidden rounded-[32px] bg-primary px-6 py-12 md:px-10 md:py-16">
+          {/* Decorative concentric rings */}
+          <div
+            aria-hidden="true"
+            className="pointer-events-none absolute -right-24 -top-24 h-[340px] w-[340px] rounded-full border border-white/10"
+          />
+          <div
+            aria-hidden="true"
+            className="pointer-events-none absolute -right-10 -top-10 h-[200px] w-[200px] rounded-full border border-white/10"
+          />
+          <div
+            aria-hidden="true"
+            className="pointer-events-none absolute -bottom-28 -left-28 h-[300px] w-[300px] rounded-full border border-white/10"
+          />
+          {/* Gold refund tag floating on the panel */}
+          <motion.div
+            initial={{ opacity: 0, y: 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={viewportOnce}
+            transition={{ duration: 0.7, ease: EASE, delay: 0.4 }}
+            className="animate-float-slow absolute left-4 top-5 z-20 flex items-center gap-2 rounded-pill bg-gold px-4 py-2.5 shadow-lift md:left-8 md:top-8"
+          >
+            <span className="tnum text-sm font-bold text-obsidian">₹48,200</span>
+            <span className="font-mono text-[10px] uppercase tracking-wider text-obsidian/70">
+              Refund initiated
+            </span>
+          </motion.div>
+
         <motion.div
           initial="hidden"
           whileInView="show"
           viewport={viewportOnce}
           variants={{ show: { transition: { staggerChildren: 0.12, delayChildren: 0.1 } } }}
-          className="relative mx-auto w-full max-w-sm overflow-visible rounded-card border border-hairline bg-white p-7 shadow-lift"
+          className="relative z-10 mx-auto w-full max-w-sm overflow-visible rounded-card bg-white p-7 shadow-lift"
         >
-          <motion.div
-            variants={{
-              hidden: { opacity: 0, x: 40, rotate: 0 },
-              show: { opacity: 1, x: 0, rotate: -6, transition: { duration: 1, ease: EASE } },
-            }}
-            className="pointer-events-none absolute -left-40 -top-20 -z-10 hidden h-[280px] w-[280px] xl:block"
-          >
-            <Image
-              src="/images/porcelain/itr-folder.png"
-              alt=""
-              fill
-              sizes="280px"
-              className="mask-fade-radial object-contain blend-porcelain"
-            />
-          </motion.div>
           {/* Header */}
           <motion.div
             variants={{
@@ -173,7 +191,7 @@ export function ITR() {
                 transition: { type: "spring", stiffness: 200, damping: 12, delay: 0.6 },
               },
             }}
-            className="absolute -bottom-4 -right-3 grid h-24 w-24 place-items-center rounded-full border-2 border-primary/60 bg-canvas/80 text-center"
+            className="absolute -bottom-4 -right-3 grid h-24 w-24 place-items-center rounded-full border-2 border-gold/70 bg-canvas/90 text-center backdrop-blur-sm"
           >
             <div className="font-mono text-[8px] uppercase leading-tight tracking-widest text-primary">
               <div className="font-bold">e-Verified</div>
@@ -182,6 +200,7 @@ export function ITR() {
             </div>
           </motion.div>
         </motion.div>
+        </div>
       </div>
     </section>
   );
