@@ -129,7 +129,8 @@ export function GST() {
                   src="/images/screens/gst-filing.png"
                   alt="TrustTax GST filing screen"
                   fill
-                  sizes="280px"
+                  quality={90}
+                  sizes="560px"
                   className="object-cover"
                 />
               </PhoneMockup>

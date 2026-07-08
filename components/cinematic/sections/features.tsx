@@ -104,7 +104,8 @@ export function Features() {
                 src="/images/screens/tax-savings.png"
                 alt="TrustTax tax savings planner"
                 fill
-                sizes="300px"
+                quality={90}
+                sizes="600px"
                 className="object-cover"
               />
             </PhoneMockup>

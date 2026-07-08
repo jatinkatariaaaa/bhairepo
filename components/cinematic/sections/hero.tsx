@@ -116,7 +116,8 @@ export function Hero() {
                 src="/images/screens/expense-books.png"
                 alt="TrustTax business bookkeeping screen"
                 fill
-                sizes="230px"
+                quality={90}
+                sizes="460px"
                 className="object-cover"
               />
             </PhoneMockup>
@@ -136,7 +137,8 @@ export function Hero() {
                 alt="TrustTax dashboard screen"
                 fill
                 priority
-                sizes="290px"
+                quality={90}
+                sizes="580px"
                 className="object-cover"
               />
             </PhoneMockup>
@@ -155,7 +157,8 @@ export function Hero() {
                 src="/images/screens/compliance-calendar.png"
                 alt="TrustTax compliance deadlines screen"
                 fill
-                sizes="230px"
+                quality={90}
+                sizes="460px"
                 className="object-cover"
               />
             </PhoneMockup>

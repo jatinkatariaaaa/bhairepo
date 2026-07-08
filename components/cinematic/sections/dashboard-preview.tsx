@@ -89,7 +89,8 @@ export function DashboardPreview() {
                   src="/images/screens/dashboard-main.png"
                   alt="TrustTax live compliance dashboard"
                   fill
-                  sizes="300px"
+                  quality={90}
+                  sizes="600px"
                   className="object-cover"
                 />
               </PhoneMockup>
