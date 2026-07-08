@@ -133,6 +133,20 @@ export const testimonials: Testimonial[] = [
     role: "Director, Nova Retail",
     initials: "PN",
   },
+  {
+    quote:
+      "Within a week they found deductions my old accountant had missed for years. My refund nearly doubled — and the process was completely online.",
+    name: "Karan Mehta",
+    role: "Product Manager, Bengaluru",
+    initials: "KM",
+  },
+  {
+    quote:
+      "As a first-time founder I had no idea about ROC filings or advance tax. TrusTax handles all of it and just pings me when something needs a signature.",
+    name: "Sneha Iyer",
+    role: "Co-founder, Loop Studio",
+    initials: "SI",
+  },
 ];
 
 export type HomeFaq = { question: string; answer: string };
