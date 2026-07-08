@@ -124,7 +124,7 @@ export function GST() {
             className="relative z-10 mx-auto w-[248px] md:w-[280px]"
           >
             <div className="animate-float-slow">
-              <PhoneMockup island={false}>
+              <PhoneMockup>
                 <Image
                   src="/images/screens/gst-filing.png"
                   alt="TrustTax GST filing screen"

@@ -111,7 +111,7 @@ export function Hero() {
             className="z-10 -mr-10 mt-16 hidden w-[190px] sm:block md:-mr-12 md:mt-20 md:w-[230px]"
           >
             <motion.div style={{ rotate: rotateLeft, x: xLeft }} className="will-change-transform">
-            <PhoneMockup className="shadow-phone" island={false}>
+            <PhoneMockup className="shadow-phone">
               <Image
                 src="/images/screens/expense-books.png"
                 alt="TrustTax business bookkeeping screen"
@@ -130,7 +130,7 @@ export function Hero() {
             transition={{ duration: 1.3, ease: EASE, delay: 0.45 }}
             className="z-20 w-[240px] md:w-[290px]"
           >
-            <PhoneMockup className="shadow-phone" island={false}>
+            <PhoneMockup className="shadow-phone">
               <Image
                 src="/images/screens/dashboard-main.png"
                 alt="TrustTax dashboard screen"
@@ -150,7 +150,7 @@ export function Hero() {
             className="z-10 -ml-10 mt-16 hidden w-[190px] sm:block md:-ml-12 md:mt-20 md:w-[230px]"
           >
             <motion.div style={{ rotate: rotateRight, x: xRight }} className="will-change-transform">
-            <PhoneMockup className="shadow-phone" island={false}>
+            <PhoneMockup className="shadow-phone">
               <Image
                 src="/images/screens/compliance-calendar.png"
                 alt="TrustTax compliance deadlines screen"

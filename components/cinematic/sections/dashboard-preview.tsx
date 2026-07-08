@@ -84,7 +84,7 @@ export function DashboardPreview() {
               viewport={viewportOnce}
               transition={{ duration: 1, ease: EASE }}
             >
-              <PhoneMockup className="shadow-phone" island={false}>
+              <PhoneMockup className="shadow-phone">
                 <Image
                   src="/images/screens/dashboard-main.png"
                   alt="TrustTax live compliance dashboard"

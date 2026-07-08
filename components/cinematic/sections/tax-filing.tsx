@@ -88,7 +88,7 @@ export function TaxFiling() {
           className="mx-auto w-[248px] md:w-[280px]"
         >
           <div className="animate-float-slow">
-            <PhoneMockup island={false}>
+            <PhoneMockup>
               <Image
                 src="/images/screens/refund-tracker.png"
                 alt="TrustTax ITR refund tracker screen"

@@ -38,7 +38,12 @@ export function PhoneMockup({
         )}
       >
         {island && (
-          <div className="absolute left-1/2 top-[10px] z-30 h-[22px] w-16 -translate-x-1/2 rounded-full bg-black" />
+          <div className="absolute left-1/2 top-[10px] z-30 flex h-[22px] w-[72px] -translate-x-1/2 items-center justify-end rounded-full bg-black pr-[6px] shadow-[inset_0_0_2px_rgba(255,255,255,0.12)]">
+            {/* front camera lens */}
+            <span className="h-[10px] w-[10px] rounded-full bg-[#0d1117] ring-1 ring-white/10">
+              <span className="mx-auto mt-[2.5px] block h-[5px] w-[5px] rounded-full bg-[#1c2b4a]/90" />
+            </span>
+          </div>
         )}
         <div className="absolute inset-0">{children}</div>
         {glare && (

@@ -99,7 +99,7 @@ export function Features() {
             transition={{ duration: 1.1, ease: EASE, delay: 0.1 }}
             className="order-1 mx-auto w-[260px] md:w-[300px] lg:order-2"
           >
-            <PhoneMockup className="shadow-phone" island={false}>
+            <PhoneMockup className="shadow-phone">
               <Image
                 src="/images/screens/tax-savings.png"
                 alt="TrustTax tax savings planner"
