@@ -7,7 +7,6 @@ import { motion } from "framer-motion";
 import { ArrowUpRight, Check } from "lucide-react";
 
 import { PhoneMockup } from "@/components/cinematic/phone";
-import { GstScreen } from "@/components/cinematic/app-screens";
 import { Marquee } from "@/components/cinematic/marquee";
 import { EASE, viewportOnce } from "@/components/cinematic/lib/motion";
 import { getService } from "@/lib/services";
@@ -22,13 +21,14 @@ export function GST() {
   const items = gst?.included ?? [];
 
   return (
-    <section className="section-y relative overflow-hidden bg-canvas">
+    <section className="px-3 py-2 md:px-4 md:py-3">
+      <div className="noise relative overflow-hidden rounded-[32px] bg-obsidian py-24 text-cream md:rounded-[40px] md:py-32">
       {/* Term marquee — editorial band */}
-      <Marquee className="border-y border-hairline py-5">
+      <Marquee className="border-y border-white/10 py-5">
         {TERMS.map((t) => (
           <span
             key={t}
-            className="mx-6 font-display text-2xl font-medium text-ink/25 md:text-4xl"
+            className="mx-6 font-display text-2xl font-medium text-cream/25 md:text-4xl"
           >
             {t}
             <span className="ml-6 text-gold">✦</span>
@@ -38,18 +38,18 @@ export function GST() {
 
       <div className="container-page mt-16 grid items-center gap-12 lg:grid-cols-2 lg:gap-20">
         <div>
-          <div className="flex items-center gap-2.5 font-mono text-[11px] uppercase tracking-[0.24em] text-muted">
+          <div className="flex items-center gap-2.5 font-mono text-[11px] uppercase tracking-[0.24em] text-cream/50">
             <span className="h-2 w-2 rounded-full bg-gold" />
             <span className="text-gold">(07)</span>
             <span>GST services</span>
           </div>
-          <div className="mt-4 inline-flex items-center gap-2 rounded-pill bg-mint px-3 py-1 font-mono text-xs text-primary">
+          <div className="mt-4 inline-flex items-center gap-2 rounded-pill bg-white/10 px-3 py-1 font-mono text-xs text-accent">
             <span className="h-1.5 w-1.5 rounded-full bg-accent" />
             Registration &amp; returns · from ₹999
           </div>
-          <h2 className="mt-5 font-display text-[clamp(2.2rem,5.5vw,4.5rem)] font-semibold leading-[1.02] tracking-[-0.03em] text-ink">
+          <h2 className="mt-5 font-display text-[clamp(2.2rem,5.5vw,4.5rem)] font-semibold leading-[1.02] tracking-[-0.03em] text-cream">
             GST that never keeps you{" "}
-            <span className="font-display font-extrabold text-primary">up at night.</span>
+            <span className="font-display font-extrabold text-accent">up at night.</span>
           </h2>
 
           <motion.ul
@@ -73,25 +73,25 @@ export function GST() {
                     hidden: { scaleY: 0 },
                     show: { scaleY: 1, transition: { duration: 0.5, ease: EASE } },
                   }}
-                  className="absolute left-0 top-1 h-[calc(100%-0.5rem)] w-0.5 origin-top rounded bg-primary/25"
+                  className="absolute left-0 top-1 h-[calc(100%-0.5rem)] w-0.5 origin-top rounded bg-accent/30"
                 />
                 <motion.span
                   variants={{
                     hidden: { scale: 0, rotate: -30 },
                     show: { scale: 1, rotate: 0, transition: { type: "spring", stiffness: 320, damping: 18 } },
                   }}
-                  className="mt-0.5 grid h-6 w-6 shrink-0 place-items-center rounded-full bg-primary text-white"
+                  className="mt-0.5 grid h-6 w-6 shrink-0 place-items-center rounded-full bg-accent text-obsidian"
                 >
                   <Check className="h-3.5 w-3.5" strokeWidth={3} />
                 </motion.span>
-                <span className="text-[15px] leading-relaxed text-body">{it}</span>
+                <span className="text-[15px] leading-relaxed text-cream/70">{it}</span>
               </motion.li>
             ))}
           </motion.ul>
 
           <Link
             href="/services/gst"
-            className="link-underline mt-9 inline-flex items-center gap-2 font-medium text-ink"
+            className="link-underline mt-9 inline-flex items-center gap-2 font-medium text-cream"
           >
             Explore GST services
             <ArrowUpRight className="h-4 w-4" />
@@ -112,7 +112,7 @@ export function GST() {
               alt=""
               fill
               sizes="360px"
-              className="mask-fade-radial object-contain blend-porcelain"
+              className="mask-fade-radial object-contain opacity-30"
             />
           </motion.div>
 
@@ -124,12 +124,19 @@ export function GST() {
             className="relative z-10 mx-auto w-[248px] md:w-[280px]"
           >
             <div className="animate-float-slow">
-              <PhoneMockup>
-                <GstScreen />
+              <PhoneMockup island={false}>
+                <Image
+                  src="/images/screens/gst-filing.png"
+                  alt="TrustTax GST filing screen"
+                  fill
+                  sizes="280px"
+                  className="object-cover"
+                />
               </PhoneMockup>
             </div>
           </motion.div>
         </div>
+      </div>
       </div>
     </section>
   );

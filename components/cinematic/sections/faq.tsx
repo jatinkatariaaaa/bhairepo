@@ -13,22 +13,23 @@ export function Faq() {
   const [open, setOpen] = React.useState<number | null>(0);
 
   return (
-    <section className="section-y bg-canvas">
+    <section className="px-3 py-2 md:px-4 md:py-3">
+      <div className="noise relative overflow-hidden rounded-[32px] bg-obsidian py-24 text-cream md:rounded-[40px] md:py-32">
       <div className="container-page grid gap-12 lg:grid-cols-[0.8fr_1.4fr] lg:gap-20">
         {/* Sticky rail */}
         <div className="lg:sticky lg:top-28 lg:h-fit">
-          <div className="flex items-center gap-2.5 font-mono text-[11px] uppercase tracking-[0.24em] text-muted">
+          <div className="flex items-center gap-2.5 font-mono text-[11px] uppercase tracking-[0.24em] text-cream/50">
             <span className="h-2 w-2 rounded-full bg-gold" />
             <span className="text-gold">(11)</span>
             <span>FAQ</span>
           </div>
-          <h2 className="mt-5 font-display text-[clamp(2.2rem,5.5vw,4.5rem)] font-semibold leading-[1.02] tracking-[-0.03em] text-ink">
+          <h2 className="mt-5 font-display text-[clamp(2.2rem,5.5vw,4.5rem)] font-semibold leading-[1.02] tracking-[-0.03em] text-cream">
             <RevealText
               segments={[
                 { text: "Questions," },
                 {
                   text: " answered.",
-                  className: "font-display font-extrabold text-primary",
+                  className: "font-display font-extrabold text-accent",
                 },
               ]}
             />
@@ -44,27 +45,27 @@ export function Faq() {
                   animate={{ y: 0 }}
                   exit={{ y: "-100%" }}
                   transition={{ duration: 0.4, ease: EASE }}
-                  className="absolute inset-0 flex items-center justify-center font-mono text-7xl font-bold text-mint-deep"
+                  className="absolute inset-0 flex items-center justify-center font-mono text-7xl font-bold text-accent"
                 >
                   {open === null ? "—" : String(open + 1).padStart(2, "0")}
                 </motion.span>
               </AnimatePresence>
             </div>
-            <span className="mb-3 max-w-[10rem] text-sm leading-relaxed text-muted">
+            <span className="mb-3 max-w-[10rem] text-sm leading-relaxed text-cream/50">
               of {String(homeFaqs.length).padStart(2, "0")} common questions
             </span>
           </div>
 
           <Link
             href="/contact#book"
-            className="link-underline mt-10 inline-flex items-center gap-2 font-medium text-ink"
+            className="link-underline mt-10 inline-flex items-center gap-2 font-medium text-cream"
           >
             Still curious? Talk to a CA →
           </Link>
         </div>
 
         {/* Accordion */}
-        <ul className="divide-y divide-hairline border-t border-hairline">
+        <ul className="divide-y divide-white/10 border-t border-white/10">
           {homeFaqs.map((f, i) => {
             const isOpen = open === i;
             return (
@@ -78,21 +79,21 @@ export function Faq() {
                     {isOpen && (
                       <motion.span
                         layoutId="faq-bar"
-                        className="absolute -left-[1px] top-1/2 h-8 w-0.5 -translate-y-1/2 rounded bg-primary"
+                        className="absolute -left-[1px] top-1/2 h-8 w-0.5 -translate-y-1/2 rounded bg-accent"
                         transition={{ duration: 0.35, ease: EASE }}
                       />
                     )}
-                    <span className="font-mono text-xs text-muted">
+                    <span className="font-mono text-xs text-cream/40">
                       {String(i + 1).padStart(2, "0")}
                     </span>
                   </span>
-                  <span className="flex-1 text-h3 font-medium text-ink">
+                  <span className="flex-1 text-h3 font-medium text-cream">
                     {f.question}
                   </span>
                   <motion.span
                     animate={{ rotate: isOpen ? 45 : 0 }}
                     transition={{ duration: 0.3, ease: EASE }}
-                    className="grid h-9 w-9 shrink-0 place-items-center rounded-full border border-hairline text-ink"
+                    className="grid h-9 w-9 shrink-0 place-items-center rounded-full border border-white/20 text-cream"
                   >
                     <Plus className="h-4 w-4" />
                   </motion.span>
@@ -108,7 +109,7 @@ export function Faq() {
                       transition={{ duration: 0.4, ease: EASE }}
                       className="overflow-hidden"
                     >
-                      <p className="max-w-2xl pb-7 pl-12 pr-10 text-body-lg leading-relaxed text-body">
+                      <p className="max-w-2xl pb-7 pl-12 pr-10 text-body-lg leading-relaxed text-cream/65">
                         {f.answer}
                       </p>
                     </motion.div>
@@ -118,6 +119,7 @@ export function Faq() {
             );
           })}
         </ul>
+      </div>
       </div>
     </section>
   );

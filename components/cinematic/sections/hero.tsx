@@ -11,7 +11,6 @@ import {
 } from "framer-motion";
 
 import { PhoneMockup } from "@/components/cinematic/phone";
-import { DashboardScreen } from "@/components/cinematic/app-screens";
 import { ProofTag } from "@/components/cinematic/proof-tag";
 import { EASE } from "@/components/cinematic/lib/motion";
 
@@ -91,19 +90,63 @@ export function Hero() {
           </motion.h1>
         </motion.div>
 
-        {/* Single phone rising from the scene */}
+        {/* Three phones rising from the scene — center leads, sides tilt back */}
         <motion.div
           style={{ y: yPhone }}
-          className="pointer-events-none absolute inset-x-0 top-[46%] z-20 flex justify-center will-change-transform"
+          className="pointer-events-none absolute inset-x-0 top-[46%] z-20 flex items-start justify-center will-change-transform"
         >
+          {/* Left phone — GST filing */}
+          <motion.div
+            initial={reduce ? {} : { opacity: 0, y: 180, rotate: 0 }}
+            animate={{ opacity: 1, y: 0, rotate: -10 }}
+            transition={{ duration: 1.3, ease: EASE, delay: 0.62 }}
+            className="z-10 -mr-10 mt-16 hidden w-[190px] sm:block md:-mr-12 md:mt-20 md:w-[230px]"
+          >
+            <PhoneMockup className="shadow-phone" island={false}>
+              <Image
+                src="/images/screens/gst-filing.png"
+                alt="TrustTax GST filing screen"
+                fill
+                sizes="230px"
+                className="object-cover"
+              />
+            </PhoneMockup>
+          </motion.div>
+
+          {/* Center phone — dashboard, front and tallest */}
           <motion.div
             initial={reduce ? {} : { opacity: 0, y: 160 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1.3, ease: EASE, delay: 0.45 }}
-            className="w-[240px] md:w-[290px]"
+            className="z-20 w-[240px] md:w-[290px]"
           >
-            <PhoneMockup className="shadow-phone">
-              <DashboardScreen />
+            <PhoneMockup className="shadow-phone" island={false}>
+              <Image
+                src="/images/screens/dashboard-main.png"
+                alt="TrustTax dashboard screen"
+                fill
+                priority
+                sizes="290px"
+                className="object-cover"
+              />
+            </PhoneMockup>
+          </motion.div>
+
+          {/* Right phone — refund tracker */}
+          <motion.div
+            initial={reduce ? {} : { opacity: 0, y: 180, rotate: 0 }}
+            animate={{ opacity: 1, y: 0, rotate: 10 }}
+            transition={{ duration: 1.3, ease: EASE, delay: 0.78 }}
+            className="z-10 -ml-10 mt-16 hidden w-[190px] sm:block md:-ml-12 md:mt-20 md:w-[230px]"
+          >
+            <PhoneMockup className="shadow-phone" island={false}>
+              <Image
+                src="/images/screens/refund-tracker.png"
+                alt="TrustTax refund tracker screen"
+                fill
+                sizes="230px"
+                className="object-cover"
+              />
             </PhoneMockup>
           </motion.div>
         </motion.div>

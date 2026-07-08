@@ -1,7 +1,6 @@
 import { FaqJsonLd, OrganizationJsonLd } from "@/components/shared/json-ld";
 import { homeFaqs } from "@/lib/content";
 
-import { Preloader } from "@/components/cinematic/sections/preloader";
 import { Hero } from "@/components/cinematic/sections/hero";
 import { Features } from "@/components/cinematic/sections/features";
 import { WhyTrustTax } from "@/components/cinematic/sections/why-trustax";
@@ -26,7 +25,6 @@ export default function HomePage() {
       <OrganizationJsonLd />
       <FaqJsonLd items={homeFaqs} />
 
-      <Preloader />
       <Hero />
       <Features />
       <WhyTrustTax />

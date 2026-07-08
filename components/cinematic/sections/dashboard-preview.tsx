@@ -8,8 +8,9 @@ import {
   useReducedMotion,
 } from "framer-motion";
 
+import Image from "next/image";
+
 import { PhoneMockup } from "@/components/cinematic/phone";
-import { DashboardScreen } from "@/components/cinematic/app-screens";
 import { EASE, viewportOnce } from "@/components/cinematic/lib/motion";
 import { stats } from "@/lib/content";
 
@@ -27,10 +28,8 @@ export function DashboardPreview() {
   const scale = useTransform(scrollYProgress, [0, 0.5, 1], [0.85, 1, 0.85]);
 
   return (
-    <section
-      ref={ref}
-      className="noise relative flex min-h-[110vh] items-center overflow-hidden bg-obsidian py-28 text-cream md:py-40"
-    >
+    <section ref={ref} className="px-3 py-2 md:px-4 md:py-3">
+      <div className="noise relative flex min-h-[110vh] items-center overflow-hidden rounded-[32px] bg-obsidian py-28 text-cream md:rounded-[40px] md:py-40">
       <div className="bg-orb-emerald pointer-events-none absolute left-1/2 top-1/2 h-[80vmin] w-[80vmin] -translate-x-1/2 -translate-y-1/2 opacity-30" />
       <div className="bg-dotgrid-dark pointer-events-none absolute inset-0 opacity-40" />
 
@@ -85,8 +84,14 @@ export function DashboardPreview() {
               viewport={viewportOnce}
               transition={{ duration: 1, ease: EASE }}
             >
-              <PhoneMockup className="shadow-phone">
-                <DashboardScreen />
+              <PhoneMockup className="shadow-phone" island={false}>
+                <Image
+                  src="/images/screens/dashboard-main.png"
+                  alt="TrustTax live compliance dashboard"
+                  fill
+                  sizes="300px"
+                  className="object-cover"
+                />
               </PhoneMockup>
             </motion.div>
           </motion.div>
@@ -115,6 +120,7 @@ export function DashboardPreview() {
             ))}
           </div>
         </div>
+      </div>
       </div>
     </section>
   );

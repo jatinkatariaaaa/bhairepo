@@ -2,11 +2,11 @@
 
 import * as React from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { motion } from "framer-motion";
 import { ArrowUpRight, Check } from "lucide-react";
 
 import { PhoneMockup } from "@/components/cinematic/phone";
-import { ItrScreen } from "@/components/cinematic/app-screens";
 import { EASE, viewportOnce } from "@/components/cinematic/lib/motion";
 import { getService } from "@/lib/services";
 
@@ -88,8 +88,14 @@ export function TaxFiling() {
           className="mx-auto w-[248px] md:w-[280px]"
         >
           <div className="animate-float-slow">
-            <PhoneMockup>
-              <ItrScreen />
+            <PhoneMockup island={false}>
+              <Image
+                src="/images/screens/refund-tracker.png"
+                alt="TrustTax ITR refund tracker screen"
+                fill
+                sizes="280px"
+                className="object-cover"
+              />
             </PhoneMockup>
           </div>
         </motion.div>
