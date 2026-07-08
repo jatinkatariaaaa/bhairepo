@@ -1,7 +1,6 @@
 "use client";
 
 import * as React from "react";
-import Image from "next/image";
 import { motion, useScroll, useTransform } from "framer-motion";
 
 import { EASE } from "@/components/cinematic/lib/motion";
@@ -20,25 +19,8 @@ export function WhyTrustTax() {
 
   return (
     <section ref={ref} className="px-3 py-2 md:px-4 md:py-3">
-      <div className="noise relative flex min-h-[100vh] items-center overflow-hidden rounded-[32px] bg-obsidian py-28 text-cream md:rounded-[40px] md:py-40">
-        {/* Obsidian vault — rising from the bottom of the panel, EventBeds-style */}
-        <motion.div
-          initial={{ opacity: 0, y: 80 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-15%" }}
-          transition={{ duration: 1.6, ease: EASE }}
-          className="pointer-events-none absolute inset-x-0 bottom-0 mx-auto h-[55%] w-[min(900px,95vw)]"
-        >
-          <Image
-            src="/images/porcelain/vault-dark.png"
-            alt=""
-            fill
-            sizes="900px"
-            className="mask-fade-dark blend-obsidian object-contain object-bottom"
-          />
-        </motion.div>
-
-        <div className="container-page relative z-10 pb-[30vh] text-center md:pb-[34vh]">
+      <div className="noise relative flex items-center overflow-hidden rounded-[32px] bg-obsidian py-28 text-cream md:rounded-[40px] md:py-36">
+        <div className="container-page relative z-10 text-center">
           <motion.h2
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
