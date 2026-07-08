@@ -5,12 +5,61 @@ import Image from "next/image";
 import { motion, useReducedMotion, useScroll, useTransform } from "framer-motion";
 
 import { Icon } from "@/components/shared/icon";
+import type { IconName } from "@/components/shared/icon";
 
 /**
- * "Discover / Easy filing" — EventBeds-style black rounded panel, but instead
- * of another phone trio, a large desktop dashboard in a browser frame rises
- * into view with floating stat cards drifting at parallax speeds around it.
+ * EventBeds "Book and relax" — a near-black scene with a centered headline,
+ * a large 3D dark tower with glowing windows, and four floating feature
+ * cards scattered around it that drift at parallax speeds on scroll.
  */
+
+type FloatCard = {
+  icon: IconName;
+  text: string;
+  /** Position on desktop */
+  pos: string;
+  /** Card surface */
+  surface: string;
+  iconChip: string;
+  /** Parallax intensity */
+  speed: number;
+};
+
+const CARDS: FloatCard[] = [
+  {
+    icon: "IndianRupee",
+    text: "Maximum legal refund, guaranteed.",
+    pos: "left-[4%] top-[16%] lg:left-[10%]",
+    surface: "bg-mint text-ink",
+    iconChip: "bg-ink/10 text-ink",
+    speed: 120,
+  },
+  {
+    icon: "ClipboardCheck",
+    text: "Never miss a deadline again.",
+    pos: "right-[4%] top-[30%] lg:right-[10%]",
+    surface: "bg-cream text-ink",
+    iconChip: "bg-mint text-primary",
+    speed: 200,
+  },
+  {
+    icon: "FileCheck2",
+    text: "Amend or revise your return online.",
+    pos: "left-[2%] top-[58%] lg:left-[8%]",
+    surface: "bg-cream text-ink",
+    iconChip: "bg-mint text-primary",
+    speed: 260,
+  },
+  {
+    icon: "LifeBuoy",
+    text: "On demand CA support.",
+    pos: "right-[3%] top-[68%] lg:right-[9%]",
+    surface: "bg-primary text-white",
+    iconChip: "bg-white/15 text-white",
+    speed: 170,
+  },
+];
+
 export function Discover() {
   const ref = React.useRef<HTMLDivElement>(null);
   const reduce = useReducedMotion();
@@ -21,94 +70,68 @@ export function Discover() {
     offset: ["start end", "center center"],
   });
 
-  // Dashboard rises into view; floating cards trail at different speeds
-  const yBrowser = useTransform(scrollYProgress, [0, 1], [220 * k, 0]);
-  const yCardA = useTransform(scrollYProgress, [0, 1], [340 * k, 0]);
-  const yCardB = useTransform(scrollYProgress, [0, 1], [420 * k, 0]);
-  const headlineY = useTransform(scrollYProgress, [0, 1], [60 * k, 0]);
-  const headlineOpacity = useTransform(scrollYProgress, [0, 0.6], [k ? 0 : 1, 1]);
+  const yTower = useTransform(scrollYProgress, [0, 1], [90 * k, 0]);
+  const towerScale = useTransform(scrollYProgress, [0, 1], [1 - 0.05 * k, 1]);
+  const headlineY = useTransform(scrollYProgress, [0, 1], [50 * k, 0]);
+  const headlineOpacity = useTransform(scrollYProgress, [0, 0.55], [k ? 0 : 1, 1]);
+
+  // One parallax track per card — each trails at its own speed
+  const yCard0 = useTransform(scrollYProgress, [0, 1], [CARDS[0].speed * k, 0]);
+  const yCard1 = useTransform(scrollYProgress, [0, 1], [CARDS[1].speed * k, 0]);
+  const yCard2 = useTransform(scrollYProgress, [0, 1], [CARDS[2].speed * k, 0]);
+  const yCard3 = useTransform(scrollYProgress, [0, 1], [CARDS[3].speed * k, 0]);
+  const tracks = [yCard0, yCard1, yCard2, yCard3];
 
   return (
     <section ref={ref} className="px-3 py-2 md:px-4 md:py-3">
       <div className="noise relative overflow-hidden rounded-[32px] bg-obsidian pt-20 text-cream md:rounded-[40px] md:pt-28">
-        {/* Eyebrow + massive headline — the dashboard rises over its lower half */}
+        {/* Centered headline + subcopy */}
         <motion.div
           style={{ y: headlineY, opacity: headlineOpacity }}
           className="container-page relative z-10 text-center"
         >
-          <p className="font-mono text-[13px] uppercase tracking-[0.24em] text-cream/40">
-            Discover
-          </p>
-          <h2 className="mt-3 font-display text-[clamp(3rem,9vw,7.5rem)] font-extrabold leading-[0.95] tracking-[-0.04em] text-cream">
-            Easy filing
+          <h2 className="font-display text-[clamp(2.6rem,7vw,5.5rem)] font-extrabold leading-[0.95] tracking-[-0.04em] text-cream">
+            File and relax
           </h2>
+          <p className="mx-auto mt-5 max-w-xs text-balance text-sm leading-relaxed text-cream/45 md:text-base">
+            Flexible filing options give you more time to run your business and
+            less time stressing about compliance.
+          </p>
         </motion.div>
 
-        {/* Desktop dashboard in a browser frame — clipped by the panel bottom */}
-        <div className="relative z-20 mx-auto -mt-4 flex h-[340px] items-start justify-center overflow-hidden md:h-[520px]">
+        {/* Dark tower scene with floating feature cards */}
+        <div className="relative mx-auto -mt-6 h-[520px] w-full max-w-5xl md:-mt-10 md:h-[760px]">
+          {/* 3D tower */}
           <motion.div
-            style={{ y: yBrowser }}
-            className="relative mt-10 w-[92%] max-w-4xl will-change-transform md:mt-14"
+            style={{ y: yTower, scale: towerScale }}
+            className="absolute inset-x-0 bottom-0 top-0 will-change-transform"
           >
-            {/* Browser chrome */}
-            <div className="overflow-hidden rounded-t-2xl border border-white/10 bg-[#161B18] shadow-phone">
-              <div className="flex items-center gap-2 px-4 py-3">
-                <span className="h-2.5 w-2.5 rounded-full bg-white/15" />
-                <span className="h-2.5 w-2.5 rounded-full bg-white/15" />
-                <span className="h-2.5 w-2.5 rounded-full bg-white/15" />
-                <span className="mx-auto flex items-center gap-1.5 rounded-pill bg-white/5 px-4 py-1 font-mono text-[11px] text-cream/40">
-                  <Icon name="Lock" className="h-3 w-3" />
-                  app.trustax.in
-                </span>
-                <span className="w-16" />
-              </div>
-              <div className="relative aspect-[16/10] w-full">
-                <Image
-                  src="/images/screens/desktop-dashboard.png"
-                  alt="TrustTax web dashboard with refund, savings and compliance overview"
-                  fill
-                  sizes="(min-width: 768px) 896px, 92vw"
-                  className="object-cover"
-                />
-              </div>
-            </div>
-
-            {/* Floating stat card — left, trails slower */}
-            <motion.div
-              style={{ y: yCardA }}
-              className="absolute -left-4 top-[18%] hidden rounded-2xl bg-cream p-4 shadow-lift md:-left-16 md:block"
-            >
-              <div className="flex items-center gap-3">
-                <span className="grid h-9 w-9 place-items-center rounded-full bg-mint text-primary">
-                  <Icon name="IndianRupee" className="h-4 w-4" />
-                </span>
-                <div>
-                  <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-muted">
-                    Refund expected
-                  </p>
-                  <p className="font-display text-lg font-bold text-ink">₹48,200</p>
-                </div>
-              </div>
-            </motion.div>
-
-            {/* Floating status card — right, trails slowest */}
-            <motion.div
-              style={{ y: yCardB }}
-              className="absolute -right-4 top-[52%] hidden rounded-2xl bg-primary p-4 text-white shadow-lift md:-right-16 md:block"
-            >
-              <div className="flex items-center gap-3">
-                <span className="grid h-9 w-9 place-items-center rounded-full bg-white/15">
-                  <Icon name="BadgeCheck" className="h-4 w-4" />
-                </span>
-                <div>
-                  <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-white/60">
-                    GSTR-3B
-                  </p>
-                  <p className="font-display text-lg font-bold">Filed on time</p>
-                </div>
-              </div>
-            </motion.div>
+            <Image
+              src="/images/city/dark-tower.png"
+              alt="Dark office tower at night with a few warmly lit windows"
+              fill
+              sizes="(min-width: 1024px) 1024px, 100vw"
+              className="mask-fade-radial object-contain object-bottom"
+            />
           </motion.div>
+
+          {/* Floating feature cards */}
+          {CARDS.map((c, i) => (
+            <motion.div
+              key={c.text}
+              style={{ y: tracks[i] }}
+              className={`absolute z-20 w-[150px] rounded-2xl p-4 shadow-lift will-change-transform md:w-[190px] md:rounded-[20px] md:p-5 ${c.pos} ${c.surface}`}
+            >
+              <span
+                className={`grid h-9 w-9 place-items-center rounded-full ${c.iconChip}`}
+              >
+                <Icon name={c.icon} className="h-4 w-4" />
+              </span>
+              <p className="mt-6 text-[13px] font-semibold leading-snug md:mt-9 md:text-[15px]">
+                {c.text}
+              </p>
+            </motion.div>
+          ))}
         </div>
       </div>
     </section>

@@ -46,7 +46,7 @@ export function WhyTrustTax() {
             transition={{ duration: 0.9, ease: EASE }}
             className="font-display text-[clamp(2.6rem,7vw,5.5rem)] font-extrabold tracking-[-0.03em] text-cream"
           >
-            File and relax
+            Why TrusTax
           </motion.h2>
 
           <p className="mx-auto mt-10 max-w-4xl font-display text-[clamp(1.15rem,2.4vw,1.8rem)] font-medium leading-[1.35] tracking-tight text-cream/90">
